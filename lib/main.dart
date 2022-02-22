@@ -17,6 +17,11 @@ class MyApp extends StatelessWidget {
   }
 }
 
+getScore(int counter){
+  List<String> score_list = ["0","15","30","40","Game"];
+  return score_list[counter];
+}
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -68,12 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '$counter_p1',
+                    getScore(counter_p1),
                     style: Theme.of(context).textTheme.headline4,
                   ),
                   SizedBox(width: 30,),
                   Text(
-                    '$counter_p2',
+                    getScore(counter_p2),
                     style: Theme.of(context).textTheme.headline4,
                   ),
                 ]
