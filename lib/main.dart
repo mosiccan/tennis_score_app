@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 }
 
 getScore(int counter){
-  List<String> score_list = ["0","15","30","40","Game","No Ad"];
+  List<String> score_list = ["0","15","30","40","Game","No Ad","-"];
   return score_list[counter];
 }
 
@@ -42,6 +42,13 @@ class _MyHomePageState extends State<MyHomePage> {
         counter_p1 += 2;
         getScore(counter_p2 += 2);
       }
+      else if(counter_p1 == 6){
+        counter_p1 -= 2;
+        getScore(counter_p2++);
+      }
+      else if(counter_p1 == 4 && counter_p2 < 4){
+        getScore(counter_p2 = 6);
+      }
     });
   }
 
@@ -51,6 +58,13 @@ class _MyHomePageState extends State<MyHomePage> {
       if(counter_p2 == counter_p1 && counter_p2 == 3){
         counter_p2 += 2;
         getScore(counter_p1 += 2);
+      }
+      else if(counter_p2 == 6){
+        counter_p2 -= 2;
+        getScore(counter_p1++);
+      }
+      else if(counter_p2 == 4 && counter_p1 < 4){
+        getScore(counter_p1 = 6);
       }
     });
   }
