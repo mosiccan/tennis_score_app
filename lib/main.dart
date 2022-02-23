@@ -35,13 +35,13 @@ class _MyHomePageState extends State<MyHomePage> {
   int counter_p1 = 0;
   int counter_p2 = 0;
 
-  void _incrementCounter() {
+  void _incrementCounter_p1() {
     setState(() {
       counter_p1++;
     });
   }
 
-  void _decrementCounter(){
+  void _increaseCounter_p2() {
     setState(() {
       counter_p2++;
     });
@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
                   child: FloatingActionButton.extended(
-                      onPressed: _incrementCounter,
+                      onPressed: _incrementCounter_p1,
                       tooltip: 'Player 1 gets point',
                       icon: Icon(Icons.add),
                       label: Text("Player 1")
@@ -129,7 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
                   child: FloatingActionButton.extended(
-                    onPressed: _decrementCounter,
+                    onPressed: _increaseCounter_p2,
                     tooltip: 'Player 2 gets point',
                     icon: Icon(Icons.add),
                     label: Text("Player 2"),
