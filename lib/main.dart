@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:collection';
+import 'dart:async';
 
 void main() => runApp(MyApp());
 
@@ -22,6 +24,21 @@ getScore(int counter){
   return score_list[counter];
 }
 
+List<int> playedPoint_list = [];
+Queue<int> playedPoint_Queue = new Queue<int>.from(playedPoint_list);
+
+addPointLog(int player){
+  playedPoint_Queue.add(player);
+}
+
+checkLastPoint(){
+  return playedPoint_Queue.last;
+}
+
+removeLastLog(){
+  playedPoint_Queue.removeLast();
+}
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -37,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter_p1() {
     setState(() {
+      addPointLog(1);
       counter_p1++;
       if(counter_p1 == counter_p2 && counter_p1 == 3){
         counter_p1 += 2;
@@ -54,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _increaseCounter_p2() {
     setState(() {
+      addPointLog(2);
       counter_p2++;
       if(counter_p2 == counter_p1 && counter_p2 == 3){
         counter_p2 += 2;
@@ -69,6 +88,18 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void undoPoint(){
+    setState(() {
+      if(checkLastPoint() == 1){
+        counter_p1--;
+        removeLastLog();
+      }else{
+        counter_p2--;
+        removeLastLog();
+      }
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,7 +181,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               margin: EdgeInsets.all(16),
               child: FloatingActionButton.extended(
-                onPressed: (){},
+                onPressed: undoPoint,
                 elevation: 0.0,
                 backgroundColor: Colors.grey,
                   label: Icon(Icons.undo),
