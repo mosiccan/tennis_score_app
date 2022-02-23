@@ -51,13 +51,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -69,19 +65,55 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             SizedBox(height: 30,),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    getScore(counter_p1),
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                  SizedBox(width: 30,),
-                  Text(
-                    getScore(counter_p2),
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                ]
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(),
+              ),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                      ),
+                      margin: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
+                      padding: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
+                      child: Text(
+                        getScore(counter_p1),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 54,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                      ),
+                      margin: EdgeInsets.fromLTRB(40, 0.0, 40, 0.0),
+                      child: Text(':',
+                        style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 54,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                      ),
+                      margin: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
+                      padding: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
+                      child: Text(
+                        getScore(counter_p2),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 54,
+                        ),
+                      ),
+                    ),
+                  ]
+              ),
             ),
             SizedBox(height: 30,),
             Row(
@@ -93,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     icon: Icon(Icons.add),
                     label: Text("Player 1")
                 ),
-                SizedBox(width: 20,),
+                SizedBox(width: 48,),
                 FloatingActionButton.extended(
                   onPressed: _decrementCounter,
                   tooltip: 'Decrement',
@@ -105,7 +137,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 }
