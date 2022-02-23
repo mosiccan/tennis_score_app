@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 }
 
 getScore(int counter){
-  List<String> score_list = ["0","15","30","40","Game"];
+  List<String> score_list = ["0","15","30","40","Game","No Ad"];
   return score_list[counter];
 }
 
@@ -38,12 +38,20 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter_p1() {
     setState(() {
       counter_p1++;
+      if(counter_p1 == counter_p2 && counter_p1 == 3){
+        counter_p1 += 2;
+        getScore(counter_p2 += 2);
+      }
     });
   }
 
   void _increaseCounter_p2() {
     setState(() {
       counter_p2++;
+      if(counter_p2 == counter_p1 && counter_p2 == 3){
+        counter_p2 += 2;
+        getScore(counter_p1 += 2);
+      }
     });
   }
 
@@ -71,43 +79,31 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.fromLTRB(32, 0.0, 32, 0.0),
-                      // decoration: BoxDecoration(
-                      //   border: Border.all(
-                      //     width: 1,
-                      //     color: Colors.redAccent,
-                      //   ),
-                      // ),
+                      margin: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
                       child: Text(
                         getScore(counter_p1),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 54,
+                          fontSize: 48,
                         ),
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
-                      // decoration: BoxDecoration(
-                      //   border: Border.all(
-                      //     width: 1,
-                      //     color: Colors.redAccent,
-                      //   ),
-                      // ),
                       child: Text(':',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 54,
+                          fontSize: 48,
                         ),
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(32, 0.0, 32, 0.0),
+                      margin: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
                       child: Text(
                         getScore(counter_p2),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 54,
+                          fontSize: 48,
                         ),
                       ),
                     ),
