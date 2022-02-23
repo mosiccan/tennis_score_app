@@ -51,13 +51,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
+        centerTitle: true,
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -69,38 +66,85 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             SizedBox(height: 30,),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    getScore(counter_p1),
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                  SizedBox(width: 30,),
-                  Text(
-                    getScore(counter_p2),
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                ]
+            Container(
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.fromLTRB(32, 0.0, 32, 0.0),
+                      // decoration: BoxDecoration(
+                      //   border: Border.all(
+                      //     width: 1,
+                      //     color: Colors.redAccent,
+                      //   ),
+                      // ),
+                      child: Text(
+                        getScore(counter_p1),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 54,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
+                      // decoration: BoxDecoration(
+                      //   border: Border.all(
+                      //     width: 1,
+                      //     color: Colors.redAccent,
+                      //   ),
+                      // ),
+                      child: Text(':',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 54,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(32, 0.0, 32, 0.0),
+                      child: Text(
+                        getScore(counter_p2),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 54,
+                        ),
+                      ),
+                    ),
+                  ]
+              ),
             ),
-            SizedBox(height: 30,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FloatingActionButton.extended(
-                    onPressed: _incrementCounter,
-                    tooltip: 'Increment',
-                    icon: Icon(Icons.add),
-                    label: Text("Player 1")
+                Container(
+                  margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                  child: FloatingActionButton.extended(
+                      onPressed: _incrementCounter,
+                      tooltip: 'Player 1 gets point',
+                      icon: Icon(Icons.add),
+                      label: Text("Player 1")
+                  ),
                 ),
-                SizedBox(width: 20,),
-                FloatingActionButton.extended(
-                  onPressed: _decrementCounter,
-                  tooltip: 'Decrement',
-                  icon: Icon(Icons.add),
-                  label: Text("Player 2"),
+                Container(
+                  margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                  child: FloatingActionButton.extended(
+                    onPressed: _decrementCounter,
+                    tooltip: 'Player 2 gets point',
+                    icon: Icon(Icons.add),
+                    label: Text("Player 2"),
+                  ),
                 ),
               ],
+            ),
+            Container(
+              margin: EdgeInsets.all(16),
+              child: FloatingActionButton.extended(
+                onPressed: (){},
+                elevation: 0.0,
+                backgroundColor: Colors.grey,
+                  label: Icon(Icons.undo),
+              )
             )
           ],
         ),
