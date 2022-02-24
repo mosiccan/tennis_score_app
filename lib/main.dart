@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:collection';
-import 'dart:async';
 
 void main() => runApp(MyApp());
 
@@ -56,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       addPointLog(1);
       counter_p1++;
-      if(counter_p1 == counter_p2 && counter_p1 == 3){
+      if(counter_p1 == counter_p2 && counter_p1 == 3){  // 40:40 일 때 No-Ad로 표기
         counter_p1 += 2;
         getScore(counter_p2 += 2);
       }
@@ -74,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       addPointLog(2);
       counter_p2++;
-      if(counter_p2 == counter_p1 && counter_p2 == 3){
+      if(counter_p2 == counter_p1 && counter_p2 == 3){  // 40:40 일 때 No-Ad로 표기
         counter_p2 += 2;
         getScore(counter_p1 += 2);
       }
@@ -91,15 +90,29 @@ class _MyHomePageState extends State<MyHomePage> {
   void undoPoint(){
     setState(() {
       if(checkLastPoint() == 1){
+        if(counter_p2 == counter_p1 && counter_p2 == 5){ // No-Ad 일 때 undo
+          getScore(counter_p1 -= 3);
+          getScore(counter_p2 -= 2);
+          removeLastLog();
+          return;
+        }
         counter_p1--;
         removeLastLog();
-      }else{
+
+      }
+      else{
+        if(counter_p2 == counter_p1 && counter_p2 == 5){  // No-Ad 일 때 undo
+          getScore(counter_p2 -= 3);
+          getScore(counter_p1 -= 2);
+          removeLastLog();
+          return;
+        }
         counter_p2--;
         removeLastLog();
       }
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,21 +137,21 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Flexible(
-                      fit: FlexFit.loose,
-                      child:
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Text(
-                              getScore(counter_p1),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 42,
-                              ),
+                        fit: FlexFit.loose,
+                        child:
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            getScore(counter_p1),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 42,
                             ),
-                          )
+                          ),
+                        )
                     ),
                     Flexible(
-                      fit: FlexFit.loose,
+                        fit: FlexFit.loose,
                         child: Container(
                           margin: EdgeInsets.fromLTRB(32, 0.0, 32, 0.0),
                           child: Text(':',
@@ -148,9 +161,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         )
-                      ),
+                    ),
                     Flexible(
-                      fit: FlexFit.loose,
+                        fit: FlexFit.loose,
                         child:
                         Align(
                           alignment: Alignment.centerLeft,
@@ -190,13 +203,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             Container(
-              margin: EdgeInsets.all(16),
-              child: FloatingActionButton.extended(
-                onPressed: undoPoint,
-                elevation: 0.0,
-                backgroundColor: Colors.grey,
+                margin: EdgeInsets.all(16),
+                child: FloatingActionButton.extended(
+                  onPressed: undoPoint,
+                  elevation: 0.0,
+                  backgroundColor: Colors.grey,
                   label: Icon(Icons.undo),
-              )
+                )
             )
           ],
         ),
