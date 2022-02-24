@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
 }
 
 getScore(int counter){
-  List<String> score_list = ["0","15","30","40","Game","No Ad","-"];
+  List<String> score_list = ["0","15","30","40","Game","No-Ad","-"];
   return score_list[counter];
 }
 
@@ -123,34 +123,47 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      margin: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
-                      child: Text(
-                        getScore(counter_p1),
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 48,
-                        ),
-                      ),
+                    Flexible(
+                      fit: FlexFit.loose,
+                      //margin: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
+                      //alignment: Alignment.centerRight,
+                      child:
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              getScore(counter_p1),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 42,
+                              ),
+                            ),
+                          )
                     ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
-                      child: Text(':',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 48,
-                        ),
+                    Flexible(
+                      fit: FlexFit.loose,
+                        child: Container(
+                          margin: EdgeInsets.fromLTRB(32, 0.0, 32, 0.0),
+                          child: Text(':',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 48,
+                            ),
+                          ),
+                        )
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
-                      child: Text(
-                        getScore(counter_p2),
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 48,
-                        ),
-                      ),
+                    Flexible(
+                      fit: FlexFit.loose,
+                        child:
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            getScore(counter_p2),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 42,
+                            ),
+                          ),
+                        )
                     ),
                   ]
               ),
@@ -159,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                  margin: EdgeInsets.fromLTRB(32, 16, 32, 0.0),
                   child: FloatingActionButton.extended(
                       onPressed: _incrementCounter_p1,
                       tooltip: 'Player 1 gets point',
@@ -168,7 +181,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                  margin: EdgeInsets.fromLTRB(32, 16, 32, 0.0),
                   child: FloatingActionButton.extended(
                     onPressed: _increaseCounter_p2,
                     tooltip: 'Player 2 gets point',
