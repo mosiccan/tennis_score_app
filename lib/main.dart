@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:collection';
+import 'dart:async';
 
 void main() => runApp(MyApp());
 
@@ -18,8 +20,23 @@ class MyApp extends StatelessWidget {
 }
 
 getScore(int counter){
-  List<String> score_list = ["0","15","30","40","Game"];
+  List<String> score_list = ["0","15","30","40","Game","No Ad","-"];
   return score_list[counter];
+}
+
+List<int> playedPoint_list = [];
+Queue<int> playedPoint_Queue = new Queue<int>.from(playedPoint_list);
+
+addPointLog(int player){
+  playedPoint_Queue.add(player);
+}
+
+checkLastPoint(){
+  return playedPoint_Queue.last;
+}
+
+removeLastLog(){
+  playedPoint_Queue.removeLast();
 }
 
 class MyHomePage extends StatefulWidget {
@@ -35,22 +52,59 @@ class _MyHomePageState extends State<MyHomePage> {
   int counter_p1 = 0;
   int counter_p2 = 0;
 
-  void _incrementCounter() {
+  void _incrementCounter_p1() {
     setState(() {
+      addPointLog(1);
       counter_p1++;
+      if(counter_p1 == counter_p2 && counter_p1 == 3){
+        counter_p1 += 2;
+        getScore(counter_p2 += 2);
+      }
+      else if(counter_p1 == 6){
+        counter_p1 -= 2;
+        getScore(counter_p2++);
+      }
+      else if(counter_p1 == 4 && counter_p2 < 4){
+        getScore(counter_p2 = 6);
+      }
     });
   }
 
-  void _decrementCounter(){
+  void _increaseCounter_p2() {
     setState(() {
+      addPointLog(2);
       counter_p2++;
+      if(counter_p2 == counter_p1 && counter_p2 == 3){
+        counter_p2 += 2;
+        getScore(counter_p1 += 2);
+      }
+      else if(counter_p2 == 6){
+        counter_p2 -= 2;
+        getScore(counter_p1++);
+      }
+      else if(counter_p2 == 4 && counter_p1 < 4){
+        getScore(counter_p1 = 6);
+      }
     });
   }
 
+  void undoPoint(){
+    setState(() {
+      if(checkLastPoint() == 1){
+        counter_p1--;
+        removeLastLog();
+      }else{
+        counter_p2--;
+        removeLastLog();
+      }
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(widget.title),
       ),
       body: Center(
@@ -66,77 +120,77 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             SizedBox(height: 30,),
             Container(
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
                       margin: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
-                      padding: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
                       child: Text(
                         getScore(counter_p1),
                         style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 54,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 48,
                         ),
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
-                      margin: EdgeInsets.fromLTRB(40, 0.0, 40, 0.0),
+                      margin: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
                       child: Text(':',
                         style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 54,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 48,
                         ),
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
                       margin: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
-                      padding: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
                       child: Text(
                         getScore(counter_p2),
                         style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 54,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 48,
                         ),
                       ),
                     ),
                   ]
               ),
             ),
-            SizedBox(height: 30,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FloatingActionButton.extended(
-                    onPressed: _incrementCounter,
-                    tooltip: 'Increment',
-                    icon: Icon(Icons.add),
-                    label: Text("Player 1")
+                Container(
+                  margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                  child: FloatingActionButton.extended(
+                      onPressed: _incrementCounter_p1,
+                      tooltip: 'Player 1 gets point',
+                      icon: Icon(Icons.add),
+                      label: Text("Player 1")
+                  ),
                 ),
-                SizedBox(width: 48,),
-                FloatingActionButton.extended(
-                  onPressed: _decrementCounter,
-                  tooltip: 'Decrement',
-                  icon: Icon(Icons.add),
-                  label: Text("Player 2"),
+                Container(
+                  margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                  child: FloatingActionButton.extended(
+                    onPressed: _increaseCounter_p2,
+                    tooltip: 'Player 2 gets point',
+                    icon: Icon(Icons.add),
+                    label: Text("Player 2"),
+                  ),
                 ),
               ],
+            ),
+            Container(
+              margin: EdgeInsets.all(16),
+              child: FloatingActionButton.extended(
+                onPressed: undoPoint,
+                elevation: 0.0,
+                backgroundColor: Colors.grey,
+                  label: Icon(Icons.undo),
+              )
             )
           ],
         ),
       ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 }
