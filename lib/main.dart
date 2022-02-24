@@ -125,8 +125,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     Flexible(
                       fit: FlexFit.loose,
-                      //margin: EdgeInsets.fromLTRB(16, 0.0, 16, 0.0),
-                      //alignment: Alignment.centerRight,
                       child:
                           Align(
                             alignment: Alignment.centerRight,
