@@ -209,6 +209,28 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             Container(
+              margin: EdgeInsets.fromLTRB(0.0, 20, 0.0, 0.0),
+              child: Text(
+                'Information',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 16),
+              child: Card(
+                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: ListTile(
+
+                )
+              )
+            ),
+            Container(
               margin: EdgeInsets.all(16),
               child: const Text(
                 'Score',
