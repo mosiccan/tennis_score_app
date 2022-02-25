@@ -4,7 +4,6 @@ import 'dart:collection';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,23 +17,23 @@ class MyApp extends StatelessWidget {
   }
 }
 
-getScore(int counter){
-  List<String> score_list = ["0","15","30","40","Game","No-Ad","-"];
+getScore(int counter) {
+  List<String> score_list = ["0", "15", "30", "40", "Game", "No-Ad", "-"];
   return score_list[counter];
 }
 
 List<int> playedPoint_list = [];
 Queue<int> playedPoint_Queue = new Queue<int>.from(playedPoint_list);
 
-addPointLog(int player){
+addPointLog(int player) {
   playedPoint_Queue.add(player);
 }
 
-checkLastPoint(){
+checkLastPoint() {
   return playedPoint_Queue.last;
 }
 
-removeLastLog(){
+removeLastLog() {
   playedPoint_Queue.removeLast();
 }
 
@@ -55,15 +54,14 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       addPointLog(1);
       counter_p1++;
-      if(counter_p1 == counter_p2 && counter_p1 == 3){  // 40:40 일 때 No-Ad로 표기
+      if (counter_p1 == counter_p2 && counter_p1 == 3) {
+        // 40:40 일 때 No-Ad로 표기
         counter_p1 += 2;
         getScore(counter_p2 += 2);
-      }
-      else if(counter_p1 == 6){
+      } else if (counter_p1 == 6) {
         counter_p1 -= 2;
         getScore(counter_p2++);
-      }
-      else if(counter_p1 == 4 && counter_p2 < 4){
+      } else if (counter_p1 == 4 && counter_p2 < 4) {
         getScore(counter_p2 = 6);
       }
     });
@@ -73,24 +71,24 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       addPointLog(2);
       counter_p2++;
-      if(counter_p2 == counter_p1 && counter_p2 == 3){  // 40:40 일 때 No-Ad로 표기
+      if (counter_p2 == counter_p1 && counter_p2 == 3) {
+        // 40:40 일 때 No-Ad로 표기
         counter_p2 += 2;
         getScore(counter_p1 += 2);
-      }
-      else if(counter_p2 == 6){
+      } else if (counter_p2 == 6) {
         counter_p2 -= 2;
         getScore(counter_p1++);
-      }
-      else if(counter_p2 == 4 && counter_p1 < 4){
+      } else if (counter_p2 == 4 && counter_p1 < 4) {
         getScore(counter_p1 = 6);
       }
     });
   }
 
-  void undoPoint(){
+  void undoPoint() {
     setState(() {
-      if(checkLastPoint() == 1){
-        if(counter_p2 == counter_p1 && counter_p2 == 5){ // No-Ad 일 때 undo
+      if (checkLastPoint() == 1) {
+        if (counter_p2 == counter_p1 && counter_p2 == 5) {
+          // No-Ad 일 때 undo
           getScore(counter_p1 -= 3);
           getScore(counter_p2 -= 2);
           removeLastLog();
@@ -98,10 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
         }
         counter_p1--;
         removeLastLog();
-
-      }
-      else{
-        if(counter_p2 == counter_p1 && counter_p2 == 5){  // No-Ad 일 때 undo
+      } else {
+        if (counter_p2 == counter_p1 && counter_p2 == 5) {
+          // No-Ad 일 때 undo
           getScore(counter_p2 -= 3);
           getScore(counter_p1 -= 2);
           removeLastLog();
@@ -124,60 +121,102 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'Score',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
+            DataTable(
+                columns: const <DataColumn>[
+                  DataColumn(
+                      label: Text(
+                        'Serve',
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Name',
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Game',
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Points',
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                ],
+                rows: <DataRow>[
+                  DataRow(
+                    cells: <DataCell>[
+                      DataCell(Icon(Icons.sports_tennis)),
+                      DataCell(Text('Player 1')),
+                      DataCell(Text('5')),
+                      DataCell(Text(getScore(counter_p1))),
+                    ],
+                  ),
+                  DataRow(
+                    cells: <DataCell>[
+                      DataCell(Text(' ')),
+                      DataCell(Text('Player 2')),
+                      DataCell(Text('4')),
+                      DataCell(Text(getScore(counter_p2))),
+                    ],
+                  ),
+                ],
+              ),
+            Container(
+              margin: EdgeInsets.all(16),
+              child: const Text(
+                'Score',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                ),
               ),
             ),
-            SizedBox(height: 30,),
             Container(
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Flexible(
-                        fit: FlexFit.loose,
-                        child:
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            getScore(counter_p1),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 42,
-                            ),
-                          ),
-                        )
-                    ),
-                    Flexible(
-                        fit: FlexFit.loose,
-                        child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 0.0, 32, 0.0),
-                          child: Text(':',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 48,
-                            ),
-                          ),
-                        )
-                    ),
-                    Flexible(
-                        fit: FlexFit.loose,
-                        child:
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            getScore(counter_p2),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 42,
-                            ),
-                          ),
-                        )
-                    ),
-                  ]
-              ),
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Flexible(
+                    fit: FlexFit.loose,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        getScore(counter_p1),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 42,
+                        ),
+                      ),
+                    )),
+                Flexible(
+                    fit: FlexFit.loose,
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(32, 0.0, 32, 0.0),
+                      child: Text(
+                        ':',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 48,
+                        ),
+                      ),
+                    )),
+                Flexible(
+                    fit: FlexFit.loose,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        getScore(counter_p2),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 42,
+                        ),
+                      ),
+                    )),
+              ]),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -188,8 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: _incrementCounter_p1,
                       tooltip: 'Player 1 gets point',
                       icon: Icon(Icons.add),
-                      label: Text("Player 1")
-                  ),
+                      label: Text("Player 1")),
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(32, 16, 32, 0.0),
@@ -209,8 +247,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   elevation: 0.0,
                   backgroundColor: Colors.grey,
                   label: Icon(Icons.undo),
-                )
-            )
+                ))
           ],
         ),
       ),
