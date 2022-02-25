@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 }
 
 getScore(int counter) {
-  List<String> score_list = ["0", "15", "30", "40", "Game", "No-Ad", "-"];
+  List<String> score_list = ["0", "15", "30", "40", "0", "No-Ad", "0"];
   return score_list[counter];
 }
 
@@ -76,11 +76,15 @@ class _MyHomePageState extends State<MyHomePage> {
         counter_p1 -= 2;
         getScore(counter_p2++);
         gameCounter_p1++;
+        counter_p1 = 0;
+        counter_p2 = 0;
       }
       else if(counter_p1 == 4 && counter_p2 < 4){       // 상대가 40까지 못 갔을때 득점
         savePreviousPoint();
         getScore(counter_p2 = 6);
         gameCounter_p1++;
+        counter_p1 = 0;
+        counter_p2 = 0;
       }
     });
   }
@@ -100,11 +104,15 @@ class _MyHomePageState extends State<MyHomePage> {
         counter_p2 -= 2;
         getScore(counter_p1++);
         gameCounter_p2++;
+        counter_p1 = 0;
+        counter_p2 = 0;
       }
       else if(counter_p2 == 4 && counter_p1 < 4){      // 상대가 40까지 못 갔을때 득점
         savePreviousPoint();
         getScore(counter_p1 = 6);
         gameCounter_p2++;
+        counter_p1 = 0;
+        counter_p2 = 0;
       }
     });
   }
@@ -136,8 +144,8 @@ class _MyHomePageState extends State<MyHomePage> {
           removeLastLog();
           return;
         }
-        else if(gameCounter_p1 > 0 && counter_p1 == 0 && counter_p2 ==0){
-          gameCounter_p1--;
+        else if(gameCounter_p2 > 0 && counter_p1 == 0 && counter_p2 ==0){
+          gameCounter_p2--;
           counter_p1 = previousPointCounter_p1;
           counter_p2 = previousPointCounter_p2;
           getScore(counter_p1);
