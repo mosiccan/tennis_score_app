@@ -49,20 +49,38 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int counter_p1 = 0;
   int counter_p2 = 0;
+  
+  int previousPointCounter_p1 = 0;
+  int previousPointCounter_p2 = 0;
+  
+  int gameCounter_p1 = 0;
+  int gameCounter_p2 = 0;
+  
+  void savePreviousPoint(){
+    previousPointCounter_p1 = counter_p1;
+    previousPointCounter_p2 = counter_p2;
+  }
 
   void _incrementCounter_p1() {
     setState(() {
       addPointLog(1);
+      savePreviousPoint();
       counter_p1++;
-      if (counter_p1 == counter_p2 && counter_p1 == 3) {
-        // 40:40 일 때 No-Ad로 표기
+      if(counter_p1 == counter_p2 && counter_p1 == 3){  // 40:40 일 때 No-Ad로 표기
+        savePreviousPoint();
         counter_p1 += 2;
         getScore(counter_p2 += 2);
-      } else if (counter_p1 == 6) {
+      }
+      else if(counter_p1 == 6){                         // No-Ad 상황에서 득점
+        savePreviousPoint();
         counter_p1 -= 2;
         getScore(counter_p2++);
-      } else if (counter_p1 == 4 && counter_p2 < 4) {
+        gameCounter_p1++;
+      }
+      else if(counter_p1 == 4 && counter_p2 < 4){       // 상대가 40까지 못 갔을때 득점
+        savePreviousPoint();
         getScore(counter_p2 = 6);
+        gameCounter_p1++;
       }
     });
   }
@@ -70,45 +88,68 @@ class _MyHomePageState extends State<MyHomePage> {
   void _increaseCounter_p2() {
     setState(() {
       addPointLog(2);
+      savePreviousPoint();
       counter_p2++;
-      if (counter_p2 == counter_p1 && counter_p2 == 3) {
-        // 40:40 일 때 No-Ad로 표기
+      if(counter_p2 == counter_p1 && counter_p2 == 3){// 40:40 일 때 No-Ad로 표기
+        savePreviousPoint();
         counter_p2 += 2;
         getScore(counter_p1 += 2);
-      } else if (counter_p2 == 6) {
+      }
+      else if(counter_p2 == 6){                        // No-Ad 상황에서 득점
+        savePreviousPoint();
         counter_p2 -= 2;
         getScore(counter_p1++);
-      } else if (counter_p2 == 4 && counter_p1 < 4) {
+        gameCounter_p2++;
+      }
+      else if(counter_p2 == 4 && counter_p1 < 4){      // 상대가 40까지 못 갔을때 득점
+        savePreviousPoint();
         getScore(counter_p1 = 6);
+        gameCounter_p2++;
       }
     });
   }
 
-  void undoPoint() {
+  void undoPoint(){
     setState(() {
-      if (checkLastPoint() == 1) {
-        if (counter_p2 == counter_p1 && counter_p2 == 5) {
-          // No-Ad 일 때 undo
+      if(checkLastPoint() == 1){
+        if(counter_p2 == counter_p1 && counter_p2 == 5){ // No-Ad 일 때 undo
           getScore(counter_p1 -= 3);
           getScore(counter_p2 -= 2);
           removeLastLog();
           return;
         }
+        else if(gameCounter_p1 > 0 && counter_p1 == 0 && counter_p2 ==0){
+          gameCounter_p1--;
+          counter_p1 = previousPointCounter_p1;
+          counter_p2 = previousPointCounter_p2;
+          getScore(counter_p1);
+          getScore(counter_p2);
+          removeLastLog();
+        }
         counter_p1--;
         removeLastLog();
-      } else {
-        if (counter_p2 == counter_p1 && counter_p2 == 5) {
-          // No-Ad 일 때 undo
+      }
+      else{
+        if(counter_p2 == counter_p1 && counter_p2 == 5){  // No-Ad 일 때 undo
           getScore(counter_p2 -= 3);
           getScore(counter_p1 -= 2);
           removeLastLog();
           return;
+        }
+        else if(gameCounter_p1 > 0 && counter_p1 == 0 && counter_p2 ==0){
+          gameCounter_p1--;
+          counter_p1 = previousPointCounter_p1;
+          counter_p2 = previousPointCounter_p2;
+          getScore(counter_p1);
+          getScore(counter_p2);
+          removeLastLog();
         }
         counter_p2--;
         removeLastLog();
       }
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +194,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     cells: <DataCell>[
                       DataCell(Icon(Icons.sports_tennis)),
                       DataCell(Text('Player 1')),
-                      DataCell(Text('5')),
+                      DataCell(Text("$gameCounter_p1")),
                       DataCell(Text(getScore(counter_p1))),
                     ],
                   ),
@@ -161,7 +202,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     cells: <DataCell>[
                       DataCell(Text(' ')),
                       DataCell(Text('Player 2')),
-                      DataCell(Text('4')),
+                      DataCell(Text("$gameCounter_p2")),
                       DataCell(Text(getScore(counter_p2))),
                     ],
                   ),
