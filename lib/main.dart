@@ -169,7 +169,57 @@ class _MyHomePageState extends State<MyHomePage> {
       gameCounter_p1 = 0;
       gameCounter_p2 = 0;
       resetPointLog();
+      Navigator.pop(context);
     });
+  }
+
+  void resetDialog() {
+    showDialog(
+        context: context,
+        //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0)),
+            //Dialog Main Title
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Text("Reset Match?"),
+              ],
+            ),
+            //
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "text",
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.black,
+                ),
+                child: Text('No'),
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.grey,
+                ),
+                child: Text('Ok'),
+                onPressed: resetPoint, // reset
+              ),
+            ],
+          );
+        });
   }
 
 
@@ -182,7 +232,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             DataTable(
                 columns: const <DataColumn>[
@@ -216,7 +266,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     cells: <DataCell>[
                       DataCell(Icon(Icons.sports_tennis)),
                       DataCell(Text('Player 1')),
-                      DataCell(Text("$gameCounter_p1")),
+                      DataCell(
+                          Text("$gameCounter_p1")
+                      ),
                       DataCell(Text(getScore(counter_p1))),
                     ],
                   ),
@@ -332,11 +384,22 @@ class _MyHomePageState extends State<MyHomePage> {
                   elevation: 0.0,
                   backgroundColor: Colors.grey,
                   label: Icon(Icons.undo),
-                ))
+                )
+            ),
+            Container(
+              alignment: Alignment.bottomRight,
+              margin: EdgeInsets.fromLTRB(32, 16, 32, 0.0),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.grey,
+                ),
+                child: Text('All Reset',),
+                onPressed: resetDialog,
+              ),
+            ),
           ],
         ),
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 }
