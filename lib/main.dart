@@ -37,6 +37,10 @@ removeLastLog() {
   playedPoint_Queue.removeLast();
 }
 
+resetPointLog(){
+  playedPoint_Queue.clear();
+}
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -155,6 +159,16 @@ class _MyHomePageState extends State<MyHomePage> {
         counter_p2--;
         removeLastLog();
       }
+    });
+  }
+
+  void resetPoint(){
+    setState(() {
+      getScore(counter_p1 = 0);
+      getScore(counter_p2 = 0);
+      gameCounter_p1 = 0;
+      gameCounter_p2 = 0;
+      resetPointLog();
     });
   }
 
