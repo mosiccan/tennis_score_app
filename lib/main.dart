@@ -166,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void undoPoint() {
     setState(() {
-      if (checkLastPoint() == 1) {
+      if (checkLastPoint() == 1) {    // 마지막 득점자가 player1 일 때
         if (counter_p2 == counter_p1 && counter_p2 == 5) {
           // No-Ad 일 때 undo
           getScore(counter_p1 -= 3);
@@ -180,6 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
           getScore(counter_p1);
           getScore(counter_p2);
           removeLastLog();
+          return;
         }
         counter_p1--;
         removeLastLog();
@@ -197,6 +198,7 @@ class _MyHomePageState extends State<MyHomePage> {
           getScore(counter_p1);
           getScore(counter_p2);
           removeLastLog();
+          return;
         }
         counter_p2--;
         removeLastLog();
