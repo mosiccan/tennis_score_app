@@ -1,5 +1,5 @@
 # Tennis Score System
-> "대학생 테니스 플랫폼 앱 만들어보기" Flutter 사이드 프로젝트
+> "대학생 테니스 플랫폼 앱 제작" Flutter 사이드 프로젝트
 <br>
 
 ### Member
