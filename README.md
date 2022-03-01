@@ -19,7 +19,7 @@
 <br>
 
 ## 개발환경
-- **개발도구** : Android Studio (ver 2021.1) , Visual Studio Code
+- **개발도구** : Android Studio Bumblebee (ver 2021.1) , Visual Studio Code
 - **프레임워크** : Flutter (ver 2.10.2 ~)
     - 사용언어 : Dart   
 - **개발방식**
