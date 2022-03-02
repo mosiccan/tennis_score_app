@@ -17,25 +17,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-List<int> playedPoint_list = [];
-Queue<int> playedPoint_Queue = new Queue<int>.from(playedPoint_list);
-
-addPointLog(int player) {
-  playedPoint_Queue.add(player);
-}
-
-checkLastPoint() {
-  return playedPoint_Queue.last;
-}
-
-removeLastLog() {
-  playedPoint_Queue.removeLast();
-}
-
-resetPointLog() {
-  playedPoint_Queue.clear();
-}
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -46,176 +27,98 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int counter_p1 = 0;
-  int counter_p2 = 0;
 
-  int previousPointCounter_p1 = 0;
-  int previousPointCounter_p2 = 0;
+  List<String> scoreList = ["0", "15", "30", "40"];
 
-  int gameCounter_p1 = 0;
-  int gameCounter_p2 = 0;
+  List<String> pointLogListP1 = ["0"];
 
-  int totalGameScore = 0;
+  List<String> pointLogListP2 = ["0"];
 
-  bool isTieBreak() {
-    addTotalGameScore();
-    if (gameCounter_p1 == gameCounter_p2 && totalGameScore == 10) {
-      return true;
-    } else
-      return false;
-    // else if(gameCounter_p1 == 5 && gameCounter_p2 < 5 && (counter_p1 == 3 || counter_p1 == 5)){
-    //
-    // }
+  List<int> orderOfPlay = [];
+
+  int counterP1 = 0;
+  int counterP2 = 0;
+
+  int gameCounterP1 = 0;
+  int gameCounterP2 = 0;
+
+  void addPointToLogP1(int counter){
+    pointLogListP1.add(scoreList[counter]);
   }
 
-  // bool isMatchPoint() {
-  //   // 우선 타이브레이크 안갔을 때
-  // }
-  // int displaySocre(int counter){
-  //   return counter;
-  // }
-
-  void addTotalGameScore() {
-    totalGameScore = gameCounter_p1 + gameCounter_p2;
+  void addPointToLogP2(int counter){
+    pointLogListP2.add(scoreList[counter]);
   }
 
-  void savePreviousPoint() {
-    previousPointCounter_p1 = counter_p1;
-    previousPointCounter_p2 = counter_p2;
+  String currentPointP1(){
+    return pointLogListP1.last;
   }
 
-  getScore(int counter) {
-    List<String> score_list = ["0", "15", "30", "40", "0", "No-Ad", "0"];
-
-    if (isTieBreak() == false) {
-      return score_list[counter];
-    } else {
-      return counter.toString();
-    }
+  String currentPointP2(){
+    return pointLogListP2.last;
   }
 
-  void _incrementCounter_p1() {
+  void removeLog(){
+    pointLogListP1.removeLast();
+    pointLogListP2.removeLast();
+  }
+
+  void resetGameLog(){
+    pointLogListP1.clear();
+    pointLogListP2.clear();
+    pointLogListP1.add("0");
+    pointLogListP2.add("0");
+  }
+
+  void addOrderOfPlay(int player){
+    orderOfPlay.add(player);
+  }
+
+  void removeOrderOfPlay(){
+    orderOfPlay.removeLast();
+  }
+
+  void incrementCounterP1(){
     setState(() {
-      addPointLog(1);
-      savePreviousPoint();
-      if (isTieBreak() == false) {
-        counter_p1++;
-        if (counter_p1 == counter_p2 && counter_p1 == 3) {
-          // 40:40 일 때 No-Ad로 표기
-          savePreviousPoint();
-          counter_p1 += 2;
-          getScore(counter_p2 += 2);
-        } else if (counter_p1 == 6) {
-          // No-Ad 상황에서 득점
-          savePreviousPoint();
-          counter_p1 -= 2;
-          getScore(counter_p2++);
-          gameCounter_p1++;
-          counter_p1 = 0;
-          counter_p2 = 0;
-        } else if (counter_p1 == 4 && counter_p2 < 4) {
-          // 상대가 40까지 못 갔을때 득점
-          savePreviousPoint();
-          getScore(counter_p2 = 6);
-          gameCounter_p1++;
-          counter_p1 = 0;
-          counter_p2 = 0;
-        }
-      } else {
-        // Tie Break 돌입
-        counter_p1++;
-        // 타이브레이크 듀스, 승리 조건 등 if문으로 만들기
-      }
+      counterP1++;
+      addOrderOfPlay(1);
+      addPointToLogP1(counterP1);
+      addPointToLogP2(counterP2);
     });
   }
 
-  void _increaseCounter_p2() {
-    setState(() {
-      addPointLog(2);
-      savePreviousPoint();
-      if (isTieBreak() == false) {
-        counter_p2++;
-        if (counter_p2 == counter_p1 && counter_p2 == 3) {
-          // 40:40 일 때 No-Ad로 표기
-          savePreviousPoint();
-          counter_p2 += 2;
-          getScore(counter_p1 += 2);
-        } else if (counter_p2 == 6) {
-          // No-Ad 상황에서 득점
-          savePreviousPoint();
-          counter_p2 -= 2;
-          getScore(counter_p1++);
-          gameCounter_p2++;
-          counter_p1 = 0;
-          counter_p2 = 0;
-        } else if (counter_p2 == 4 && counter_p1 < 4) {
-          // 상대가 40까지 못 갔을때 득점
-          savePreviousPoint();
-          getScore(counter_p1 = 6);
-          gameCounter_p2++;
-          counter_p1 = 0;
-          counter_p2 = 0;
-        }
-      } else {
-        // Tie Break 돌입
-        counter_p2++;
-        //displaySocre(counter_p2);
-      }
+  void incrementCounterP2(){
+    setState((){
+      counterP2++;
+      addOrderOfPlay(2);
+      addPointToLogP1(counterP1);
+      addPointToLogP2(counterP2);
     });
   }
 
-  void undoPoint() {
-    setState(() {
-      if (checkLastPoint() == 1) {    // 마지막 득점자가 player1 일 때
-        if (counter_p2 == counter_p1 && counter_p2 == 5) {
-          // No-Ad 일 때 undo
-          getScore(counter_p1 -= 3);
-          getScore(counter_p2 -= 2);
-          removeLastLog();
-          return;
-        } else if (gameCounter_p1 > 0 && counter_p1 == 0 && counter_p2 == 0) {
-          gameCounter_p1--;
-          counter_p1 = previousPointCounter_p1;
-          counter_p2 = previousPointCounter_p2;
-          getScore(counter_p1);
-          getScore(counter_p2);
-          removeLastLog();
-          return;
-        }
-        counter_p1--;
-        removeLastLog();
-      } else {
-        if (counter_p2 == counter_p1 && counter_p2 == 5) {
-          // No-Ad 일 때 undo
-          getScore(counter_p2 -= 3);
-          getScore(counter_p1 -= 2);
-          removeLastLog();
-          return;
-        } else if (gameCounter_p2 > 0 && counter_p1 == 0 && counter_p2 == 0) {
-          gameCounter_p2--;
-          counter_p1 = previousPointCounter_p1;
-          counter_p2 = previousPointCounter_p2;
-          getScore(counter_p1);
-          getScore(counter_p2);
-          removeLastLog();
-          return;
-        }
-        counter_p2--;
-        removeLastLog();
+  void undoPoint(){
+    setState((){
+      removeLog();
+      if(orderOfPlay.last == 1){
+        counterP1--;
+      }else{
+        counterP2--;
       }
+      removeOrderOfPlay();
     });
   }
 
-  void resetPoint() {
-    setState(() {
-      getScore(counter_p1 = 0);
-      getScore(counter_p2 = 0);
-      gameCounter_p1 = 0;
-      gameCounter_p2 = 0;
-      resetPointLog();
+  void resetPoint(){
+    setState((){
+      counterP1 = 0;
+      counterP2 = 0;
+      gameCounterP1 = 0;
+      gameCounterP2 = 0;
+      resetGameLog();
       Navigator.pop(context);
     });
   }
+
 
   void resetDialog() {
     showDialog(
@@ -310,16 +213,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   cells: <DataCell>[
                     DataCell(Icon(Icons.sports_tennis)),
                     DataCell(Text("Player1")),
-                    DataCell(Text("$gameCounter_p1")),
-                    DataCell(Text(getScore(counter_p1))),
+                    DataCell(Text("$gameCounterP1")),
+                    DataCell(Text(currentPointP1())),
                   ],
                 ),
                 DataRow(
                   cells: <DataCell>[
                     DataCell(Text('')),
                     DataCell(Text("Player2")),
-                    DataCell(Text("$gameCounter_p2")),
-                    DataCell(Text(getScore(counter_p2))),
+                    DataCell(Text("$gameCounterP2")),
+                    DataCell(Text(currentPointP2())),
                   ],
                 ),
               ],
@@ -356,13 +259,13 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               // Score 표시되는 부분
               child:
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Flexible(
                     fit: FlexFit.loose,
                     child: Align(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        getScore(counter_p1),
+                        currentPointP1(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 40,
@@ -370,7 +273,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     )),
                 Flexible(
-                    //fit: FlexFit.loose,
+                  //fit: FlexFit.loose,
                     child: Container(
                       margin: EdgeInsets.fromLTRB(24, 0.0, 24, 8),
                       child: Text(
@@ -386,7 +289,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        getScore(counter_p2),
+                        currentPointP2(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 40,
@@ -401,7 +304,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   margin: EdgeInsets.fromLTRB(0.0, 32, 16, 0.0),
                   child: FloatingActionButton.extended(
-                      onPressed: _incrementCounter_p1,
+                      onPressed: incrementCounterP1,
                       tooltip: 'Player 1 gets point',
                       icon: Icon(Icons.add),
                       label: Text("Player 1")),
@@ -409,7 +312,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   margin: EdgeInsets.fromLTRB(16, 32, 0.0, 0.0),
                   child: FloatingActionButton.extended(
-                    onPressed: _increaseCounter_p2,
+                    onPressed: incrementCounterP2,
                     tooltip: 'Player 2 gets point',
                     icon: Icon(Icons.add),
                     label: Text("Player 2"),
