@@ -28,57 +28,57 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  List<String> scoreList = ["0", "15", "30", "40"];
+  List<String> scoreList = ["0", "15", "30", "40"]; // '포인트' 리스트
 
-  List<String> pointLogListP1 = ["0"];
+  List<String> pointLogListP1 = ["0"];  // Player1의 포인트 로그 리스트
 
-  List<String> pointLogListP2 = ["0"];
+  List<String> pointLogListP2 = ["0"];  // Player2의 포인트 로그 리스트
 
-  List<int> orderOfPlay = [];
+  List<int> orderOfPlay = []; // 득점자 기록용 리스트
 
-  int counterP1 = 0;
-  int counterP2 = 0;
+  int counterP1 = 0;  // Player1의 '포인트' 지정 변수
+  int counterP2 = 0;  // Player1의 '포인트' 지정 변수
 
-  int gameCounterP1 = 0;
-  int gameCounterP2 = 0;
+  int gameCounterP1 = 0;  // Player1의 '게임' 스코어 지정 변수
+  int gameCounterP2 = 0;  // Player2의 '게임' 스코어 지정 변수
 
-  void addPointToLogP1(int counter){
+  void addPointToLogP1(int counter){  // Player1 포인트 로그 리스트에 '포인트' 추가
     pointLogListP1.add(scoreList[counter]);
   }
 
-  void addPointToLogP2(int counter){
+  void addPointToLogP2(int counter){  // Player2 포인트 로그 리스트에 '포인트' 추가
     pointLogListP2.add(scoreList[counter]);
   }
 
-  String currentPointP1(){
+  String currentPointP1(){  // Player1의 현재 '포인트' 반환
     return pointLogListP1.last;
   }
 
-  String currentPointP2(){
+  String currentPointP2(){  // Player2의 현재 '포인트' 반환
     return pointLogListP2.last;
   }
 
-  void removeLog(){
+  void removeLog(){ // 모든 Player의 마지막 포인트 로그 제거
     pointLogListP1.removeLast();
     pointLogListP2.removeLast();
   }
 
-  void resetGameLog(){
+  void resetGameLog(){  // 모든 게임 '로그' 초기화 "All Reset"
     pointLogListP1.clear();
     pointLogListP2.clear();
     pointLogListP1.add("0");
     pointLogListP2.add("0");
   }
 
-  void addOrderOfPlay(int player){
+  void addOrderOfPlay(int player){  // 어떤 Player가 득점했는지에 대한 로그 추가
     orderOfPlay.add(player);
   }
 
-  void removeOrderOfPlay(){
+  void removeOrderOfPlay(){ // 마지막 득점 로그 지우기
     orderOfPlay.removeLast();
   }
 
-  void incrementCounterP1(){
+  void incrementCounterP1(){  // Player1 득점
     setState(() {
       counterP1++;
       addOrderOfPlay(1);
@@ -87,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void incrementCounterP2(){
+  void incrementCounterP2(){  // Player2 득점
     setState((){
       counterP2++;
       addOrderOfPlay(2);
@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void undoPoint(){
+  void undoPoint(){ // 1 '포인트' 되돌리기
     setState((){
       removeLog();
       if(orderOfPlay.last == 1){
@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void resetPoint(){
+  void resetPoint(){  // 모든 점수 초기화
     setState((){
       counterP1 = 0;
       counterP2 = 0;
@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
-  void resetDialog() {
+  void resetDialog() {  // 'All Reset' Dialog 알림
     showDialog(
         context: context,
         //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
