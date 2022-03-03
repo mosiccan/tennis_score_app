@@ -96,6 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       counterP1++;
       if(counterP1 == 4){     // 득점 및 '게임' 승리
+        counterP1--;
         saveLastCounterOfGame(counterP1, counterP2);
         counterP1 = 0;
         counterP2 = 0;
@@ -115,6 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState((){
       counterP2++;
       if(counterP2 == 4){     // 득점 및 '게임' 승리
+      counterP2--;
         saveLastCounterOfGame(counterP1, counterP2);
         counterP1 = 0;
         counterP2 = 0;
