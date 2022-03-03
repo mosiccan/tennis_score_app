@@ -27,45 +27,50 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   List<String> scoreList = ["0", "15", "30", "40"]; // '포인트' 리스트
 
-  List<String> pointLogListP1 = ["0"];  // Player1의 포인트 로그 리스트
-  List<String> pointLogListP2 = ["0"];  // Player2의 포인트 로그 리스트
+  List<String> pointLogListP1 = ["0"]; // Player1의 포인트 로그 리스트
+  List<String> pointLogListP2 = ["0"]; // Player2의 포인트 로그 리스트
 
   List<int> orderOfPlay = []; // 득점순서 기록용 리스트
-  
+
   List<int> lastCounterOfGameListP1 = []; // '게임' 득점 직전 CounterP1 및 CounterP2 저장
   List<int> lastCounterOfGameListP2 = []; // '게임' 득점 직전 CounterP1 및 CounterP2 저장
 
-  int counterP1 = 0;  // Player1의 '포인트' 지정 변수
-  int counterP2 = 0;  // Player2의 '포인트' 지정 변수
+  int counterP1 = 0; // Player1의 '포인트' 지정 변수
+  int counterP2 = 0; // Player2의 '포인트' 지정 변수
 
-  int gameCounterP1 = 0;  // Player1의 '게임' 스코어 지정 변수
-  int gameCounterP2 = 0;  // Player2의 '게임' 스코어 지정 변수
+  int gameCounterP1 = 0; // Player1의 '게임' 스코어 지정 변수
+  int gameCounterP2 = 0; // Player2의 '게임' 스코어 지정 변수
 
-  void addPointToLogP1(int counter){  // Player1 포인트 로그 리스트에 '포인트' 추가
+  void addPointToLogP1(int counter) {
+    // Player1 포인트 로그 리스트에 '포인트' 추가
     pointLogListP1.add(scoreList[counter]);
   }
 
-  void addPointToLogP2(int counter){  // Player2 포인트 로그 리스트에 '포인트' 추가
+  void addPointToLogP2(int counter) {
+    // Player2 포인트 로그 리스트에 '포인트' 추가
     pointLogListP2.add(scoreList[counter]);
   }
 
-  String currentPointP1(){  // Player1의 현재 '포인트' 반환
+  String currentPointP1() {
+    // Player1의 현재 '포인트' 반환
     return pointLogListP1.last;
   }
 
-  String currentPointP2(){  // Player2의 현재 '포인트' 반환
+  String currentPointP2() {
+    // Player2의 현재 '포인트' 반환
     return pointLogListP2.last;
   }
 
-  void removeLog(){ // 모든 Player의 마지막 포인트 로그 제거
+  void removeLog() {
+    // 모든 Player의 마지막 포인트 로그 제거
     pointLogListP1.removeLast();
     pointLogListP2.removeLast();
   }
 
-  void resetGameLog(){  // 모든 게임 '로그' 초기화 "All Reset"
+  void resetGameLog() {
+    // 모든 게임 '로그' 초기화 "All Reset"
     pointLogListP1.clear();
     pointLogListP2.clear();
     pointLogListP1.add("0");
@@ -74,28 +79,32 @@ class _MyHomePageState extends State<MyHomePage> {
     lastCounterOfGameListP2.clear();
   }
 
-  void addOrderOfPlay(int player){  // 어떤 Player가 득점했는지에 대한 로그 추가
+  void addOrderOfPlay(int player) {
+    // 어떤 Player가 득점했는지에 대한 로그 추가
     orderOfPlay.add(player);
   }
 
-  void removeOrderOfPlay(){ // 마지막 득점 로그 지우기
+  void removeOrderOfPlay() {
+    // 마지막 득점 로그 지우기
     orderOfPlay.removeLast();
   }
-  
-  void saveLastCounterOfGame(int counter1, int counter2){
+
+  void saveLastCounterOfGame(int counter1, int counter2) {
     lastCounterOfGameListP1.add(counter1);
     lastCounterOfGameListP2.add(counter2);
   }
-  
-  void removeLastCounterOfGame(){
+
+  void removeLastCounterOfGame() {
     lastCounterOfGameListP1.removeLast();
     lastCounterOfGameListP2.removeLast();
   }
 
-  void incrementCounterP1(){  // Player1 득점
+  void incrementCounterP1() {
+    // Player1 득점
     setState(() {
       counterP1++;
-      if(counterP1 == 4){     // 득점 및 '게임' 승리
+      if (counterP1 == 4) {
+        // 득점 및 '게임' 승리
         counterP1--;
         saveLastCounterOfGame(counterP1, counterP2);
         counterP1 = 0;
@@ -104,19 +113,22 @@ class _MyHomePageState extends State<MyHomePage> {
         addOrderOfPlay(1);
         addPointToLogP1(counterP1);
         addPointToLogP2(counterP2);
-      }else{                  // '게임' 진행 중 득점
-        addOrderOfPlay(1);  
+      } else {
+        // '게임' 진행 중 득점
+        addOrderOfPlay(1);
         addPointToLogP1(counterP1);
         addPointToLogP2(counterP2);
       }
     });
   }
 
-  void incrementCounterP2(){  // Player2 득점
-    setState((){
+  void incrementCounterP2() {
+    // Player2 득점
+    setState(() {
       counterP2++;
-      if(counterP2 == 4){     // 득점 및 '게임' 승리
-      counterP2--;
+      if (counterP2 == 4) {
+        // 득점 및 '게임' 승리
+        counterP2--;
         saveLastCounterOfGame(counterP1, counterP2);
         counterP1 = 0;
         counterP2 = 0;
@@ -124,42 +136,51 @@ class _MyHomePageState extends State<MyHomePage> {
         addOrderOfPlay(2);
         addPointToLogP1(counterP1);
         addPointToLogP2(counterP2);
-      }else{                  // '게임' 진행 중 득점
-        addOrderOfPlay(2);  
+      } else {
+        // '게임' 진행 중 득점
+        addOrderOfPlay(2);
         addPointToLogP1(counterP1);
         addPointToLogP2(counterP2);
       }
     });
   }
 
-  void undoPoint(){ // 1 '포인트' 되돌리기
-    setState((){
-      removeLog();
-      if(orderOfPlay.last == 1){
-        if(gameCounterP1 > 0 && counterP1 == counterP2 && counterP1 == 0){
+  void undoPoint() {
+    // 1 '포인트' 되돌리기
+    setState(() {
+      if (orderOfPlay.last == 1) {
+        removeLog();
+        if (gameCounterP1 > 0 && counterP1 == counterP2 && counterP1 == 0) {
           gameCounterP1--;
           counterP1 = lastCounterOfGameListP1.last;
           counterP2 = lastCounterOfGameListP2.last;
           removeLastCounterOfGame();
-        }else{
-          counterP1--;  
+          removeOrderOfPlay();
+        } else {
+          counterP1--;
+          removeOrderOfPlay();
         }
-      }else{
-        if(gameCounterP2 > 0 && counterP1 == counterP2 && counterP1 == 0){
+      } else if (orderOfPlay.last == 2) {
+        removeLog();
+        if (gameCounterP2 > 0 && counterP1 == counterP2 && counterP1 == 0) {
           gameCounterP2--;
           counterP1 = lastCounterOfGameListP1.last;
           counterP2 = lastCounterOfGameListP2.last;
           removeLastCounterOfGame();
-        }else{
-          counterP2--;  
+          removeOrderOfPlay();
+        } else {
+          counterP2--;
+          removeOrderOfPlay();
         }
+      } else if (gameCounterP1 == 0 && gameCounterP2 == 0 && counterP1 == 0 && counterP2 == 0) {
+        resetPoint();
       }
-      removeOrderOfPlay();
     });
   }
 
-  void resetPoint(){  // 모든 점수 초기화
-    setState((){
+  void resetPoint() {
+    // 모든 점수 초기화
+    setState(() {
       counterP1 = 0;
       counterP2 = 0;
       gameCounterP1 = 0;
@@ -169,8 +190,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-
-  void resetDialog() {  // 'All Reset' Dialog 알림
+  void resetDialog() {
+    // 'All Reset' Dialog 알림
     showDialog(
         context: context,
         //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
@@ -277,7 +298,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            Container(    // Information 탭
+            Container(
+              // Information 탭
               margin: EdgeInsets.fromLTRB(0.0, 20, 0.0, 0.0),
               child: Text(
                 'Information',
@@ -309,7 +331,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               // Score 표시되는 부분
               child:
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Flexible(
                     fit: FlexFit.loose,
                     child: Align(
@@ -323,17 +345,17 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     )),
                 Flexible(
-                  //fit: FlexFit.loose,
+                    //fit: FlexFit.loose,
                     child: Container(
-                      margin: EdgeInsets.fromLTRB(24, 0.0, 24, 8),
-                      child: Text(
-                        ':',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 48,
-                        ),
-                      ),
-                    )),
+                  margin: EdgeInsets.fromLTRB(24, 0.0, 24, 8),
+                  child: Text(
+                    ':',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 48,
+                    ),
+                  ),
+                )),
                 Flexible(
                     fit: FlexFit.loose,
                     child: Align(
