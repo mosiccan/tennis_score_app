@@ -98,6 +98,13 @@ class _MyHomePageState extends State<MyHomePage> {
     lastCounterOfGameListP1.removeLast();
     lastCounterOfGameListP2.removeLast();
   }
+  
+  bool isMatchOver(int counter){
+    if(counter == 6){
+      return true;
+    }
+    return false;
+  }
 
   void incrementCounterP1() {
     // Player1 득점
@@ -113,6 +120,10 @@ class _MyHomePageState extends State<MyHomePage> {
         addOrderOfPlay(1);
         addPointToLogP1(counterP1);
         addPointToLogP2(counterP2);
+        if(isMatchOver(gameCounterP1)){
+        pointLogListP1.add("Win");
+        pointLogListP2.add("Lose");
+      }
       } else {
         // '게임' 진행 중 득점
         addOrderOfPlay(1);
@@ -136,6 +147,10 @@ class _MyHomePageState extends State<MyHomePage> {
         addOrderOfPlay(2);
         addPointToLogP1(counterP1);
         addPointToLogP2(counterP2);
+        if(isMatchOver(gameCounterP2)){
+        pointLogListP2.add("Win");
+        pointLogListP1.add("Lose");
+      }
       } else {
         // '게임' 진행 중 득점
         addOrderOfPlay(2);
@@ -149,6 +164,10 @@ class _MyHomePageState extends State<MyHomePage> {
     // 1 '포인트' 되돌리기
     setState(() {
       if (orderOfPlay.last == 1) {
+        if(isMatchOver(gameCounterP1)){
+          pointLogListP1.removeLast();
+          pointLogListP2.removeLast();
+        }
         removeLog();
         if (gameCounterP1 > 0 && counterP1 == counterP2 && counterP1 == 0) {
           gameCounterP1--;
@@ -161,6 +180,10 @@ class _MyHomePageState extends State<MyHomePage> {
           removeOrderOfPlay();
         }
       } else if (orderOfPlay.last == 2) {
+        if(isMatchOver(gameCounterP2)){
+          pointLogListP1.removeLast();
+          pointLogListP2.removeLast();
+        }
         removeLog();
         if (gameCounterP2 > 0 && counterP1 == counterP2 && counterP1 == 0) {
           gameCounterP2--;
