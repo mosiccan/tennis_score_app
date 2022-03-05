@@ -42,6 +42,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int gameCounterP1 = 0; // Player1의 '게임' 스코어 지정 변수
   int gameCounterP2 = 0; // Player2의 '게임' 스코어 지정 변수
+  
+  int tieBreakCounterP1 = 0;    //Player1의 타이브레이크 진행 시 사용하는 카운터
+  int tieBreakCounterP2 = 0;    //Player2의 타이브레이크 진행 시 사용하는 카운터
 
   void addPointToLogP1(int counter) {
     // Player1 포인트 로그 리스트에 '포인트' 추가
@@ -77,6 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
     pointLogListP2.add("0");
     lastCounterOfGameListP1.clear();
     lastCounterOfGameListP2.clear();
+    tieBreakCounterP1 = 0;
+    tieBreakCounterP2 = 0;
   }
 
   void addOrderOfPlay(int player) {
@@ -99,6 +104,13 @@ class _MyHomePageState extends State<MyHomePage> {
     lastCounterOfGameListP2.removeLast();
   }
   
+  bool isTieBreak(int counter1, int counter2){
+    if(counter1 == counter2 && counter1 == 5){
+      return true;
+    }
+    return false;
+  }
+  
   bool isMatchOver(int counter){
     if(counter == 6){
       return true;
@@ -109,26 +121,31 @@ class _MyHomePageState extends State<MyHomePage> {
   void incrementCounterP1() {
     // Player1 득점
     setState(() {
-      counterP1++;
-      if (counterP1 == 4) {
-        // 득점 및 '게임' 승리
-        counterP1--;
-        saveLastCounterOfGame(counterP1, counterP2);
-        counterP1 = 0;
-        counterP2 = 0;
-        gameCounterP1++;
+      if(isTieBreak(gameCounterP1, gameCounterP2)){
+        tieBreakCounterP1++;
+        pointLogListP1.add(tieBreakCounterP1.toString());
+        pointLogListP2.add(tieBreakCounterP2.toString());
         addOrderOfPlay(1);
-        addPointToLogP1(counterP1);
-        addPointToLogP2(counterP2);
-        if(isMatchOver(gameCounterP1)){
-        pointLogListP1.add("Win");
-        pointLogListP2.add("Lose");
-      }
-      } else {
-        // '게임' 진행 중 득점
-        addOrderOfPlay(1);
-        addPointToLogP1(counterP1);
-        addPointToLogP2(counterP2);
+      }else{
+        counterP1++;
+        if (counterP1 == 4) {     // 득점 및 '게임' 승리
+          counterP1--;
+          saveLastCounterOfGame(counterP1, counterP2);
+          counterP1 = 0;
+          counterP2 = 0;
+          gameCounterP1++;
+          addOrderOfPlay(1);
+          addPointToLogP1(counterP1);
+          addPointToLogP2(counterP2);
+          if(isMatchOver(gameCounterP1)){
+            pointLogListP1.add("Win");
+            pointLogListP2.add("Lose");
+          }
+        } else {                  // '게임' 진행 중 득점
+          addOrderOfPlay(1);
+          addPointToLogP1(counterP1);
+          addPointToLogP2(counterP2);
+        }
       }
     });
   }
@@ -136,27 +153,33 @@ class _MyHomePageState extends State<MyHomePage> {
   void incrementCounterP2() {
     // Player2 득점
     setState(() {
-      counterP2++;
-      if (counterP2 == 4) {
-        // 득점 및 '게임' 승리
-        counterP2--;
-        saveLastCounterOfGame(counterP1, counterP2);
-        counterP1 = 0;
-        counterP2 = 0;
-        gameCounterP2++;
+      if(isTieBreak(gameCounterP1, gameCounterP2)){
+        tieBreakCounterP2++;
+        pointLogListP1.add(tieBreakCounterP1.toString());
+        pointLogListP2.add(tieBreakCounterP2.toString());
         addOrderOfPlay(2);
-        addPointToLogP1(counterP1);
-        addPointToLogP2(counterP2);
-        if(isMatchOver(gameCounterP2)){
-        pointLogListP2.add("Win");
-        pointLogListP1.add("Lose");
+      }else{
+        counterP2++;
+         if (counterP2 == 4) {      // 득점 및 '게임' 승리
+          counterP2--;
+          saveLastCounterOfGame(counterP1, counterP2);
+          counterP1 = 0;
+          counterP2 = 0;
+          gameCounterP2++;
+          addOrderOfPlay(2);
+          addPointToLogP1(counterP1);
+          addPointToLogP2(counterP2);
+          if(isMatchOver(gameCounterP2)){
+            pointLogListP2.add("Win");
+            pointLogListP1.add("Lose");
+          }
+        } else {                    // '게임' 진행 중 득점
+          addOrderOfPlay(2);
+          addPointToLogP1(counterP1);
+          addPointToLogP2(counterP2);
+        }
       }
-      } else {
-        // '게임' 진행 중 득점
-        addOrderOfPlay(2);
-        addPointToLogP1(counterP1);
-        addPointToLogP2(counterP2);
-      }
+      
     });
   }
 
