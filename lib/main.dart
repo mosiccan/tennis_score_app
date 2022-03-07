@@ -140,6 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
           if(isMatchOver(gameCounterP1)){
             pointLogListP1.add("Win");
             pointLogListP2.add("Lose");
+            gameOverDialog();
           }
         } else {                  // '게임' 진행 중 득점
           addOrderOfPlay(1);
@@ -279,6 +280,56 @@ class _MyHomePageState extends State<MyHomePage> {
                   primary: Colors.grey,
                 ),
                 child: Text('Ok'),
+                onPressed: resetPoint, // reset
+              ),
+            ],
+          );
+        });
+  }
+
+  void gameOverDialog() {
+    // 게임 종료시 Dialog 알림
+    showDialog(
+        context: context,
+        //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0)),
+            //Dialog Main Title
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Text("Player 1 Win!!"),
+              ],
+            ),
+            //
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "TBU",
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.black,
+                ),
+                child: Text('No'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.grey,
+                ),
+                child: Text('Reset'),
                 onPressed: resetPoint, // reset
               ),
             ],
