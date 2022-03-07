@@ -82,6 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
     lastCounterOfGameListP2.clear();
     tieBreakCounterP1 = 0;
     tieBreakCounterP2 = 0;
+    orderOfPlay.clear();
   }
 
   void addOrderOfPlay(int player) {
