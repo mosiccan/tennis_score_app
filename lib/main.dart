@@ -141,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
           if(isMatchOver(gameCounterP1)){
             pointLogListP1.add("Win");
             pointLogListP2.add("Lose");
-            gameOverDialog();
+            gameOverDialog(1);
           }
         } else {                  // '게임' 진행 중 득점
           addOrderOfPlay(1);
@@ -174,6 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
           if(isMatchOver(gameCounterP2)){
             pointLogListP2.add("Win");
             pointLogListP1.add("Lose");
+            gameOverDialog(2);
           }
         } else {                    // '게임' 진행 중 득점
           addOrderOfPlay(2);
@@ -223,6 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
       } else if (gameCounterP1 == 0 && gameCounterP2 == 0 && counterP1 == 0 && counterP2 == 0) {
         resetPoint();
       }
+      Navigator.pop(context);
     });
   }
 
@@ -288,7 +290,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  void gameOverDialog() {
+  void gameOverDialog(int player) {
     // 게임 종료시 Dialog 알림
     showDialog(
         context: context,
@@ -303,7 +305,7 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                new Text("Player 1 Win!!"),
+                new Text("Player $player Win!!"),
               ],
             ),
             //
@@ -321,17 +323,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextButton.styleFrom(
                   primary: Colors.black,
                 ),
-                child: Text('No'),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+                child: Text('Reset'),
+                onPressed: resetPoint, // reset
               ),
               TextButton(
                 style: TextButton.styleFrom(
                   primary: Colors.grey,
                 ),
-                child: Text('Reset'),
-                onPressed: resetPoint, // reset
+                child: Text('Undo'),
+                onPressed: () {
+                  undoPoint();
+                },
               ),
             ],
           );
