@@ -124,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       if(isTieBreak(gameCounterP1, gameCounterP2)){
         if(tieBreakCounterP1 >= 6 && tieBreakCounterP2 >= 6){   //타이브레이크 듀스일때
-          if((tieBreakCounterP1-tieBreakCounterP2) >= 2){       //타이브레이크 듀스 종료
+          if((tieBreakCounterP1-tieBreakCounterP2) >= 1){       //타이브레이크 듀스 종료
             tieBreakCounterP1++;
             pointLogListP1.add(tieBreakCounterP1.toString());
             pointLogListP2.add(tieBreakCounterP2.toString());
@@ -179,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       if(isTieBreak(gameCounterP1, gameCounterP2)){
         if(tieBreakCounterP1 >= 6 && tieBreakCounterP2 >= 6){   //타이브레이크 듀스일때
-          if((tieBreakCounterP2-tieBreakCounterP1) >= 2){       //타이브레이크 듀스 종료
+          if((tieBreakCounterP2-tieBreakCounterP1) >= 1){       //타이브레이크 듀스 종료
             tieBreakCounterP2++;
             pointLogListP1.add(tieBreakCounterP1.toString());
             pointLogListP2.add(tieBreakCounterP2.toString());
@@ -268,7 +268,6 @@ class _MyHomePageState extends State<MyHomePage> {
       } else if (gameCounterP1 == 0 && gameCounterP2 == 0 && counterP1 == 0 && counterP2 == 0) {
         resetPoint();
       }
-      Navigator.pop(context);
     });
   }
 
