@@ -198,6 +198,12 @@ class _MyHomePageState extends State<MyHomePage> {
             addOrderOfPlay(2);
           }
         }
+        else{
+          tieBreakCounterP2++;
+          pointLogListP1.add(tieBreakCounterP1.toString());
+          pointLogListP2.add(tieBreakCounterP2.toString());
+          addOrderOfPlay(2);
+        }
       }else{
         counterP2++;
          if (counterP2 == 4) {      // 득점 및 '게임' 승리
