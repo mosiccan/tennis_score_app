@@ -192,10 +192,10 @@ class _MyHomePageState extends State<MyHomePage> {
             }
           }
           else{                                                 //듀스 또는 애드 상황
-            tieBreakCounterP1++;
+            tieBreakCounterP2++;
             pointLogListP1.add(tieBreakCounterP1.toString());
             pointLogListP2.add(tieBreakCounterP2.toString());
-            addOrderOfPlay(1);
+            addOrderOfPlay(2);
           }
         }
       }else{
