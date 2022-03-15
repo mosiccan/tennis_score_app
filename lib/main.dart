@@ -123,10 +123,32 @@ class _MyHomePageState extends State<MyHomePage> {
     // Player1 득점
     setState(() {
       if(isTieBreak(gameCounterP1, gameCounterP2)){
-        tieBreakCounterP1++;
-        pointLogListP1.add(tieBreakCounterP1.toString());
-        pointLogListP2.add(tieBreakCounterP2.toString());
-        addOrderOfPlay(1);
+        if(tieBreakCounterP1 >= 6 && tieBreakCounterP2 >= 6){   //타이브레이크 듀스일때
+          if((tieBreakCounterP1-tieBreakCounterP2) >= 2){       //타이브레이크 듀스 종료
+            tieBreakCounterP1++;
+            pointLogListP1.add(tieBreakCounterP1.toString());
+            pointLogListP2.add(tieBreakCounterP2.toString());
+            addOrderOfPlay(1);
+            gameCounterP1++;
+            if(isMatchOver(gameCounterP1)){
+              pointLogListP1.add("Win");
+              pointLogListP2.add("Lose");
+              matchOverDialog(1);
+            }
+          }
+          else{                                                 //듀스 또는 애드 상황
+            tieBreakCounterP1++;
+            pointLogListP1.add(tieBreakCounterP1.toString());
+            pointLogListP2.add(tieBreakCounterP2.toString());
+            addOrderOfPlay(1);
+          }
+        }
+        else{                                                   //타이브레이크 듀스 아닐 때
+          tieBreakCounterP1++;
+          pointLogListP1.add(tieBreakCounterP1.toString());
+          pointLogListP2.add(tieBreakCounterP2.toString());
+          addOrderOfPlay(1);
+        }
       }else{
         counterP1++;
         if (counterP1 == 4) {     // 득점 및 '게임' 승리
@@ -141,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
           if(isMatchOver(gameCounterP1)){
             pointLogListP1.add("Win");
             pointLogListP2.add("Lose");
-            gameOverDialog(1);
+            matchOverDialog(1);
           }
         } else {                  // '게임' 진행 중 득점
           addOrderOfPlay(1);
@@ -156,10 +178,26 @@ class _MyHomePageState extends State<MyHomePage> {
     // Player2 득점
     setState(() {
       if(isTieBreak(gameCounterP1, gameCounterP2)){
-        tieBreakCounterP2++;
-        pointLogListP1.add(tieBreakCounterP1.toString());
-        pointLogListP2.add(tieBreakCounterP2.toString());
-        addOrderOfPlay(2);
+        if(tieBreakCounterP1 >= 6 && tieBreakCounterP2 >= 6){   //타이브레이크 듀스일때
+          if((tieBreakCounterP2-tieBreakCounterP1) >= 2){       //타이브레이크 듀스 종료
+            tieBreakCounterP2++;
+            pointLogListP1.add(tieBreakCounterP1.toString());
+            pointLogListP2.add(tieBreakCounterP2.toString());
+            addOrderOfPlay(2);
+            gameCounterP2++;
+            if(isMatchOver(gameCounterP2)){
+              pointLogListP2.add("Win");
+              pointLogListP1.add("Lose");
+              matchOverDialog(2);
+            }
+          }
+          else{                                                 //듀스 또는 애드 상황
+            tieBreakCounterP1++;
+            pointLogListP1.add(tieBreakCounterP1.toString());
+            pointLogListP2.add(tieBreakCounterP2.toString());
+            addOrderOfPlay(1);
+          }
+        }
       }else{
         counterP2++;
          if (counterP2 == 4) {      // 득점 및 '게임' 승리
@@ -174,7 +212,7 @@ class _MyHomePageState extends State<MyHomePage> {
           if(isMatchOver(gameCounterP2)){
             pointLogListP2.add("Win");
             pointLogListP1.add("Lose");
-            gameOverDialog(2);
+            matchOverDialog(2);
           }
         } else {                    // '게임' 진행 중 득점
           addOrderOfPlay(2);
@@ -290,7 +328,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  void gameOverDialog(int player) {
+  void matchOverDialog(int player) {
     // 게임 종료시 Dialog 알림
     showDialog(
         context: context,
