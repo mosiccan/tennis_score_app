@@ -118,40 +118,65 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     return false;
   }
+  
+  bool isTieBreakOver(int counter){
+    if(counter >= 7){
+      return true;
+    }
+    return false;
+  }
 
   void incrementCounterP1() {
     // Player1 득점
     setState(() {
-      if(isTieBreak(gameCounterP1, gameCounterP2)){
-        if(tieBreakCounterP1 >= 6 && tieBreakCounterP2 >= 6){   //타이브레이크 듀스일때
-          if((tieBreakCounterP1-tieBreakCounterP2) >= 1){       //타이브레이크 듀스 종료
+      if(isTieBreak(gameCounterP1, gameCounterP2)){             
+        //타이브레이크 일 때
+        if(tieBreakCounterP1 >= 6 && tieBreakCounterP2 >= 6){   
+          //타이브레이크 듀스일때
+          if((tieBreakCounterP1-tieBreakCounterP2) >= 1){       
+            //타이브레이크 듀스 종료
             tieBreakCounterP1++;
             pointLogListP1.add(tieBreakCounterP1.toString());
             pointLogListP2.add(tieBreakCounterP2.toString());
             addOrderOfPlay(1);
             gameCounterP1++;
-            if(isMatchOver(gameCounterP1)){
+            if(isMatchOver(gameCounterP1)){                     
+              //타이브레이크 종료 후 플레이어1 승리
               pointLogListP1.add("Win");
               pointLogListP2.add("Lose");
               matchOverDialog(1);
             }
           }
-          else{                                                 //듀스 또는 애드 상황
+          else{                                                 
+            //듀스 또는 애드 상황
             tieBreakCounterP1++;
             pointLogListP1.add(tieBreakCounterP1.toString());
             pointLogListP2.add(tieBreakCounterP2.toString());
             addOrderOfPlay(1);
           }
         }
-        else{                                                   //타이브레이크 듀스 아닐 때
+        else{                                                   
+          //타이브레이크 듀스 아닐 때
           tieBreakCounterP1++;
           pointLogListP1.add(tieBreakCounterP1.toString());
           pointLogListP2.add(tieBreakCounterP2.toString());
           addOrderOfPlay(1);
+          if(isTieBreakOver(tieBreakCounterP1)){
+            //타이브레이크 종료 되었는지 확인
+            gameCounterP1++;
+            if(isMatchOver(gameCounterP1)){
+              //타이브레이크 종료로 인해 플레이어2 승리
+              pointLogListP1.add("Win");
+              pointLogListP2.add("Lose");
+              matchOverDialog(1);
+            }
+          }
         }
-      }else{
+      }else{                                                     
+        // 타이브레이크 아닐 때 
         counterP1++;
-        if (counterP1 == 4) {     // 득점 및 '게임' 승리
+        if (counterP1 == 4) {                                    
+          // 득점 및 '게임' 승리
           counterP1--;
           saveLastCounterOfGame(counterP1, counterP2);
           counterP1 = 0;
@@ -160,12 +185,14 @@ class _MyHomePageState extends State<MyHomePage> {
           addOrderOfPlay(1);
           addPointToLogP1(counterP1);
           addPointToLogP2(counterP2);
-          if(isMatchOver(gameCounterP1)){
+          if(isMatchOver(gameCounterP1)){                         
+            // 타이브레이크 아니고 플레이어1이 승리
             pointLogListP1.add("Win");
             pointLogListP2.add("Lose");
             matchOverDialog(1);
           }
-        } else {                  // '게임' 진행 중 득점
+        } else {                                                   
+          // '게임' 진행 중 득점
           addOrderOfPlay(1);
           addPointToLogP1(counterP1);
           addPointToLogP2(counterP2);
@@ -177,36 +204,54 @@ class _MyHomePageState extends State<MyHomePage> {
   void incrementCounterP2() {
     // Player2 득점
     setState(() {
-      if(isTieBreak(gameCounterP1, gameCounterP2)){
-        if(tieBreakCounterP1 >= 6 && tieBreakCounterP2 >= 6){   //타이브레이크 듀스일때
-          if((tieBreakCounterP2-tieBreakCounterP1) >= 1){       //타이브레이크 듀스 종료
+      if(isTieBreak(gameCounterP1, gameCounterP2)){             
+        // 타이브레이크 일 때
+        if(tieBreakCounterP1 >= 6 && tieBreakCounterP2 >= 6){   
+          //타이브레이크 듀스일때
+          if((tieBreakCounterP2-tieBreakCounterP1) >= 1){       
+            //타이브레이크 듀스 종료
             tieBreakCounterP2++;
             pointLogListP1.add(tieBreakCounterP1.toString());
             pointLogListP2.add(tieBreakCounterP2.toString());
             addOrderOfPlay(2);
             gameCounterP2++;
-            if(isMatchOver(gameCounterP2)){
+            if(isMatchOver(gameCounterP2)){                     
+              //타이브레이크 종료 후 플레이어2 승리
               pointLogListP2.add("Win");
               pointLogListP1.add("Lose");
               matchOverDialog(2);
             }
           }
-          else{                                                 //듀스 또는 애드 상황
+          else{                                                 
+            //듀스 또는 애드 상황
             tieBreakCounterP2++;
             pointLogListP1.add(tieBreakCounterP1.toString());
             pointLogListP2.add(tieBreakCounterP2.toString());
             addOrderOfPlay(2);
           }
         }
-        else{
+        else{                                                   
+          //타이브레이크 때 그냥 득점
           tieBreakCounterP2++;
           pointLogListP1.add(tieBreakCounterP1.toString());
           pointLogListP2.add(tieBreakCounterP2.toString());
           addOrderOfPlay(2);
+          if(isTieBreakOver(tieBreakCounterP2)){
+            //타이브레이크가 종료 되었는지 확인
+            gameCounterP2++;
+            if(isMatchOver(gameCounterP2)){
+              //타이브레이크 종료로 인해 플레이어2 승리
+              pointLogListP2.add("Win");
+              pointLogListP1.add("Lose");
+              matchOverDialog(2);
+            }
+          }
         }
-      }else{
+      }else{                                                     
+        //타이브레이크 아닐 때
         counterP2++;
-         if (counterP2 == 4) {      // 득점 및 '게임' 승리
+         if (counterP2 == 4) {                                   
+           // 득점 및 '게임' 승리
           counterP2--;
           saveLastCounterOfGame(counterP1, counterP2);
           counterP1 = 0;
@@ -215,12 +260,14 @@ class _MyHomePageState extends State<MyHomePage> {
           addOrderOfPlay(2);
           addPointToLogP1(counterP1);
           addPointToLogP2(counterP2);
-          if(isMatchOver(gameCounterP2)){
+          if(isMatchOver(gameCounterP2)){                        
+            //타이브레이크 아니고 플레이어2 승리
             pointLogListP2.add("Win");
             pointLogListP1.add("Lose");
             matchOverDialog(2);
           }
-        } else {                    // '게임' 진행 중 득점
+        } else {                                                 
+          // '게임' 진행 중 득점
           addOrderOfPlay(2);
           addPointToLogP1(counterP1);
           addPointToLogP2(counterP2);
@@ -230,42 +277,51 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void undoPoint() {
+  void undoPoint() {                                              
     // 1 '포인트' 되돌리기
     setState(() {
-      if (orderOfPlay.last == 1) {
-        if(isMatchOver(gameCounterP1)){
+      if (orderOfPlay.last == 1) {                                
+        // 마지막 득점자가 플레이어1 일 때
+        if(isMatchOver(gameCounterP1)){                           
+          // 플레이어1 매치 종료시 출력하는 (Win:Lose) 지워주기
           pointLogListP1.removeLast();
           pointLogListP2.removeLast();
         }
         removeLog();
-        if (gameCounterP1 > 0 && counterP1 == counterP2 && counterP1 == 0) {
+        if (gameCounterP1 > 0 && counterP1 == counterP2 && counterP1 == 0) {  
+          //플레이어1이 게임 득점시 이전 게임으로 돌아가기
           gameCounterP1--;
           counterP1 = lastCounterOfGameListP1.last;
           counterP2 = lastCounterOfGameListP2.last;
           removeLastCounterOfGame();
           removeOrderOfPlay();
-        } else {
+        } else {                                                              
+          //일반 상황 시 플레이어1 득점 돌아가기
           counterP1--;
           removeOrderOfPlay();
         }
-      } else if (orderOfPlay.last == 2) {
-        if(isMatchOver(gameCounterP2)){
+      } else if (orderOfPlay.last == 2) {                                     
+        //플레이어2가 마지막 득점자 일 떄
+        if(isMatchOver(gameCounterP2)){                                       
+          //플레이어2 매치 종료 시 출력하는 (Win:Lose) 지워주기
           pointLogListP1.removeLast();
           pointLogListP2.removeLast();
         }
         removeLog();
-        if (gameCounterP2 > 0 && counterP1 == counterP2 && counterP1 == 0) {
+        if (gameCounterP2 > 0 && counterP1 == counterP2 && counterP1 == 0) {   
+          //플레이어2가 게임 득점시 이전게임으로 돌아가기
           gameCounterP2--;
           counterP1 = lastCounterOfGameListP1.last;
           counterP2 = lastCounterOfGameListP2.last;
           removeLastCounterOfGame();
           removeOrderOfPlay();
-        } else {
+        } else {                                                                
+          //일반 상황 시 플레이어2 득점 돌아가기
           counterP2--;
           removeOrderOfPlay();
         }
-      } else if (gameCounterP1 == 0 && gameCounterP2 == 0 && counterP1 == 0 && counterP2 == 0) {
+      } else if (gameCounterP1 == 0 && gameCounterP2 == 0 && counterP1 == 0 && counterP2 == 0) {  
+        //0:0 상황일때 undo시 게임 reset
         resetPoint();
       }
     });
