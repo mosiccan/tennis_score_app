@@ -42,9 +42,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int gameCounterP1 = 0; // Player1의 '게임' 스코어 지정 변수
   int gameCounterP2 = 0; // Player2의 '게임' 스코어 지정 변수
-
-  int tieBreakCounterP1 = 0; //Player1의 타이브레이크 진행 시 사용하는 카운터
-  int tieBreakCounterP2 = 0; //Player2의 타이브레이크 진행 시 사용하는 카운터
+  
+  int tieBreakCounterP1 = 0;    //Player1의 타이브레이크 진행 시 사용하는 카운터
+  int tieBreakCounterP2 = 0;    //Player2의 타이브레이크 진행 시 사용하는 카운터
 
   void addPointToLogP1(int counter) {
     // Player1 포인트 로그 리스트에 '포인트' 추가
@@ -104,23 +104,23 @@ class _MyHomePageState extends State<MyHomePage> {
     lastCounterOfGameListP1.removeLast();
     lastCounterOfGameListP2.removeLast();
   }
-
-  bool isTieBreak(int counter1, int counter2) {
-    if (counter1 == counter2 && counter1 == 5) {
+  
+  bool isTieBreak(int counter1, int counter2){
+    if(counter1 == counter2 && counter1 == 5){
       return true;
     }
     return false;
   }
-
-  bool isMatchOver(int counter) {
-    if (counter == 6) {
+  
+  bool isMatchOver(int counter){
+    if(counter == 6){
       return true;
     }
     return false;
   }
-
-  bool isTieBreakOver(int counter) {
-    if (counter >= 7) {
+  
+  bool isTieBreakOver(int counter){
+    if(counter >= 7){
       return true;
     }
     return false;
@@ -129,40 +129,42 @@ class _MyHomePageState extends State<MyHomePage> {
   void incrementCounterP1() {
     // Player1 득점
     setState(() {
-      if (isTieBreak(gameCounterP1, gameCounterP2)) {
+      if(isTieBreak(gameCounterP1, gameCounterP2)){             
         //타이브레이크 일 때
-        if (tieBreakCounterP1 >= 6 && tieBreakCounterP2 >= 6) {
+        if(tieBreakCounterP1 >= 6 && tieBreakCounterP2 >= 6){   
           //타이브레이크 듀스일때
-          if ((tieBreakCounterP1 - tieBreakCounterP2) >= 1) {
+          if((tieBreakCounterP1-tieBreakCounterP2) >= 1){       
             //타이브레이크 듀스 종료
             tieBreakCounterP1++;
             pointLogListP1.add(tieBreakCounterP1.toString());
             pointLogListP2.add(tieBreakCounterP2.toString());
             addOrderOfPlay(1);
             gameCounterP1++;
-            if (isMatchOver(gameCounterP1)) {
+            if(isMatchOver(gameCounterP1)){                     
               //타이브레이크 종료 후 플레이어1 승리
               pointLogListP1.add("Win");
               pointLogListP2.add("Lose");
               matchOverDialog(1);
             }
-          } else {
+          }
+          else{                                                 
             //듀스 또는 애드 상황
             tieBreakCounterP1++;
             pointLogListP1.add(tieBreakCounterP1.toString());
             pointLogListP2.add(tieBreakCounterP2.toString());
             addOrderOfPlay(1);
           }
-        } else {
+        }
+        else{                                                   
           //타이브레이크 듀스 아닐 때
           tieBreakCounterP1++;
           pointLogListP1.add(tieBreakCounterP1.toString());
           pointLogListP2.add(tieBreakCounterP2.toString());
           addOrderOfPlay(1);
-          if (isTieBreakOver(tieBreakCounterP1)) {
+          if(isTieBreakOver(tieBreakCounterP1)){
             //타이브레이크 종료 되었는지 확인
             gameCounterP1++;
-            if (isMatchOver(gameCounterP1)) {
+            if(isMatchOver(gameCounterP1)){
               //타이브레이크 종료로 인해 플레이어2 승리
               pointLogListP1.add("Win");
               pointLogListP2.add("Lose");
@@ -170,10 +172,10 @@ class _MyHomePageState extends State<MyHomePage> {
             }
           }
         }
-      } else {
-        // 타이브레이크 아닐 때
+      }else{                                                     
+        // 타이브레이크 아닐 때 
         counterP1++;
-        if (counterP1 == 4) {
+        if (counterP1 == 4) {                                    
           // 득점 및 '게임' 승리
           counterP1--;
           saveLastCounterOfGame(counterP1, counterP2);
@@ -183,13 +185,13 @@ class _MyHomePageState extends State<MyHomePage> {
           addOrderOfPlay(1);
           addPointToLogP1(counterP1);
           addPointToLogP2(counterP2);
-          if (isMatchOver(gameCounterP1)) {
+          if(isMatchOver(gameCounterP1)){                         
             // 타이브레이크 아니고 플레이어1이 승리
             pointLogListP1.add("Win");
             pointLogListP2.add("Lose");
             matchOverDialog(1);
           }
-        } else {
+        } else {                                                   
           // '게임' 진행 중 득점
           addOrderOfPlay(1);
           addPointToLogP1(counterP1);
@@ -202,40 +204,42 @@ class _MyHomePageState extends State<MyHomePage> {
   void incrementCounterP2() {
     // Player2 득점
     setState(() {
-      if (isTieBreak(gameCounterP1, gameCounterP2)) {
+      if(isTieBreak(gameCounterP1, gameCounterP2)){             
         // 타이브레이크 일 때
-        if (tieBreakCounterP1 >= 6 && tieBreakCounterP2 >= 6) {
+        if(tieBreakCounterP1 >= 6 && tieBreakCounterP2 >= 6){   
           //타이브레이크 듀스일때
-          if ((tieBreakCounterP2 - tieBreakCounterP1) >= 1) {
+          if((tieBreakCounterP2-tieBreakCounterP1) >= 1){       
             //타이브레이크 듀스 종료
             tieBreakCounterP2++;
             pointLogListP1.add(tieBreakCounterP1.toString());
             pointLogListP2.add(tieBreakCounterP2.toString());
             addOrderOfPlay(2);
             gameCounterP2++;
-            if (isMatchOver(gameCounterP2)) {
+            if(isMatchOver(gameCounterP2)){                     
               //타이브레이크 종료 후 플레이어2 승리
               pointLogListP2.add("Win");
               pointLogListP1.add("Lose");
               matchOverDialog(2);
             }
-          } else {
+          }
+          else{                                                 
             //듀스 또는 애드 상황
             tieBreakCounterP2++;
             pointLogListP1.add(tieBreakCounterP1.toString());
             pointLogListP2.add(tieBreakCounterP2.toString());
             addOrderOfPlay(2);
           }
-        } else {
+        }
+        else{                                                   
           //타이브레이크 때 그냥 득점
           tieBreakCounterP2++;
           pointLogListP1.add(tieBreakCounterP1.toString());
           pointLogListP2.add(tieBreakCounterP2.toString());
           addOrderOfPlay(2);
-          if (isTieBreakOver(tieBreakCounterP2)) {
+          if(isTieBreakOver(tieBreakCounterP2)){
             //타이브레이크가 종료 되었는지 확인
             gameCounterP2++;
-            if (isMatchOver(gameCounterP2)) {
+            if(isMatchOver(gameCounterP2)){
               //타이브레이크 종료로 인해 플레이어2 승리
               pointLogListP2.add("Win");
               pointLogListP1.add("Lose");
@@ -243,11 +247,11 @@ class _MyHomePageState extends State<MyHomePage> {
             }
           }
         }
-      } else {
+      }else{                                                     
         //타이브레이크 아닐 때
         counterP2++;
-        if (counterP2 == 4) {
-          // 득점 및 '게임' 승리
+         if (counterP2 == 4) {                                   
+           // 득점 및 '게임' 승리
           counterP2--;
           saveLastCounterOfGame(counterP1, counterP2);
           counterP1 = 0;
@@ -256,13 +260,13 @@ class _MyHomePageState extends State<MyHomePage> {
           addOrderOfPlay(2);
           addPointToLogP1(counterP1);
           addPointToLogP2(counterP2);
-          if (isMatchOver(gameCounterP2)) {
+          if(isMatchOver(gameCounterP2)){                        
             //타이브레이크 아니고 플레이어2 승리
             pointLogListP2.add("Win");
             pointLogListP1.add("Lose");
             matchOverDialog(2);
           }
-        } else {
+        } else {                                                 
           // '게임' 진행 중 득점
           addOrderOfPlay(2);
           addPointToLogP1(counterP1);
@@ -272,55 +276,97 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void undoPoint() {
+  void undoPoint() {                                              
     // 1 '포인트' 되돌리기
     setState(() {
-      if (orderOfPlay.last == 1) {
+      if (orderOfPlay.last == 1) {                                
         // 마지막 득점자가 플레이어1 일 때
-        if (isMatchOver(gameCounterP1)) {
-          // 플레이어1 매치 종료시 출력하는 (Win:Lose) 지워주기
-          pointLogListP1.removeLast();
-          pointLogListP2.removeLast();
+        if(isTieBreak(gameCounterP1, gameCounterP2)){
+          if(isMatchOver(gameCounterP1)){
+            pointLogListP1.removeLast();
+            pointLogListP2.removeLast();
+            Navigator.pop(context);
+          }
+          if (gameCounterP1 == 5 && tieBreakCounterP1 == tieBreakCounterP2 && tieBreakCounterP1 == 0) {  
+            //플레이어1이 게임 득점시 이전 게임으로 돌아가기
+            gameCounterP1--;
+            counterP1 = lastCounterOfGameListP1.last;
+            counterP2 = lastCounterOfGameListP2.last;
+            removeLastCounterOfGame();
+            removeOrderOfPlay();
+          }
+          else{
+            tieBreakCounterP1--;
+            pointLogListP1.removeLast();
+            pointLogListP2.removeLast(); 
+            removeOrderOfPlay();
+          } 
         }
-        removeLog();
-        if (gameCounterP1 > 0 && counterP1 == counterP2 && counterP1 == 0) {
-          //플레이어1이 게임 득점시 이전 게임으로 돌아가기
-          gameCounterP1--;
-          counterP1 = lastCounterOfGameListP1.last;
-          counterP2 = lastCounterOfGameListP2.last;
-          removeLastCounterOfGame();
-          removeOrderOfPlay();
-        } else {
-          //일반 상황 시 플레이어1 득점 돌아가기
-          counterP1--;
-          removeOrderOfPlay();
+        else{
+          if(isMatchOver(gameCounterP1)){                           
+            // 플레이어1 매치 종료시 출력하는 (Win:Lose) 지워주기
+            pointLogListP1.removeLast();
+            pointLogListP2.removeLast();
+            Navigator.pop(context);
+          }
+          removeLog();
+          if (gameCounterP1 > 0 && counterP1 == counterP2 && counterP1 == 0) {  
+            //플레이어1이 게임 득점시 이전 게임으로 돌아가기
+            gameCounterP1--;
+            counterP1 = lastCounterOfGameListP1.last;
+            counterP2 = lastCounterOfGameListP2.last;
+            removeLastCounterOfGame();
+            removeOrderOfPlay();
+          } else {                                                              
+            //일반 상황 시 플레이어1 득점 돌아가기
+            counterP1--;
+            removeOrderOfPlay();
+          }
         }
-      } else if (orderOfPlay.last == 2) {
+      } else if (orderOfPlay.last == 2) {                                     
         //플레이어2가 마지막 득점자 일 떄
-        if (isMatchOver(gameCounterP2)) {
-          //플레이어2 매치 종료 시 출력하는 (Win:Lose) 지워주기
-          pointLogListP1.removeLast();
-          pointLogListP2.removeLast();
+        if(isTieBreak(gameCounterP1, gameCounterP2)){
+          if(isMatchOver(gameCounterP2)){
+            pointLogListP1.removeLast();
+            pointLogListP2.removeLast();
+            Navigator.pop(context);
+          }
+          if (gameCounterP2 == 5 && tieBreakCounterP1 == tieBreakCounterP2 && tieBreakCounterP1 == 0) {  
+            //플레이어1이 게임 득점시 이전 게임으로 돌아가기
+            gameCounterP2--;
+            counterP1 = lastCounterOfGameListP1.last;
+            counterP2 = lastCounterOfGameListP2.last;
+            removeLastCounterOfGame();
+            removeOrderOfPlay();
+          }
+          else{
+            tieBreakCounterP2--;
+            pointLogListP1.removeLast();
+            pointLogListP2.removeLast();
+            removeOrderOfPlay();
+          } 
         }
-        removeLog();
-        if (gameCounterP2 > 0 && counterP1 == counterP2 && counterP1 == 0) {
-          //플레이어2가 게임 득점시 이전게임으로 돌아가기
-          gameCounterP2--;
-          counterP1 = lastCounterOfGameListP1.last;
-          counterP2 = lastCounterOfGameListP2.last;
-          removeLastCounterOfGame();
-          removeOrderOfPlay();
-        } else {
-          //일반 상황 시 플레이어2 득점 돌아가기
-          counterP2--;
-          removeOrderOfPlay();
+        else{
+          if(isMatchOver(gameCounterP2)){                           
+            // 플레이어1 매치 종료시 출력하는 (Win:Lose) 지워주기
+            pointLogListP1.removeLast();
+            pointLogListP2.removeLast();
+            Navigator.pop(context);
+          }
+          removeLog();
+          if (gameCounterP2 > 0 && counterP1 == counterP2 && counterP1 == 0) {  
+            //플레이어1이 게임 득점시 이전 게임으로 돌아가기
+            gameCounterP2--;
+            counterP1 = lastCounterOfGameListP1.last;
+            counterP2 = lastCounterOfGameListP2.last;
+            removeLastCounterOfGame();
+            removeOrderOfPlay();
+          } else {                                                              
+            //일반 상황 시 플레이어1 득점 돌아가기
+            counterP2--;
+            removeOrderOfPlay();
+          }
         }
-      } else if (gameCounterP1 == 0 &&
-          gameCounterP2 == 0 &&
-          counterP1 == 0 &&
-          counterP2 == 0) {
-        //0:0 상황일때 undo시 게임 reset
-        resetPoint();
       }
     });
   }
@@ -448,184 +494,167 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            DataTable(
+              columns: const <DataColumn>[
+                DataColumn(
+                  label: Text(
+                    'Serve',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'Name',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'Game',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                  numeric: false,
+                ),
+                DataColumn(
+                  label: Text(
+                    'Points',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                ),
+              ],
+              rows: <DataRow>[
+                DataRow(
+                  cells: <DataCell>[
+                    DataCell(Icon(Icons.sports_tennis)),
+                    DataCell(Text("Player1")),
+                    DataCell(Text("$gameCounterP1")),
+                    DataCell(Text(currentPointP1())),
+                  ],
+                ),
+                DataRow(
+                  cells: <DataCell>[
+                    DataCell(Text('')),
+                    DataCell(Text("Player2")),
+                    DataCell(Text("$gameCounterP2")),
+                    DataCell(Text(currentPointP2())),
+                  ],
+                ),
+              ],
+            ),
             Container(
-                child: DataTable(
-                  columns: const <DataColumn>[
-                    DataColumn(
-                      label: Text(
-                        'Serve',
-                        style: TextStyle(fontStyle: FontStyle.italic),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Name',
-                        style: TextStyle(fontStyle: FontStyle.italic),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Game',
-                        style: TextStyle(fontStyle: FontStyle.italic),
-                      ),
-                      numeric: false,
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Points',
-                        style: TextStyle(fontStyle: FontStyle.italic),
-                      ),
-                    ),
-                  ],
-                  rows: <DataRow>[
-                    DataRow(
-                      cells: <DataCell>[
-                        DataCell(Icon(Icons.sports_tennis)),
-                        DataCell(Text("Player1")),
-                        DataCell(Text("$gameCounterP1")),
-                        DataCell(Text(currentPointP1())),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        DataCell(Text('')),
-                        DataCell(Text("Player2")),
-                        DataCell(Text("$gameCounterP2")),
-                        DataCell(Text(currentPointP2())),
-                      ],
-                    ),
-                  ],
+              // Information 탭
+              margin: EdgeInsets.fromLTRB(0.0, 20, 0.0, 0.0),
+              child: Text(
+                'Information',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
                 ),
               ),
-            Flexible(
-              child: Container(
-                // Information 탭
-                margin: EdgeInsets.fromLTRB(0.0, 20, 0.0, 0.0),
-                child: Text(
-                  'Information',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                  ),
-                ),
-              ), //flex: 1,
             ),
-            Flexible(
-              child: Container(
-                  margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 16),
-                  child: Card(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: ListTile())),//flex: 2,
-            ),
-            Flexible(
-              child: Container(
-                // Score
-                margin: EdgeInsets.all(10),
-                child: const Text(
-                  'Score',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                  ),
-                ),
-              ), //flex: 1,
-            ),
-            Flexible(
-              child: Container(
-                // Score 표시되는 부분
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Flexible(
-                      fit: FlexFit.loose,
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          currentPointP1(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 40,
-                          ),
-                        ),
-                      )),
-                  Flexible(
-                      //fit: FlexFit.loose,
-                      child: Container(
-                    margin: EdgeInsets.fromLTRB(24, 0.0, 24, 8),
-                    child: Text(
-                      ':',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 48,
-                      ),
+            Container(
+                margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 16),
+                child: Card(
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
                     ),
-                  )),
-                  Flexible(
-                      fit: FlexFit.loose,
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          currentPointP2(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 40,
-                          ),
+                    child: ListTile())),
+            Container(
+              // Score
+              margin: EdgeInsets.all(16),
+              child: const Text(
+                'Score',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                ),
+              ),
+            ),
+            Container(
+              // Score 표시되는 부분
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Flexible(
+                    fit: FlexFit.loose,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        currentPointP1(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 40,
                         ),
-                      )),
-                ]),
-              ),//flex: 1,
-            ),
-            Flexible(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0.0, 24, 16, 0.0),
-                    child: FloatingActionButton.extended(
-                        onPressed: incrementCounterP1,
-                        tooltip: 'Player 1 gets point',
-                        icon: Icon(Icons.add),
-                        label: Text("Player 1")),
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(16, 24, 0.0, 0.0),
-                    child: FloatingActionButton.extended(
-                      onPressed: incrementCounterP2,
-                      tooltip: 'Player 2 gets point',
-                      icon: Icon(Icons.add),
-                      label: Text("Player 2"),
-                    ),
-                  ),
-                ],
-              ), //flex: 1,
-            ),
-            Flexible(
-              child: Container(
-                  margin: EdgeInsets.all(16),
-                  child: FloatingActionButton.extended(
-                    onPressed: undoPoint,
-                    elevation: 0.0,
-                    backgroundColor: Colors.grey,
-                    label: Icon(Icons.undo),
-                  )), //flex: 1,
-            ),
-            Flexible(
-              child: Container(
-                alignment: Alignment.bottomRight,
-                margin: EdgeInsets.fromLTRB(32, 0, 32, 0.0),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    primary: Colors.grey,
-                  ),
+                      ),
+                    )),
+                Flexible(
+                    //fit: FlexFit.loose,
+                    child: Container(
+                  margin: EdgeInsets.fromLTRB(24, 0.0, 24, 8),
                   child: Text(
-                    'All Reset',
+                    ':',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 48,
+                    ),
                   ),
-                  onPressed: resetDialog,
+                )),
+                Flexible(
+                    fit: FlexFit.loose,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        currentPointP2(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 40,
+                        ),
+                      ),
+                    )),
+              ]),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(0.0, 32, 16, 0.0),
+                  child: FloatingActionButton.extended(
+                      onPressed: incrementCounterP1,
+                      tooltip: 'Player 1 gets point',
+                      icon: Icon(Icons.add),
+                      label: Text("Player 1")),
                 ),
-              ), //flex: 1,
+                Container(
+                  margin: EdgeInsets.fromLTRB(16, 32, 0.0, 0.0),
+                  child: FloatingActionButton.extended(
+                    onPressed: incrementCounterP2,
+                    tooltip: 'Player 2 gets point',
+                    icon: Icon(Icons.add),
+                    label: Text("Player 2"),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+                margin: EdgeInsets.all(16),
+                child: FloatingActionButton.extended(
+                  onPressed: undoPoint,
+                  elevation: 0.0,
+                  backgroundColor: Colors.grey,
+                  label: Icon(Icons.undo),
+                )),
+            Container(
+              alignment: Alignment.bottomRight,
+              margin: EdgeInsets.fromLTRB(32, 16, 32, 0.0),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.grey,
+                ),
+                child: Text(
+                  'All Reset',
+                ),
+                onPressed: resetDialog,
+              ),
             ),
           ],
         ),
