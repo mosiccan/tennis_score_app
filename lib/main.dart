@@ -113,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   
   bool isMatchOver(int counter){
-    if(counter == 6){
+    if(counter >= 6){
       return true;
     }
     return false;
@@ -283,8 +283,8 @@ class _MyHomePageState extends State<MyHomePage> {
         // 마지막 득점자가 플레이어1 일 때
         if(isTieBreak(gameCounterP1, gameCounterP2)){
           if(isMatchOver(gameCounterP1)){
-            pointLogListP1.removeLast();
-            pointLogListP2.removeLast();
+            tieBreakCounterP1 = 6;
+            removeLog();
             Navigator.pop(context);
           }
           if (gameCounterP1 == 5 && tieBreakCounterP1 == tieBreakCounterP2 && tieBreakCounterP1 == 0) {  
@@ -292,21 +292,20 @@ class _MyHomePageState extends State<MyHomePage> {
             gameCounterP1--;
             counterP1 = lastCounterOfGameListP1.last;
             counterP2 = lastCounterOfGameListP2.last;
+            removeLog();
             removeLastCounterOfGame();
             removeOrderOfPlay();
           }
           else{
             tieBreakCounterP1--;
-            pointLogListP1.removeLast();
-            pointLogListP2.removeLast(); 
+            removeLog();
             removeOrderOfPlay();
           } 
         }
         else{
           if(isMatchOver(gameCounterP1)){                           
             // 플레이어1 매치 종료시 출력하는 (Win:Lose) 지워주기
-            pointLogListP1.removeLast();
-            pointLogListP2.removeLast();
+            removeLog();
             Navigator.pop(context);
           }
           removeLog();
@@ -327,8 +326,8 @@ class _MyHomePageState extends State<MyHomePage> {
         //플레이어2가 마지막 득점자 일 떄
         if(isTieBreak(gameCounterP1, gameCounterP2)){
           if(isMatchOver(gameCounterP2)){
-            pointLogListP1.removeLast();
-            pointLogListP2.removeLast();
+            tieBreakCounterP2 = 6;
+            removeLog();
             Navigator.pop(context);
           }
           if (gameCounterP2 == 5 && tieBreakCounterP1 == tieBreakCounterP2 && tieBreakCounterP1 == 0) {  
@@ -336,21 +335,20 @@ class _MyHomePageState extends State<MyHomePage> {
             gameCounterP2--;
             counterP1 = lastCounterOfGameListP1.last;
             counterP2 = lastCounterOfGameListP2.last;
+            removeLog();
             removeLastCounterOfGame();
             removeOrderOfPlay();
           }
           else{
             tieBreakCounterP2--;
-            pointLogListP1.removeLast();
-            pointLogListP2.removeLast();
+            removeLog();
             removeOrderOfPlay();
           } 
         }
         else{
           if(isMatchOver(gameCounterP2)){                           
             // 플레이어1 매치 종료시 출력하는 (Win:Lose) 지워주기
-            pointLogListP1.removeLast();
-            pointLogListP2.removeLast();
+            removeLog();
             Navigator.pop(context);
           }
           removeLog();
