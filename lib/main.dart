@@ -106,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   
   bool isTieBreak(int counter1, int counter2){
-    if(counter1 == counter2 && counter1 == 5){
+    if(counter1 == counter2 && counter1 >= 5){
       return true;
     }
     return false;
@@ -283,7 +283,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // 마지막 득점자가 플레이어1 일 때
         if(isTieBreak(gameCounterP1, gameCounterP2)){
           if(isMatchOver(gameCounterP1)){
-            tieBreakCounterP1 = 6;
+            tieBreakCounterP1--;
             removeLog();
             Navigator.pop(context);
           }
@@ -326,11 +326,11 @@ class _MyHomePageState extends State<MyHomePage> {
         //플레이어2가 마지막 득점자 일 떄
         if(isTieBreak(gameCounterP1, gameCounterP2)){
           if(isMatchOver(gameCounterP2)){
-            tieBreakCounterP2 = 6;
+            tieBreakCounterP2--;
             removeLog();
             Navigator.pop(context);
           }
-          if (gameCounterP2 == 5 && tieBreakCounterP1 == tieBreakCounterP2 && tieBreakCounterP1 == 0) {  
+          else if (gameCounterP2 == 5 && tieBreakCounterP1 == tieBreakCounterP2 && tieBreakCounterP1 == 0) {  
             //플레이어1이 게임 득점시 이전 게임으로 돌아가기
             gameCounterP2--;
             counterP1 = lastCounterOfGameListP1.last;
