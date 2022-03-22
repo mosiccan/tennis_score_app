@@ -281,91 +281,108 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       if (orderOfPlay.last == 1) {                                
         // 마지막 득점자가 플레이어1 일 때
-        if(isTieBreak(gameCounterP1, gameCounterP2)){
-          if(isMatchOver(gameCounterP1)){
+        if(isMatchOver(gameCounterP1)){
+          // 매치 종료시 undo 실행
+          gameCounterP1--;
+          removeLog();
+          if(isTieBreak(gameCounterP1, gameCounterP2)){
+            // 타이브레이크 진행 이후 Match Over였을 때
             tieBreakCounterP1--;
-            removeLog();
-            Navigator.pop(context);
-          }
-          if (gameCounterP1 == 5 && tieBreakCounterP1 == tieBreakCounterP2 && tieBreakCounterP1 == 0) {  
-            //플레이어1이 게임 득점시 이전 게임으로 돌아가기
-            gameCounterP1--;
-            counterP1 = lastCounterOfGameListP1.last;
-            counterP2 = lastCounterOfGameListP2.last;
-            removeLog();
-            removeLastCounterOfGame();
-            removeOrderOfPlay();
           }
           else{
-            tieBreakCounterP1--;
-            removeLog();
-            removeOrderOfPlay();
-          } 
-        }
-        else{
-          if(isMatchOver(gameCounterP1)){                           
-            // 플레이어1 매치 종료시 출력하는 (Win:Lose) 지워주기
-            removeLog();
-            Navigator.pop(context);
-          }
-          removeLog();
-          if (gameCounterP1 > 0 && counterP1 == counterP2 && counterP1 == 0) {  
-            //플레이어1이 게임 득점시 이전 게임으로 돌아가기
-            gameCounterP1--;
+            // 일반 게임 이후 Match Over였을 때
             counterP1 = lastCounterOfGameListP1.last;
             counterP2 = lastCounterOfGameListP2.last;
             removeLastCounterOfGame();
-            removeOrderOfPlay();
-          } else {                                                              
-            //일반 상황 시 플레이어1 득점 돌아가기
-            counterP1--;
-            removeOrderOfPlay();
+          }
+          Navigator.pop(context);
+          removeLog();
+        }
+        else{
+          if(isTieBreak(gameCounterP1, gameCounterP2)){
+            // 타이브레이크에서 undo 실행 시
+            if(gameCounterP1 == 5 && tieBreakCounterP1 == tieBreakCounterP2 && tieBreakCounterP1 == 0){
+              // 타이브레이크 0:0 상황 시 undo
+              gameCounterP1--;
+              counterP1 = lastCounterOfGameListP1.last;
+              counterP2 = lastCounterOfGameListP2.last;
+              removeLastCounterOfGame();
+            }
+            else{
+              // 일반 타이브레이크 시 undo
+              tieBreakCounterP1--;
+            }
+            removeLog();
+          }
+          else{
+            // 일반 상황에서 undo 실행 시
+            if(gameCounterP1 > 0 && counterP1 == counterP2 && counterP1 == 0){
+              // 일반 상황 0:0 에서 undo
+              gameCounterP1--;
+              counterP1 = lastCounterOfGameListP1.last;
+              counterP2 = lastCounterOfGameListP2.last;
+              removeLastCounterOfGame();
+            }
+            else{
+              // 일반 상황에서 undo
+              counterP1--;
+            }
+            removeLog();
           }
         }
       } else if (orderOfPlay.last == 2) {                                     
         //플레이어2가 마지막 득점자 일 떄
-        if(isTieBreak(gameCounterP1, gameCounterP2)){
-          if(isMatchOver(gameCounterP2)){
+        if(isMatchOver(gameCounterP2)){
+          // 매치 종료시 undo 실행
+          gameCounterP2--;
+          removeLog();
+          if(isTieBreak(gameCounterP1, gameCounterP2)){
+            // 타이브레이크 진행 이후 Match Over였을 때
             tieBreakCounterP2--;
-            removeLog();
-            Navigator.pop(context);
-          }
-          else if (gameCounterP2 == 5 && tieBreakCounterP1 == tieBreakCounterP2 && tieBreakCounterP1 == 0) {  
-            //플레이어1이 게임 득점시 이전 게임으로 돌아가기
-            gameCounterP2--;
-            counterP1 = lastCounterOfGameListP1.last;
-            counterP2 = lastCounterOfGameListP2.last;
-            removeLog();
-            removeLastCounterOfGame();
-            removeOrderOfPlay();
           }
           else{
-            tieBreakCounterP2--;
-            removeLog();
-            removeOrderOfPlay();
-          } 
-        }
-        else{
-          if(isMatchOver(gameCounterP2)){                           
-            // 플레이어1 매치 종료시 출력하는 (Win:Lose) 지워주기
-            removeLog();
-            Navigator.pop(context);
-          }
-          removeLog();
-          if (gameCounterP2 > 0 && counterP1 == counterP2 && counterP1 == 0) {  
-            //플레이어1이 게임 득점시 이전 게임으로 돌아가기
-            gameCounterP2--;
+            // 일반 게임 이후 Match Over였을 때
             counterP1 = lastCounterOfGameListP1.last;
             counterP2 = lastCounterOfGameListP2.last;
             removeLastCounterOfGame();
-            removeOrderOfPlay();
-          } else {                                                              
-            //일반 상황 시 플레이어1 득점 돌아가기
-            counterP2--;
-            removeOrderOfPlay();
+          }
+          Navigator.pop(context);
+          removeLog();
+        }
+        else{
+          if(isTieBreak(gameCounterP1, gameCounterP2)){
+            // 타이브레이크에서 undo 실행 시
+            if(gameCounterP2 == 5 && tieBreakCounterP1 == tieBreakCounterP2 && tieBreakCounterP1 == 0){
+              // 타이브레이크 0:0 상황 시 undo
+              gameCounterP2--;
+              counterP1 = lastCounterOfGameListP1.last;
+              counterP2 = lastCounterOfGameListP2.last;
+              removeLastCounterOfGame();
+            }
+            else{
+              // 일반 타이브레이크 시 undo
+              tieBreakCounterP2--;
+            }
+            removeLog();
+          }
+          else{
+            // 일반 상황에서 undo 실행 시
+            if(gameCounterP2 > 0 && counterP1 == counterP2 && counterP1 == 0){
+              // 일반 상황 0:0 에서 undo
+              gameCounterP2--;
+              counterP1 = lastCounterOfGameListP1.last;
+              counterP2 = lastCounterOfGameListP2.last;
+              removeLastCounterOfGame();
+            }
+            else{
+              // 일반 상황에서 undo
+              counterP2--;
+            }
+            removeLog();
           }
         }
       }
+      removeOrderOfPlay();
     });
   }
 
