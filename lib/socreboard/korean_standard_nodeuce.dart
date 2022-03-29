@@ -276,7 +276,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void undoPoint() {
+  void undoPoint(BuildContext matchOverContext) {
     // 1 '포인트' 되돌리기
     setState(() {
       if (orderOfPlay.last == 1) {
@@ -295,7 +295,7 @@ class _MyHomePageState extends State<MyHomePage> {
             counterP2 = lastCounterOfGameListP2.last;
             removeLastCounterOfGame();
           }
-          Navigator.pop(context);
+          Navigator.pop(matchOverContext);
           removeLog();
         }
         else{
@@ -346,7 +346,7 @@ class _MyHomePageState extends State<MyHomePage> {
             counterP2 = lastCounterOfGameListP2.last;
             removeLastCounterOfGame();
           }
-          Navigator.pop(context);
+          Navigator.pop(matchOverContext);
           removeLog();
         }
         else{
@@ -456,7 +456,7 @@ class _MyHomePageState extends State<MyHomePage> {
         //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
         barrierDismissible: false,
         builder: (BuildContext context) {
-          //dialogContext = context;
+          dialogContext = context;
           return AlertDialog(
             // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
             shape: RoundedRectangleBorder(
@@ -492,7 +492,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 child: Text('Undo'),
                 onPressed: () {
-                  undoPoint();
+                  undoPoint(dialogContext);
                 },
               ),
             ],
@@ -663,7 +663,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
                 margin: EdgeInsets.all(16),
                 child: FloatingActionButton.extended(
-                  onPressed: undoPoint,
+                  onPressed: undoPoint(context),
                   elevation: 0.0,
                   backgroundColor: Colors.grey,
                   label: Icon(Icons.undo),
