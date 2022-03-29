@@ -450,11 +450,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void matchOverDialog(int player) {
     // 게임 종료시 Dialog 알림
+    BuildContext dialogContext;
     showDialog(
         context: context,
         //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
         barrierDismissible: false,
         builder: (BuildContext context) {
+          //dialogContext = context;
           return AlertDialog(
             // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
             shape: RoundedRectangleBorder(
@@ -502,8 +504,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: Text(widget.title),
+        centerTitle: false,
+        title: Text(widget.title,
+          style:
+          TextStyle(
+            color: Colors.black,
+            fontSize: 24,
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
       ),
       body: Center(
         child: Column(

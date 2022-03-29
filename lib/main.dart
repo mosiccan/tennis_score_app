@@ -32,8 +32,17 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: Text("Tennis"),
+        centerTitle: false,
+        title: Text("Univ Tennis Platform",
+          style:
+          TextStyle(
+            color: Colors.black,
+            fontSize: 24,
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+
       ),
       body: Column(
         children: [
@@ -41,8 +50,16 @@ class _MyHomePageState extends State<MyHomePage> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Container(
-                width: 200,
-                height: 200,
+                alignment: Alignment.center,
+                child: Text( "Game Start",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 40,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                width: 180,
+                height: 180,
                 color: Colors.blueAccent.withOpacity(0.4),
               ),
             ),
