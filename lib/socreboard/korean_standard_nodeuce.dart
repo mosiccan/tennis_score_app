@@ -587,7 +587,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: ListTile())),
             Container(
               // Score
-              margin: EdgeInsets.all(16),
+              margin: EdgeInsets.fromLTRB(0.0, 8, 0.0, 16),
               child: const Text(
                 'Score',
                 style: TextStyle(
@@ -608,7 +608,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         currentPointP1(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 40,
+                          fontSize: 48,
                         ),
                       ),
                     )),
@@ -632,7 +632,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         currentPointP2(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 40,
+                          fontSize: 48,
                         ),
                       ),
                     )),
@@ -642,7 +642,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(0.0, 32, 16, 0.0),
+                  margin: EdgeInsets.fromLTRB(0.0, 24, 16, 0.0),
                   child: FloatingActionButton.extended(
                       onPressed: incrementCounterP1,
                       tooltip: 'Player 1 gets point',
@@ -650,7 +650,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       label: Text("Player 1")),
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(16, 32, 0.0, 0.0),
+                  margin: EdgeInsets.fromLTRB(16, 24, 0.0, 0.0),
                   child: FloatingActionButton.extended(
                     onPressed: incrementCounterP2,
                     tooltip: 'Player 2 gets point',
@@ -668,19 +668,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   backgroundColor: Colors.grey,
                   label: Icon(Icons.undo),
                 )),
-            Container(
-              alignment: Alignment.bottomRight,
-              margin: EdgeInsets.fromLTRB(32, 16, 32, 0.0),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  primary: Colors.grey,
-                ),
-                child: Text(
-                  'All Reset',
-                ),
-                onPressed: resetDialog,
-              ),
-            ),
+            // Container(
+            //   alignment: Alignment.bottomRight,
+            //   margin: EdgeInsets.fromLTRB(32, 16, 32, 0.0),
+            //   child: TextButton(
+            //     style: TextButton.styleFrom(
+            //       primary: Colors.grey,
+            //     ),
+            //     child: Text(
+            //       'All Reset',
+            //     ),
+            //     onPressed: resetDialog,
+            //   ),
+            // ),
           ],
         ),
       ),

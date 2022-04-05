@@ -42,31 +42,91 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-
       ),
       body: Column(
         children: [
-          InkWell(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Container(
-                alignment: Alignment.center,
-                child: Text( "Game Start",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 36,
-                  ),
-                  textAlign: TextAlign.center,
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.fromLTRB(16, 24, 8, 16),
+                decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(4.0, 4.0),
+                        blurRadius: 10.0,
+                        spreadRadius: 1.0,
+                      ),
+                      BoxShadow(
+                        color: Colors.white,
+                        offset: Offset(-4.0, -4.0),
+                        blurRadius: 10.0,
+                        spreadRadius: 1.0,
+                      )
+                    ]
                 ),
-                width: 180,
-                height: 180,
-                color: Colors.blueAccent.withOpacity(0.4),
+                child: InkWell(
+                  child: ClipRRect(
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text( "Game Start",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 36,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      width: 172, // 160
+                      height: 229,  // 180
+                      color: Colors.blueAccent.withOpacity(0.4),
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  onTap: (){
+                    Navigator.push( context,
+                        MaterialPageRoute( builder: (context) => korean_stadard_nodeuce_page() ) );
+                  },
+                ),
               ),
-            ),
-            onTap: (){
-              Navigator.push( context,
-                  MaterialPageRoute( builder: (context) => korean_stadard_nodeuce_page() ) );
-            },
+              Container(
+                margin: EdgeInsets.fromLTRB(8, 24, 16, 16),
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(4.0, 4.0),
+                      blurRadius: 10.0,
+                      spreadRadius: 1.0,
+                    ),
+                    BoxShadow(
+                      color: Colors.white,
+                      offset: Offset(-4.0, -4.0),
+                      blurRadius: 10.0,
+                      spreadRadius: 1.0,
+                    )
+                  ]
+                ),
+                child: InkWell(
+                  child: ClipRRect(
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text( "History",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 36,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      width: 172, // 160
+                      height: 229,  // 180
+                      color: Colors.blueGrey.withOpacity(0.4),
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  onTap: (){},
+                ),
+              ),
+            ],
           ),
         ],
       ),
