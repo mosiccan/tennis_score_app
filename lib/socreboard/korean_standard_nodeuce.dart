@@ -276,7 +276,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void undoPoint(BuildContext matchOverContext) {
+  void undoPoint() {
     // 1 '포인트' 되돌리기
     setState(() {
       if (orderOfPlay.last == 1) {
@@ -295,7 +295,7 @@ class _MyHomePageState extends State<MyHomePage> {
             counterP2 = lastCounterOfGameListP2.last;
             removeLastCounterOfGame();
           }
-          Navigator.pop(matchOverContext);
+          Navigator.pop(context);
           removeLog();
         }
         else{
@@ -346,7 +346,7 @@ class _MyHomePageState extends State<MyHomePage> {
             counterP2 = lastCounterOfGameListP2.last;
             removeLastCounterOfGame();
           }
-          Navigator.pop(matchOverContext);
+          Navigator.pop(context);
           removeLog();
         }
         else{
@@ -492,7 +492,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 child: Text('Undo'),
                 onPressed: () {
-                  undoPoint(dialogContext);
+                  undoPoint();
                 },
               ),
             ],
@@ -663,7 +663,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
                 margin: EdgeInsets.all(16),
                 child: FloatingActionButton.extended(
-                  onPressed: undoPoint(context),
+                  onPressed: undoPoint,
                   elevation: 0.0,
                   backgroundColor: Colors.grey,
                   label: Icon(Icons.undo),

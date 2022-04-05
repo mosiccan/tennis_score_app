@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text( "Game Start",
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 40,
+                    fontSize: 36,
                   ),
                   textAlign: TextAlign.center,
                 ),
