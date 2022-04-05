@@ -126,6 +126,33 @@ class _MyHomePageState extends State<MyHomePage> {
     return false;
   }
 
+  bool tieBreakServe(){
+    if((tieBreakCounterP1+tieBreakCounterP2)%4 == 0 || (tieBreakCounterP1+tieBreakCounterP2)%4 == 3){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  
+  bool normalServe(){
+    if((gameCounterP1+gameCounterP2)%2 == 1){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+  
+  bool turnToServe(){
+    if(isTieBreak(gameCounterP1, gameCounterP2)){
+      return tieBreakServe();
+    }
+    else{
+      return normalServe();
+    }
+  }
+
   void incrementCounterP1() {
     // Player1 득점
     setState(() {
@@ -550,7 +577,11 @@ class _MyHomePageState extends State<MyHomePage> {
               rows: <DataRow>[
                 DataRow(
                   cells: <DataCell>[
-                    DataCell(Icon(Icons.sports_tennis)),
+                    DataCell(
+                      Visibility(
+                        child: Icon(Icons.sports_tennis),
+                        visible: turnToServe(),
+                      )),
                     DataCell(Text("Player1")),
                     DataCell(Text("$gameCounterP1")),
                     DataCell(Text(currentPointP1())),
@@ -558,7 +589,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 DataRow(
                   cells: <DataCell>[
-                    DataCell(Text('')),
+                    DataCell(
+                      Visibility(
+                        child: Icon(Icons.sports_tennis),
+                        visible: !turnToServe(),
+                      )),
                     DataCell(Text("Player2")),
                     DataCell(Text("$gameCounterP2")),
                     DataCell(Text(currentPointP2())),
