@@ -12,7 +12,7 @@ class korean_stadard_nodeuce_page extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: 'Tennis Score System'),
+      home: const MyHomePage(title: 'Game Start!'),
     );
   }
 }

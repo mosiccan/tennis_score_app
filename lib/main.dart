@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'dart:collection';
 import './socreboard/korean_standard_nodeuce.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pixel_perfect/pixel_perfect.dart';
 
 void main() => runApp(MainMenu());
 
 class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Tennis Score System',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      home: const MyHomePage(title: 'Tennis Score System'),
+    return ScreenUtilInit(
+      designSize: const Size(390, 844),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (child) {
+        return MaterialApp(
+          title: 'Tennis Score System',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: Colors.green,
+          ),
+          home: const MyHomePage(title: 'Tennis Score System'),
+        );
+      },
     );
   }
 }
@@ -33,11 +42,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text("Univ Tennis Platform",
+        title: Text("Welcome Player 1",
           style:
           TextStyle(
             color: Colors.black,
-            fontSize: 24,
+            fontSize: 34,
+            fontWeight: FontWeight.bold,
           ),
         ),
         backgroundColor: Colors.transparent,
@@ -76,8 +86,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      width: 172, // 160
-                      height: 229,  // 180
+                      width: 160, // 160
+                      height: 200,  // 180
                       color: Colors.blueAccent.withOpacity(0.4),
                     ),
                     borderRadius: BorderRadius.circular(20),
@@ -117,8 +127,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      width: 172, // 160
-                      height: 229,  // 180
+                      width: 160, // 160
+                      height: 200,  // 180
                       color: Colors.blueGrey.withOpacity(0.4),
                     ),
                     borderRadius: BorderRadius.circular(20),
