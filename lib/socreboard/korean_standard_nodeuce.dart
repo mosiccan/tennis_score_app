@@ -303,11 +303,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void undoPointAtDialog(){
-    Navigator.pop(context);
-    undoPoint();
-  }
-
   void undoPoint() {
     // 1 '포인트' 되돌리기
     setState(() {
@@ -416,11 +411,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void resetPointAtDialog(){
-    Navigator.pop(context);
-    resetPoint();
-  }
-
   void resetPoint() {
     // 모든 점수 초기화
     setState(() {
@@ -475,7 +465,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   primary: Colors.grey,
                 ),
                 child: Text('Ok'),
-                onPressed: resetPoint, // reset
+                onPressed: (){
+                  Navigator.pop(context);
+                  resetPoint();
+                }
               ),
             ],
           );
@@ -518,15 +511,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   primary: Colors.black,
                 ),
                 child: Text('Reset'),
-                onPressed: resetPointAtDialog, // reset
-              ),
+                onPressed: (){
+                  Navigator.pop(context);
+                  resetPoint();
+                }),
               TextButton(
                 style: TextButton.styleFrom(
                   primary: Colors.grey,
                 ),
                 child: Text('Undo'),
                 onPressed: () {
-                  undoPointAtDialog();
+                  undoPoint();
+                  Navigator.pop(context);
                 },
               ),
             ],
@@ -710,19 +706,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   backgroundColor: Colors.grey,
                   label: Icon(Icons.undo),
                 )),
-            // Container(
-            //   alignment: Alignment.bottomRight,
-            //   margin: EdgeInsets.fromLTRB(32, 16, 32, 0.0),
-            //   child: TextButton(
-            //     style: TextButton.styleFrom(
-            //       primary: Colors.grey,
-            //     ),
-            //     child: Text(
-            //       'All Reset',
-            //     ),
-            //     onPressed: resetDialog,
-            //   ),
-            // ),
+            Container(
+              alignment: Alignment.bottomRight,
+              margin: EdgeInsets.fromLTRB(32, 16, 32, 0.0),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.grey,
+                ),
+                child: Text(
+                  'All Reset',
+                ),
+                onPressed: resetDialog,
+              ),
+            ),
           ],
         ),
       ),
