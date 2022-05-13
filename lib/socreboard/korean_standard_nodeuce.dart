@@ -303,6 +303,11 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void undoPointAtDialog(){
+    Navigator.pop(context);
+    undoPoint();
+  }
+
   void undoPoint() {
     // 1 '포인트' 되돌리기
     setState(() {
@@ -322,7 +327,6 @@ class _MyHomePageState extends State<MyHomePage> {
             counterP2 = lastCounterOfGameListP2.last;
             removeLastCounterOfGame();
           }
-          Navigator.pop(context);
           removeLog();
         }
         else{
@@ -373,7 +377,6 @@ class _MyHomePageState extends State<MyHomePage> {
             counterP2 = lastCounterOfGameListP2.last;
             removeLastCounterOfGame();
           }
-          Navigator.pop(context);
           removeLog();
         }
         else{
@@ -413,6 +416,11 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void resetPointAtDialog(){
+    Navigator.pop(context);
+    resetPoint();
+  }
+
   void resetPoint() {
     // 모든 점수 초기화
     setState(() {
@@ -421,7 +429,6 @@ class _MyHomePageState extends State<MyHomePage> {
       gameCounterP1 = 0;
       gameCounterP2 = 0;
       resetGameLog();
-      Navigator.pop(context);
     });
   }
 
@@ -511,7 +518,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   primary: Colors.black,
                 ),
                 child: Text('Reset'),
-                onPressed: resetPoint, // reset
+                onPressed: resetPointAtDialog, // reset
               ),
               TextButton(
                 style: TextButton.styleFrom(
@@ -519,7 +526,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 child: Text('Undo'),
                 onPressed: () {
-                  undoPoint();
+                  undoPointAtDialog();
                 },
               ),
             ],
