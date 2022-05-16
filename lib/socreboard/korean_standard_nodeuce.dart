@@ -46,6 +46,23 @@ class _MyHomePageState extends State<MyHomePage> {
   int tieBreakCounterP1 = 0;    //Player1의 타이브레이크 진행 시 사용하는 카운터
   int tieBreakCounterP2 = 0;    //Player2의 타이브레이크 진행 시 사용하는 카운터
 
+  String player1Name = "Player1";
+  String player2Name = "Player2";
+
+  String player1(){
+    return this.player1Name;
+  }
+  void setPlayer1Name(String newName){
+    this.player1Name = newName;
+  }
+
+  String player2(){
+    return this.player2Name;
+  }
+  void setPlayer2Name(String newName){
+    this.player2Name = newName;
+  }
+
   void addPointToLogP1(int counter) {
     // Player1 포인트 로그 리스트에 '포인트' 추가
     pointLogListP1.add(scoreList[counter]);
@@ -585,7 +602,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Icon(Icons.sports_tennis),
                         visible: turnToServe(),
                       )),
-                    DataCell(Text("Player1")),
+                    DataCell(Text(player1())),
                     DataCell(Text("$gameCounterP1")),
                     DataCell(Text(currentPointP1())),
                   ],
@@ -597,7 +614,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Icon(Icons.sports_tennis),
                         visible: !turnToServe(),
                       )),
-                    DataCell(Text("Player2")),
+                    DataCell(Text(player2())),
                     DataCell(Text("$gameCounterP2")),
                     DataCell(Text(currentPointP2())),
                   ],
@@ -685,7 +702,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: incrementCounterP1,
                       tooltip: 'Player 1 gets point',
                       icon: Icon(Icons.add),
-                      label: Text("Player 1")),
+                      label: Text(player1())),
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(16, 24, 0.0, 0.0),
@@ -693,7 +710,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: incrementCounterP2,
                     tooltip: 'Player 2 gets point',
                     icon: Icon(Icons.add),
-                    label: Text("Player 2"),
+                    label: Text(player2()),
                   ),
                 ),
               ],
