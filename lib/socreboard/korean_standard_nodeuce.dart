@@ -188,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
               //타이브레이크 종료 후 플레이어1 승리
               pointLogListP1.add("Win");
               pointLogListP2.add("Lose");
-              matchOverDialog(1);
+              matchOverDialog(player1());
             }
           }
           else{
@@ -212,7 +212,7 @@ class _MyHomePageState extends State<MyHomePage> {
               //타이브레이크 종료로 인해 플레이어2 승리
               pointLogListP1.add("Win");
               pointLogListP2.add("Lose");
-              matchOverDialog(1);
+              matchOverDialog(player1());
             }
           }
         }
@@ -233,7 +233,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // 타이브레이크 아니고 플레이어1이 승리
             pointLogListP1.add("Win");
             pointLogListP2.add("Lose");
-            matchOverDialog(1);
+            matchOverDialog(player1());
           }
         } else {
           // '게임' 진행 중 득점
@@ -263,7 +263,7 @@ class _MyHomePageState extends State<MyHomePage> {
               //타이브레이크 종료 후 플레이어2 승리
               pointLogListP2.add("Win");
               pointLogListP1.add("Lose");
-              matchOverDialog(2);
+              matchOverDialog(player2());
             }
           }
           else{
@@ -287,7 +287,7 @@ class _MyHomePageState extends State<MyHomePage> {
               //타이브레이크 종료로 인해 플레이어2 승리
               pointLogListP2.add("Win");
               pointLogListP1.add("Lose");
-              matchOverDialog(2);
+              matchOverDialog(player2());
             }
           }
         }
@@ -308,7 +308,7 @@ class _MyHomePageState extends State<MyHomePage> {
             //타이브레이크 아니고 플레이어2 승리
             pointLogListP2.add("Win");
             pointLogListP1.add("Lose");
-            matchOverDialog(2);
+            matchOverDialog(player2());
           }
         } else {
           // '게임' 진행 중 득점
@@ -492,7 +492,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  void matchOverDialog(int player) {
+  void matchOverDialog(String player) {
     // 게임 종료시 Dialog 알림
     BuildContext dialogContext;
     showDialog(
@@ -509,7 +509,7 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                new Text("Player $player Win!!"),
+                new Text("Player "+player+" Win!!"),
               ],
             ),
             //
