@@ -19,8 +19,8 @@
 <br>
 
 ## 개발환경
-- **개발도구** : Android Studio Bumblebee (ver 2021.1) , Visual Studio Code
-- **프레임워크** : Flutter (ver 2.10.2 ~)
+- **개발도구** : Android Studio Chipmunk (ver 2021.1) , Visual Studio Code
+- **프레임워크** : Flutter (ver 3.0.0)
     - 사용언어 : Dart   
 - **개발방식**
 - **협업도구**
