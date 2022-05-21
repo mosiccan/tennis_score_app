@@ -20,7 +20,7 @@ class MainMenu extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.green,
           ),
-          home: const MyHomePage(title: 'Tennis Score System'),
+          home: const MyHomePage(title: 'Tennis Score System',),
         );
       },
     );
@@ -40,105 +40,77 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xfff2f4f6),
       appBar: AppBar(
         centerTitle: false,
         title: Text("Welcome Player 1",
           style:
           TextStyle(
             color: Colors.black,
-            fontSize: 34,
+            fontSize: 34.sp,
             fontWeight: FontWeight.bold,
           ),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Container(
-                margin: EdgeInsets.fromLTRB(16, 24, 8, 16),
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        offset: Offset(4.0, 4.0),
-                        blurRadius: 10.0,
-                        spreadRadius: 1.0,
-                      ),
-                      BoxShadow(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 58.h), // 양쪽 마진 (여백)
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  child: InkWell(
+                    child: ClipRRect(
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text( "Game Start",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 25.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        width: 171, // 160
+                        height: 171,  // 180
                         color: Colors.white,
-                        offset: Offset(-4.0, -4.0),
-                        blurRadius: 10.0,
-                        spreadRadius: 1.0,
-                      )
-                    ]
-                ),
-                child: InkWell(
-                  child: ClipRRect(
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text( "Game Start",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 36,
-                        ),
-                        textAlign: TextAlign.center,
                       ),
-                      width: 160, // 160
-                      height: 200,  // 180
-                      color: Colors.blueAccent.withOpacity(0.4),
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    borderRadius: BorderRadius.circular(20),
+                    onTap: (){
+                      Navigator.push( context,
+                          MaterialPageRoute( builder: (context) => korean_stadard_nodeuce_page() ) );
+                    },
                   ),
-                  onTap: (){
-                    Navigator.push( context,
-                        MaterialPageRoute( builder: (context) => korean_stadard_nodeuce_page() ) );
-                  },
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(8, 24, 16, 16),
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(4.0, 4.0),
-                      blurRadius: 10.0,
-                      spreadRadius: 1.0,
-                    ),
-                    BoxShadow(
-                      color: Colors.white,
-                      offset: Offset(-4.0, -4.0),
-                      blurRadius: 10.0,
-                      spreadRadius: 1.0,
-                    )
-                  ]
-                ),
-                child: InkWell(
-                  child: ClipRRect(
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text( "History",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 36,
+                SizedBox(width: 16.w,),
+                Container(
+                  child: InkWell(
+                    child: ClipRRect(
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text( "History",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 26.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                        textAlign: TextAlign.center,
+                        width: 171, // 160
+                        height: 171,  // 180
+                        color: Colors.white,
                       ),
-                      width: 160, // 160
-                      height: 200,  // 180
-                      color: Colors.blueGrey.withOpacity(0.4),
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    borderRadius: BorderRadius.circular(20),
+                    onTap: (){},
                   ),
-                  onTap: (){},
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
