@@ -73,8 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        width: 171, // 160
-                        height: 171,  // 180
+                        width: 171.w, // 160
+                        height: 171.h,  // 180
                         color: Colors.white,
                       ),
                       borderRadius: BorderRadius.circular(20),
@@ -98,8 +98,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        width: 171, // 160
-                        height: 171,  // 180
+                        width: 171.w, // 160
+                        height: 171.h,  // 180
                         color: Colors.white,
                       ),
                       borderRadius: BorderRadius.circular(20),
