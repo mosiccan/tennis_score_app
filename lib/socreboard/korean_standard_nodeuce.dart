@@ -63,6 +63,16 @@ class _MyHomePageState extends State<MyHomePage> {
     this.player2Name = newName;
   }
 
+  final myController1 = TextEditingController();
+  final myController2 = TextEditingController();
+          
+  @override
+  void dispose(){
+    myController1.dispose();
+    myController2.dispose();
+    super.dispose();
+   }
+
   void setDefaultName(){
     this.setPlayer1Name("Player1");
     this.setPlayer2Name("Player2");
@@ -555,12 +565,14 @@ class _MyHomePageState extends State<MyHomePage> {
   void setPlayerNameDiaglog() {
     // 게임 종료시 Dialog 알림
     BuildContext dialogContext;
+  
     showDialog(
         context: context,
         //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
         barrierDismissible: false,
         builder: (BuildContext context) {
           dialogContext = context;
+          
           return AlertDialog(
             // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
             shape: RoundedRectangleBorder(
@@ -570,13 +582,15 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 new Text("Set Names for both Players"),
-                const TextField(
+                TextField(
+                  controller: myController1,
                   decoration: InputDecoration(
                     labelText: "Player1",
                     hintText: "Enter Player1's Name",
                   ),
                 ),
-                const TextField(
+                TextField(
+                  controller: myController2,
                   decoration: InputDecoration(
                     labelText: "Player2",
                     hintText: "Enter Player2's Name",
@@ -601,6 +615,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 child: Text('Okay'),
                 onPressed: () {
+                  setPlayer1Name(myController1.text);
+                  setPlayer2Name(myController2.text);
                   Navigator.pop(context);
                 },
               ),
