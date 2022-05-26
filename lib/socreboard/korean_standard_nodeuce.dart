@@ -78,8 +78,10 @@ class _MyHomePageState extends State<MyHomePage> {
    }
 
   void setDefaultName(){
-    this.setPlayer1Name("Player1");
-    this.setPlayer2Name("Player2");
+    setState(() {
+      this.setPlayer1Name("Player1");
+      this.setPlayer2Name("Player2");
+    });
   }
 
   void addPointToLogP1(int counter) {
