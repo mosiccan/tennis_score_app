@@ -63,6 +63,11 @@ class _MyHomePageState extends State<MyHomePage> {
     this.player2Name = newName;
   }
 
+  void setDefaultName(){
+    this.setPlayer1Name("Player1");
+    this.setPlayer2Name("Player2");
+  }
+
   void addPointToLogP1(int counter) {
     // Player1 포인트 로그 리스트에 '포인트' 추가
     pointLogListP1.add(scoreList[counter]);
@@ -547,6 +552,63 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  void setPlayerNameDiaglog() {
+    // 게임 종료시 Dialog 알림
+    BuildContext dialogContext;
+    showDialog(
+        context: context,
+        //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          dialogContext = context;
+          return AlertDialog(
+            // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0)),
+            //Dialog Main Title
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Text("Set Names for both Players"),
+                const TextField(
+                  decoration: InputDecoration(
+                    labelText: "Player1",
+                    hintText: "Enter Player1's Name",
+                  ),
+                ),
+                const TextField(
+                  decoration: InputDecoration(
+                    labelText: "Player2",
+                    hintText: "Enter Player2's Name",
+                  ),
+                )
+              ],
+            ),
+            //
+            actions: <Widget>[
+              TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.black,
+                ),
+                child: Text('Set Default'),
+                onPressed: (){
+                  Navigator.pop(context);
+                  setDefaultName();
+                }),
+              TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.grey,
+                ),
+                child: Text('Okay'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -723,6 +785,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   backgroundColor: Colors.grey,
                   label: Icon(Icons.undo),
                 )),
+            Container(
+              alignment: Alignment.bottomLeft,
+              margin: EdgeInsets.fromLTRB(32, 16, 32, 0.0),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.grey,
+                ),
+                child: Text(
+                  'Set Player Name',
+                ),
+                onPressed: setPlayerNameDiaglog,
+              ),
+            ),
             Container(
               alignment: Alignment.bottomRight,
               margin: EdgeInsets.fromLTRB(32, 16, 32, 0.0),
