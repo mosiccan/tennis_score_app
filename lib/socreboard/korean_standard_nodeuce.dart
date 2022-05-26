@@ -53,14 +53,18 @@ class _MyHomePageState extends State<MyHomePage> {
     return this.player1Name;
   }
   void setPlayer1Name(String newName){
-    this.player1Name = newName;
+    setState(() {
+      this.player1Name = newName;
+    });
   }
 
   String player2(){
     return this.player2Name;
   }
   void setPlayer2Name(String newName){
+    setState(() {
     this.player2Name = newName;
+    });
   }
 
   final myController1 = TextEditingController();
