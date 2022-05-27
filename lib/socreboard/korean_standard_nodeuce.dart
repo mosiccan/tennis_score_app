@@ -530,7 +530,7 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                new Text("Player "+player+" Win!!"),
+                new Text(player+" Win!!"),
               ],
             ),
             //
