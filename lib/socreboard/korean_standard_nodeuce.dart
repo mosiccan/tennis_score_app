@@ -79,8 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void setDefaultName(){
     setState(() {
-      this.setPlayer1Name("Player1");
-      this.setPlayer2Name("Player2");
+      setPlayer1Name("Player1");
+      setPlayer2Name("Player2");
     });
   }
 
