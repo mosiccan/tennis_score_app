@@ -15,16 +15,14 @@ class MainMenu extends StatelessWidget {
       designSize: const Size(390, 844),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (child) {
-        return MaterialApp(
+      builder: (context, child) => MaterialApp(
           title: 'Tennis Score System',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.green,
           ),
           home: const MyHomePage(title: 'Tennis Score System',),
-        );
-      },
+        ),
     );
   }
 }
