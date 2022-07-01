@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:collection';
-import './socreboard/korean_standard_nodeuce.dart';
+import 'socreboard/korean_standard_nodeuce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pixel_perfect/pixel_perfect.dart';
 

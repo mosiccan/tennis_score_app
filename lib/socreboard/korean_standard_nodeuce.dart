@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'dart:collection';
 
 void korean_stadard_nodeuce() => runApp(korean_stadard_nodeuce_page());
 
 class korean_stadard_nodeuce_page extends StatelessWidget {
+
+  korean_stadard_nodeuce_page({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -50,20 +52,20 @@ class _MyHomePageState extends State<MyHomePage> {
   String player2Name = "Player2";
 
   String player1(){
-    return this.player1Name;
+    return player1Name;
   }
   void setPlayer1Name(String newName){
     setState(() {
-      this.player1Name = newName;
+      player1Name = newName;
     });
   }
 
   String player2(){
-    return this.player2Name;
+    return player2Name;
   }
   void setPlayer2Name(String newName){
     setState(() {
-    this.player2Name = newName;
+    player2Name = newName;
     });
   }
 
