@@ -6,7 +6,6 @@ import 'package:tennis_score_system/socreboard/korean_standard_nodeuce.dart';
 void main() => runApp(const MainMenu());
 
 class MainMenu extends StatelessWidget {
-
   const MainMenu({Key? key}) : super(key: key);
 
   @override
@@ -15,14 +14,16 @@ class MainMenu extends StatelessWidget {
       designSize: const Size(390, 844),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (child) => MaterialApp(
+      builder: (child, context) {
+        return MaterialApp(
           title: 'Tennis Score System',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.green,
           ),
-          home: const MyHomePage(title: 'Tennis Score System',),
-        ),
+          home: const MyHomePage(title: 'Tennis Score System'),
+        );
+      },
     );
   }
 }
@@ -43,9 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: const Color(0xfff2f4f6),
       appBar: AppBar(
         centerTitle: false,
-        title: Text("Welcome Player 1",
-          style:
-          TextStyle(
+        title: Text(
+          "Welcome Player 1",
+          style: TextStyle(
             color: Colors.black,
             fontSize: 34.sp,
             fontWeight: FontWeight.bold,
@@ -55,7 +56,8 @@ class _MyHomePageState extends State<MyHomePage> {
         elevation: 0.0,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 58.h), // 양쪽 마진 (여백)
+        padding: EdgeInsets.symmetric(
+            horizontal: 16.w, vertical: 58.h), // 양쪽 마진 (여백)
         child: Column(
           children: [
             Row(
@@ -65,7 +67,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: ClipRRect(
                       child: Container(
                         alignment: Alignment.center,
-                        child: Text( "Game Start",
+                        child: Text(
+                          "Game Start",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 25.sp,
@@ -74,24 +77,30 @@ class _MyHomePageState extends State<MyHomePage> {
                           textAlign: TextAlign.center,
                         ),
                         width: 171.w, // 160
-                        height: 171.h,  // 180
+                        height: 171.h, // 180
                         color: Colors.white,
                       ),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    onTap: (){
-                      Navigator.push( context,
-                          MaterialPageRoute( builder: (context) => const KoreanStandardNodeucePage() ) );
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const KoreanStandardNodeucePage()));
                     },
                   ),
                 ),
-                SizedBox(width: 16.w,),
+                SizedBox(
+                  width: 16.w,
+                ),
                 Container(
                   child: InkWell(
                     child: ClipRRect(
                       child: Container(
                         alignment: Alignment.center,
-                        child: Text( "History",
+                        child: Text(
+                          "History",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 26.sp,
@@ -99,12 +108,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         width: 171.w, // 160
-                        height: 171.h,  // 180
+                        height: 171.h, // 180
                         color: Colors.white,
                       ),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    onTap: (){},
+                    onTap: () {},
                   ),
                 ),
               ],
