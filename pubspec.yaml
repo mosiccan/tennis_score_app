@@ -30,7 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   pixel_perfect: any
-  flutter_screenutil: ^5.5.2
+  flutter_screenutil: ^5.5.3
   shared_preferences: ^2.0.15
 
 
