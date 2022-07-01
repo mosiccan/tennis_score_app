@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-void korean_stadard_nodeuce() => runApp(korean_stadard_nodeuce_page());
+void koreanStandardNodeuce() => runApp(const KoreanStandardNodeucePage());
 
-class korean_stadard_nodeuce_page extends StatelessWidget {
+class KoreanStandardNodeucePage extends StatelessWidget {
 
-  korean_stadard_nodeuce_page({Key? key}) : super(key: key);
+  const KoreanStandardNodeucePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -477,7 +477,7 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                new Text("Reset Match?"),
+                const Text("Reset Match?"),
               ],
             ),
             //
@@ -485,7 +485,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
+                const Text(
                   "By clicking yes, the match will reset to 0-0",
                 ),
               ],
@@ -495,7 +495,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextButton.styleFrom(
                   primary: Colors.black,
                 ),
-                child: Text('No'),
+                child: const Text('No'),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -504,7 +504,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextButton.styleFrom(
                   primary: Colors.grey,
                 ),
-                child: Text('Ok'),
+                child: const Text('Ok'),
                 onPressed: (){
                   Navigator.pop(context);
                   resetPoint();
@@ -517,13 +517,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void matchOverDialog(String player) {
     // 게임 종료시 Dialog 알림
-    BuildContext dialogContext;
     showDialog(
         context: context,
         //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
         barrierDismissible: false,
         builder: (BuildContext context) {
-          dialogContext = context;
           return AlertDialog(
             // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
             shape: RoundedRectangleBorder(
@@ -532,14 +530,14 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                new Text(player+" Win!!"),
+                Text(player+" Win!!"),
               ],
             ),
             //
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
+              children: const <Widget>[
                 Text(
                   "TBU",
                 ),
@@ -550,7 +548,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextButton.styleFrom(
                   primary: Colors.black,
                 ),
-                child: Text('Reset'),
+                child: const Text('Reset'),
                 onPressed: (){
                   Navigator.pop(context);
                   resetPoint();
@@ -559,7 +557,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextButton.styleFrom(
                   primary: Colors.grey,
                 ),
-                child: Text('Undo'),
+                child: const Text('Undo'),
                 onPressed: () {
                   undoPoint();
                   Navigator.pop(context);
@@ -572,15 +570,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void setPlayerNameDiaglog() {
     // 게임 종료시 Dialog 알림
-    BuildContext dialogContext;
   
     showDialog(
         context: context,
         //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
         barrierDismissible: false,
         builder: (BuildContext context) {
-          dialogContext = context;
-          
           return AlertDialog(
             // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
             shape: RoundedRectangleBorder(
@@ -589,17 +584,17 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                new Text("Set Names for both Players"),
+                const Text("Set Names for both Players"),
                 TextField(
                   controller: myController1,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Player1",
                     hintText: "Enter Player1's Name",
                   ),
                 ),
                 TextField(
                   controller: myController2,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Player2",
                     hintText: "Enter Player2's Name",
                   ),
@@ -612,7 +607,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextButton.styleFrom(
                   primary: Colors.black,
                 ),
-                child: Text('Set Default'),
+                child: const Text('Set Default'),
                 onPressed: (){
                   Navigator.pop(context);
                   setDefaultName();
@@ -621,7 +616,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextButton.styleFrom(
                   primary: Colors.grey,
                 ),
-                child: Text('Okay'),
+                child: const Text('Okay'),
                 onPressed: () {
                   setPlayer1Name(myController1.text);
                   setPlayer2Name(myController2.text);
@@ -640,7 +635,7 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: false,
         title: Text(widget.title,
           style:
-          TextStyle(
+          const TextStyle(
             color: Colors.black,
             fontSize: 24,
           ),
@@ -685,7 +680,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   cells: <DataCell>[
                     DataCell(
                       Visibility(
-                        child: Icon(Icons.sports_tennis),
+                        child: const Icon(Icons.sports_tennis),
                         visible: turnToServe(),
                       )),
                     DataCell(Text(player1())),
@@ -697,7 +692,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   cells: <DataCell>[
                     DataCell(
                       Visibility(
-                        child: Icon(Icons.sports_tennis),
+                        child: const Icon(Icons.sports_tennis),
                         visible: !turnToServe(),
                       )),
                     DataCell(Text(player2())),
@@ -709,8 +704,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               // Information 탭
-              margin: EdgeInsets.fromLTRB(0.0, 20, 0.0, 0.0),
-              child: Text(
+              margin: const EdgeInsets.fromLTRB(0.0, 20, 0.0, 0.0),
+              child: const Text(
                 'Information',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
@@ -719,16 +714,16 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Container(
-                margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 16),
+                margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 16),
                 child: Card(
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    child: ListTile())),
+                    child: const ListTile())),
             Container(
               // Score
-              margin: EdgeInsets.fromLTRB(0.0, 8, 0.0, 16),
+              margin: const EdgeInsets.fromLTRB(0.0, 8, 0.0, 16),
               child: const Text(
                 'Score',
                 style: TextStyle(
@@ -747,7 +742,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       alignment: Alignment.centerRight,
                       child: Text(
                         currentPointP1(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 48,
                         ),
@@ -756,8 +751,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 Flexible(
                   //fit: FlexFit.loose,
                     child: Container(
-                      margin: EdgeInsets.fromLTRB(24, 0.0, 24, 8),
-                      child: Text(
+                      margin: const EdgeInsets.fromLTRB(24, 0.0, 24, 8),
+                      child: const Text(
                         ':',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -771,7 +766,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         currentPointP2(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 48,
                         ),
@@ -783,40 +778,40 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(0.0, 24, 16, 0.0),
+                  margin: const EdgeInsets.fromLTRB(0.0, 24, 16, 0.0),
                   child: FloatingActionButton.extended(
                       onPressed: incrementCounterP1,
                       tooltip: 'Player 1 gets point',
-                      icon: Icon(Icons.add),
+                      icon: const Icon(Icons.add),
                       label: Text(player1())),
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(16, 24, 0.0, 0.0),
+                  margin: const EdgeInsets.fromLTRB(16, 24, 0.0, 0.0),
                   child: FloatingActionButton.extended(
                     onPressed: incrementCounterP2,
                     tooltip: 'Player 2 gets point',
-                    icon: Icon(Icons.add),
+                    icon: const Icon(Icons.add),
                     label: Text(player2()),
                   ),
                 ),
               ],
             ),
             Container(
-                margin: EdgeInsets.all(16),
+                margin: const EdgeInsets.all(16),
                 child: FloatingActionButton.extended(
                   onPressed: undoPoint,
                   elevation: 0.0,
                   backgroundColor: Colors.grey,
-                  label: Icon(Icons.undo),
+                  label: const Icon(Icons.undo),
                 )),
             Container(
               alignment: Alignment.bottomLeft,
-              margin: EdgeInsets.fromLTRB(32, 16, 32, 0.0),
+              margin: const EdgeInsets.fromLTRB(32, 16, 32, 0.0),
               child: TextButton(
                 style: TextButton.styleFrom(
                   primary: Colors.grey,
                 ),
-                child: Text(
+                child: const Text(
                   'Set Player Name',
                 ),
                 onPressed: setPlayerNameDiaglog,
@@ -824,12 +819,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               alignment: Alignment.bottomRight,
-              margin: EdgeInsets.fromLTRB(32, 16, 32, 0.0),
+              margin: const EdgeInsets.fromLTRB(32, 16, 32, 0.0),
               child: TextButton(
                 style: TextButton.styleFrom(
                   primary: Colors.grey,
                 ),
-                child: Text(
+                child: const Text(
                   'All Reset',
                 ),
                 onPressed: resetDialog,

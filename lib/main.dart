@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'dart:collection';
-import 'socreboard/korean_standard_nodeuce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pixel_perfect/pixel_perfect.dart';
+import 'package:tennis_score_system/socreboard/korean_standard_nodeuce.dart';
 
-void main() => runApp(MainMenu());
+void main() => runApp(const MainMenu());
 
 class MainMenu extends StatelessWidget {
+
+  const MainMenu({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -40,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff2f4f6),
+      backgroundColor: const Color(0xfff2f4f6),
       appBar: AppBar(
         centerTitle: false,
         title: Text("Welcome Player 1",
@@ -81,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     onTap: (){
                       Navigator.push( context,
-                          MaterialPageRoute( builder: (context) => korean_stadard_nodeuce_page() ) );
+                          MaterialPageRoute( builder: (context) => const KoreanStandardNodeucePage() ) );
                     },
                   ),
                 ),
