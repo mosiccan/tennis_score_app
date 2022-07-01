@@ -15,7 +15,7 @@ class MainMenu extends StatelessWidget {
       designSize: const Size(390, 844),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context, child) => MaterialApp(
+      builder: (child) => MaterialApp(
           title: 'Tennis Score System',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
