@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pixel_perfect/pixel_perfect.dart';
+import 'package:tennis_score_system/history.dart';
 import 'package:tennis_score_system/socreboard/korean_standard_nodeuce.dart';
 
 void main() => runApp(const MainMenu());
@@ -113,7 +114,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context, 
+                        MaterialPageRoute(
+                          builder: (context) =>
+                            const HistoryPage()));
+                    },
                   ),
                 ),
               ],
