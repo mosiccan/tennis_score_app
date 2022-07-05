@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       var list = pref.getStringList(key);
       if(list == null){
-        pointLogListP1 = [];
+        pointLogListP1 = ["0"];
       }
       else{
         pointLogListP1 = list;
@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       var list = pref.getStringList(key);
       if(list == null){
-        pointLogListP2 = [];
+        pointLogListP2 = ["0"];
       }
       else{
         pointLogListP2 = list;
