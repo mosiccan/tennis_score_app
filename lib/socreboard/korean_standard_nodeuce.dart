@@ -492,6 +492,7 @@ class _MyHomePageState extends State<MyHomePage> {
             removeLog();
           }
         }
+        _setPlayer1GameCounterData(gameCounterP1);
       } else if (orderOfPlay.last == 2) {
         //플레이어2가 마지막 득점자 일 떄
         if(isMatchOver(gameCounterP2)){
@@ -542,6 +543,7 @@ class _MyHomePageState extends State<MyHomePage> {
             removeLog();
           }
         }
+        _setPlayer2GameCounterData(gameCounterP2);
       }
       removeOrderOfPlay();
     });
