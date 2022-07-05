@@ -48,6 +48,26 @@ class _MyHistoryPageState extends State<MyHistoryPage>{
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 16.w, vertical: 58.h),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  child: InkWell(
+                    child: ClipRRect(
+                      child: Container(
+                        
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            )
+        ]),  
+       ),
     );
   }
 
