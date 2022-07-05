@@ -704,6 +704,7 @@ class _MyHomePageState extends State<MyHomePage> {
             if(gameCounterP1 > 0 && counterP1 == counterP2 && counterP1 == 0){
               // 일반 상황 0:0 에서 undo
               gameCounterP1--;
+              _setPlayer1GameCounterData(gameCounterP1);
               counterP1 = lastCounterOfGameListP1.last;
               counterP2 = lastCounterOfGameListP2.last;
               _setCounterP1Data(counterP1);
