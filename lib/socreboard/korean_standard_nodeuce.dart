@@ -1,4 +1,7 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void koreanStandardNodeuce() => runApp(const KoreanStandardNodeucePage());
 
@@ -51,12 +54,102 @@ class _MyHomePageState extends State<MyHomePage> {
   String player1Name = "Player1";
   String player2Name = "Player2";
 
+  void _setPlayer1NameData(String value) async {
+    var key = 'name1';
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString(key, value);
+  }
+
+  void _setPlayer2NameData(String value) async {
+    var key = 'name2';
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString(key, value);
+  }
+
+  void _setPlayer1GameCounterData(int value) async{
+    var key = 'gameCounter1';
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setInt(key, value);
+  }
+
+  void _setPlayer2GameCounterData(int value) async{
+    var key = 'gameCounter2';
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setInt(key, value);
+  }
+
+  void _loadPlayer1NameData() async{
+    var key = 'name1';
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      var value = pref.getString(key);
+      if(value == null){
+        setPlayer1Name("Player1");
+      }
+      else{
+        setPlayer1Name(value);
+      }
+    });
+  }
+
+  void _loadPlayer2NameData() async{
+    var key = 'name2';
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      var value = pref.getString(key);
+      if(value == null){
+        setPlayer2Name("Player2");
+      }
+      else{
+        setPlayer2Name(value);
+      }
+    });
+  }
+
+  void _loadPlayer1GameCounterData() async{
+    var key = 'gameCounter1';
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      var value = pref.getInt(key);
+      if(value == null){
+        gameCounterP1 = 0;
+      }
+      else{
+        gameCounterP1 = value;
+      }
+    });
+  }
+
+  void _loadPlayer2GameCounterData() async{
+    var key = 'gameCounter2';
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      var value = pref.getInt(key);
+      if(value == null){
+        gameCounterP2 = 0;
+      }
+      else{
+        gameCounterP2 = value;
+      }
+    });
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    _loadPlayer1GameCounterData();
+    _loadPlayer1NameData();
+    _loadPlayer2GameCounterData();
+    _loadPlayer2NameData();
+  }
+
   String player1(){
     return player1Name;
   }
   void setPlayer1Name(String newName){
     setState(() {
       player1Name = newName;
+      _setPlayer1NameData(player1Name);
     });
   }
 
@@ -66,6 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void setPlayer2Name(String newName){
     setState(() {
     player2Name = newName;
+    _setPlayer2NameData(player2Name);
     });
   }
 
@@ -265,6 +359,7 @@ class _MyHomePageState extends State<MyHomePage> {
           addPointToLogP2(counterP2);
         }
       }
+      _setPlayer1GameCounterData(gameCounterP1);
     });
   }
 
@@ -340,6 +435,7 @@ class _MyHomePageState extends State<MyHomePage> {
           addPointToLogP2(counterP2);
         }
       }
+      _setPlayer2GameCounterData(gameCounterP2);
     });
   }
 
@@ -459,6 +555,8 @@ class _MyHomePageState extends State<MyHomePage> {
       gameCounterP1 = 0;
       gameCounterP2 = 0;
       resetGameLog();
+      _setPlayer1GameCounterData(gameCounterP1);
+      _setPlayer2GameCounterData(gameCounterP2);
     });
   }
 
