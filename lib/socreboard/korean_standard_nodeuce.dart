@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -53,6 +51,46 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String player1Name = "Player1";
   String player2Name = "Player2";
+
+  void _setPointLogListP1Data(List<String> list) async{
+    var key = 'pointListP1';
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setStringList(key, list);
+  }
+
+  void _setPointLogListP2Data(List<String> list) async{
+    var key = 'pointListP2';
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setStringList(key, list);
+  }
+
+  void _loadPointLogListP1Data() async{
+    var key = 'pointListP1';
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      var list = pref.getStringList(key);
+      if(list == null){
+        pointLogListP1 = [];
+      }
+      else{
+        pointLogListP1 = list;
+      }
+    });
+  }
+
+  void _loadPointLogListP2Data() async{
+    var key = 'pointListP2';
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      var list = pref.getStringList(key);
+      if(list == null){
+        pointLogListP2 = [];
+      }
+      else{
+        pointLogListP2 = list;
+      }
+    });
+  }
 
   void _setPlayer1NameData(String value) async {
     var key = 'name1';
@@ -141,6 +179,8 @@ class _MyHomePageState extends State<MyHomePage> {
     _loadPlayer1NameData();
     _loadPlayer2GameCounterData();
     _loadPlayer2NameData();
+    _loadPointLogListP1Data();
+    _loadPointLogListP2Data();
   }
 
   String player1(){
@@ -359,6 +399,7 @@ class _MyHomePageState extends State<MyHomePage> {
           addPointToLogP2(counterP2);
         }
       }
+      _setPointLogListP1Data(pointLogListP1);
       _setPlayer1GameCounterData(gameCounterP1);
     });
   }
@@ -435,6 +476,7 @@ class _MyHomePageState extends State<MyHomePage> {
           addPointToLogP2(counterP2);
         }
       }
+      _setPointLogListP2Data(pointLogListP2);
       _setPlayer2GameCounterData(gameCounterP2);
     });
   }
