@@ -32,8 +32,12 @@ dependencies:
   pixel_perfect: any
   flutter_screenutil: ^5.5.3
   shared_preferences: ^2.0.15
-
-
+  kakao_flutter_sdk: ^1.2.1
+  kakao_flutter_sdk_user: ^1.2.1
+  kakao_flutter_sdk_talk: ^1.2.1
+  kakao_flutter_sdk_share: ^1.2.1
+  kakao_flutter_sdk_story: ^1.2.1
+  kakao_flutter_sdk_navi: ^1.2.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
