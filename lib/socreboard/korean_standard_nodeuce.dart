@@ -333,6 +333,22 @@ class _MyHomePageState extends State<MyHomePage> {
     _loadCounterP2Data();
   }
 
+  void _setLastDataAfterAction(){
+    _setCounterP1Data(counterP1);
+    _setCounterP2Data(counterP2);
+    _setLastCounterOfGameListP1Data(lastCounterOfGameListP1);
+    _setLastCounterOfGameListP2Data(lastCounterOfGameListP2);
+    _setOrderOfPlayListData(orderOfPlay);
+    _setPlayer1GameCounterData(gameCounterP1);
+    _setPlayer1NameData(player1Name);
+    _setPlayer2GameCounterData(gameCounterP2);
+    _setPlayer2NameData(player2Name);
+    _setPointLogListP1Data(pointLogListP1);
+    _setPointLogListP2Data(pointLogListP2);
+    _setTieBreakCounterP1Data(tieBreakCounterP1);
+    _setTieBreakCounterP2Data(tieBreakCounterP2);
+  }
+
   String player1(){
     return player1Name;
   }
@@ -367,19 +383,18 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       setPlayer1Name("Player1");
       setPlayer2Name("Player2");
+      _setLastDataAfterAction();
     });
   }
 
   void addPointToLogP1(int counter) {
     // Player1 포인트 로그 리스트에 '포인트' 추가
     pointLogListP1.add(scoreList[counter]);
-    _setPointLogListP1Data(pointLogListP1);
   }
 
   void addPointToLogP2(int counter) {
     // Player2 포인트 로그 리스트에 '포인트' 추가
     pointLogListP2.add(scoreList[counter]);
-    _setPointLogListP2Data(pointLogListP2);
   }
 
   String currentPointP1() {
@@ -396,8 +411,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // 모든 Player의 마지막 포인트 로그 제거
     pointLogListP1.removeLast();
     pointLogListP2.removeLast();
-    _setPointLogListP1Data(pointLogListP1);
-    _setPointLogListP2Data(pointLogListP2);
   }
 
   void resetGameLog() {
@@ -416,27 +429,21 @@ class _MyHomePageState extends State<MyHomePage> {
   void addOrderOfPlay(int player) {
     // 어떤 Player가 득점했는지에 대한 로그 추가
     orderOfPlay.add(player);
-    _setOrderOfPlayListData(orderOfPlay);
   }
 
   void removeOrderOfPlay() {
     // 마지막 득점 로그 지우기
     orderOfPlay.removeLast();
-    _setOrderOfPlayListData(orderOfPlay);
   }
 
   void saveLastCounterOfGame(int counter1, int counter2) {
     lastCounterOfGameListP1.add(counter1);
     lastCounterOfGameListP2.add(counter2);
-    _setLastCounterOfGameListP1Data(lastCounterOfGameListP1);
-    _setLastCounterOfGameListP2Data(lastCounterOfGameListP2);
   }
 
   void removeLastCounterOfGame() {
     lastCounterOfGameListP1.removeLast();
     lastCounterOfGameListP2.removeLast();
-    _setLastCounterOfGameListP1Data(lastCounterOfGameListP1);
-    _setLastCounterOfGameListP2Data(lastCounterOfGameListP2);
   }
 
   bool isTieBreak(int counter1, int counter2){
@@ -497,12 +504,10 @@ class _MyHomePageState extends State<MyHomePage> {
           if((tieBreakCounterP1-tieBreakCounterP2) >= 1){
             //타이브레이크 듀스 종료
             tieBreakCounterP1++;
-            _setTieBreakCounterP1Data(tieBreakCounterP1);
             pointLogListP1.add(tieBreakCounterP1.toString());
             pointLogListP2.add(tieBreakCounterP2.toString());
             addOrderOfPlay(1);
             gameCounterP1++;
-            _setPlayer1GameCounterData(gameCounterP1);
             if(isMatchOver(gameCounterP1)){
               //타이브레이크 종료 후 플레이어1 승리
               pointLogListP1.add("Win");
@@ -513,7 +518,6 @@ class _MyHomePageState extends State<MyHomePage> {
           else{
             //듀스 또는 애드 상황
             tieBreakCounterP1++;
-            _setTieBreakCounterP1Data(tieBreakCounterP1);
             pointLogListP1.add(tieBreakCounterP1.toString());
             pointLogListP2.add(tieBreakCounterP2.toString());
             addOrderOfPlay(1);
@@ -522,14 +526,12 @@ class _MyHomePageState extends State<MyHomePage> {
         else{
           //타이브레이크 듀스 아닐 때
           tieBreakCounterP1++;
-          _setTieBreakCounterP1Data(tieBreakCounterP1);
           pointLogListP1.add(tieBreakCounterP1.toString());
           pointLogListP2.add(tieBreakCounterP2.toString());
           addOrderOfPlay(1);
           if(isTieBreakOver(tieBreakCounterP1)){
             //타이브레이크 종료 되었는지 확인
             gameCounterP1++;
-            _setPlayer1GameCounterData(gameCounterP1);
             if(isMatchOver(gameCounterP1)){
               //타이브레이크 종료로 인해 플레이어2 승리
               pointLogListP1.add("Win");
@@ -541,7 +543,6 @@ class _MyHomePageState extends State<MyHomePage> {
       }else{
         // 타이브레이크 아닐 때
         counterP1++;
-        _setCounterP1Data(counterP1);
         if (counterP1 == 4) {
           // 득점 및 '게임' 승리
           counterP1--;
@@ -549,9 +550,6 @@ class _MyHomePageState extends State<MyHomePage> {
           counterP1 = 0;
           counterP2 = 0;
           gameCounterP1++;
-          _setCounterP1Data(counterP1);
-          _setCounterP2Data(counterP2);
-          _setPlayer1GameCounterData(gameCounterP1);
           addOrderOfPlay(1);
           addPointToLogP1(counterP1);
           addPointToLogP2(counterP2);
@@ -568,6 +566,7 @@ class _MyHomePageState extends State<MyHomePage> {
           addPointToLogP2(counterP2);
         }
       }
+      _setLastDataAfterAction();
     });
   }
 
@@ -581,12 +580,10 @@ class _MyHomePageState extends State<MyHomePage> {
           if((tieBreakCounterP2-tieBreakCounterP1) >= 1){
             //타이브레이크 듀스 종료
             tieBreakCounterP2++;
-            _setTieBreakCounterP2Data(tieBreakCounterP2);
             pointLogListP1.add(tieBreakCounterP1.toString());
             pointLogListP2.add(tieBreakCounterP2.toString());
             addOrderOfPlay(2);
             gameCounterP2++;
-            _setPlayer2GameCounterData(gameCounterP2);
             if(isMatchOver(gameCounterP2)){
               //타이브레이크 종료 후 플레이어2 승리
               pointLogListP2.add("Win");
@@ -597,7 +594,6 @@ class _MyHomePageState extends State<MyHomePage> {
           else{
             //듀스 또는 애드 상황
             tieBreakCounterP2++;
-            _setTieBreakCounterP2Data(tieBreakCounterP2);
             pointLogListP1.add(tieBreakCounterP1.toString());
             pointLogListP2.add(tieBreakCounterP2.toString());
             addOrderOfPlay(2);
@@ -606,14 +602,12 @@ class _MyHomePageState extends State<MyHomePage> {
         else{
           //타이브레이크 때 그냥 득점
           tieBreakCounterP2++;
-          _setTieBreakCounterP2Data(tieBreakCounterP2);
           pointLogListP1.add(tieBreakCounterP1.toString());
           pointLogListP2.add(tieBreakCounterP2.toString());
           addOrderOfPlay(2);
           if(isTieBreakOver(tieBreakCounterP2)){
             //타이브레이크가 종료 되었는지 확인
             gameCounterP2++;
-            _setPlayer2GameCounterData(gameCounterP2);
             if(isMatchOver(gameCounterP2)){
               //타이브레이크 종료로 인해 플레이어2 승리
               pointLogListP2.add("Win");
@@ -632,9 +626,6 @@ class _MyHomePageState extends State<MyHomePage> {
           counterP1 = 0;
           counterP2 = 0;
           gameCounterP2++;
-          _setCounterP1Data(counterP1);
-          _setCounterP2Data(counterP2);
-          _setPlayer2GameCounterData(gameCounterP2);
           addOrderOfPlay(2);
           addPointToLogP1(counterP1);
           addPointToLogP2(counterP2);
@@ -651,6 +642,7 @@ class _MyHomePageState extends State<MyHomePage> {
           addPointToLogP2(counterP2);
         }
       }
+      _setLastDataAfterAction();
     });
   }
 
@@ -662,19 +654,15 @@ class _MyHomePageState extends State<MyHomePage> {
         if(isMatchOver(gameCounterP1)){
           // 매치 종료시 undo 실행
           gameCounterP1--;
-          _setPlayer1GameCounterData(gameCounterP1);
           removeLog();
           if(isTieBreak(gameCounterP1, gameCounterP2)){
             // 타이브레이크 진행 이후 Match Over였을 때
             tieBreakCounterP1--;
-            _setTieBreakCounterP1Data(tieBreakCounterP1);
           }
           else{
             // 일반 게임 이후 Match Over였을 때
             counterP1 = lastCounterOfGameListP1.last;
             counterP2 = lastCounterOfGameListP2.last;
-            _setCounterP1Data(counterP1);
-            _setCounterP2Data(counterP2);
             removeLastCounterOfGame();
           }
           removeLog();
@@ -685,17 +673,13 @@ class _MyHomePageState extends State<MyHomePage> {
             if(gameCounterP1 == 5 && tieBreakCounterP1 == tieBreakCounterP2 && tieBreakCounterP1 == 0){
               // 타이브레이크 0:0 상황 시 undo
               gameCounterP1--;
-              _setPlayer1GameCounterData(gameCounterP1);
               counterP1 = lastCounterOfGameListP1.last;
               counterP2 = lastCounterOfGameListP2.last;
-              _setCounterP1Data(counterP1);
-              _setCounterP2Data(counterP2);
               removeLastCounterOfGame();
             }
             else{
               // 일반 타이브레이크 시 undo
               tieBreakCounterP1--;
-              _setTieBreakCounterP1Data(tieBreakCounterP1);
             }
             removeLog();
           }
@@ -704,17 +688,13 @@ class _MyHomePageState extends State<MyHomePage> {
             if(gameCounterP1 > 0 && counterP1 == counterP2 && counterP1 == 0){
               // 일반 상황 0:0 에서 undo
               gameCounterP1--;
-              _setPlayer1GameCounterData(gameCounterP1);
               counterP1 = lastCounterOfGameListP1.last;
               counterP2 = lastCounterOfGameListP2.last;
-              _setCounterP1Data(counterP1);
-              _setCounterP2Data(counterP2);
               removeLastCounterOfGame();
             }
             else{
               // 일반 상황에서 undo
               counterP1--;
-              _setCounterP1Data(counterP1);
             }
             removeLog();
           }
@@ -725,19 +705,15 @@ class _MyHomePageState extends State<MyHomePage> {
         if(isMatchOver(gameCounterP2)){
           // 매치 종료시 undo 실행
           gameCounterP2--;
-          _setPlayer2GameCounterData(gameCounterP2);
           removeLog();
           if(isTieBreak(gameCounterP1, gameCounterP2)){
             // 타이브레이크 진행 이후 Match Over였을 때
             tieBreakCounterP2--;
-            _setTieBreakCounterP2Data(tieBreakCounterP2);
           }
           else{
             // 일반 게임 이후 Match Over였을 때
             counterP1 = lastCounterOfGameListP1.last;
             counterP2 = lastCounterOfGameListP2.last;
-            _setCounterP1Data(counterP1);
-            _setCounterP2Data(counterP2);
             removeLastCounterOfGame();
           }
           removeLog();
@@ -748,17 +724,13 @@ class _MyHomePageState extends State<MyHomePage> {
             if(gameCounterP2 == 5 && tieBreakCounterP1 == tieBreakCounterP2 && tieBreakCounterP1 == 0){
               // 타이브레이크 0:0 상황 시 undo
               gameCounterP2--;
-              _setPlayer2GameCounterData(gameCounterP2);
               counterP1 = lastCounterOfGameListP1.last;
               counterP2 = lastCounterOfGameListP2.last;
-              _setCounterP1Data(counterP1);
-              _setCounterP2Data(counterP2);
               removeLastCounterOfGame();
             }
             else{
               // 일반 타이브레이크 시 undo
               tieBreakCounterP2--;
-              _setTieBreakCounterP2Data(tieBreakCounterP2);
             }
             removeLog();
           }
@@ -767,17 +739,13 @@ class _MyHomePageState extends State<MyHomePage> {
             if(gameCounterP2 > 0 && counterP1 == counterP2 && counterP1 == 0){
               // 일반 상황 0:0 에서 undo
               gameCounterP2--;
-              _setPlayer2GameCounterData(gameCounterP2);
               counterP1 = lastCounterOfGameListP1.last;
               counterP2 = lastCounterOfGameListP2.last;
-              _setCounterP1Data(counterP1);
-              _setCounterP2Data(counterP2);
               removeLastCounterOfGame();
             }
             else{
               // 일반 상황에서 undo
               counterP2--;
-              _setCounterP2Data(counterP2);
             }
             removeLog();
           }
@@ -787,6 +755,7 @@ class _MyHomePageState extends State<MyHomePage> {
       else{
         resetPoint();
       }
+      _setLastDataAfterAction();
     });
   }
 
@@ -799,19 +768,7 @@ class _MyHomePageState extends State<MyHomePage> {
       gameCounterP2 = 0;
       resetGameLog();
       setDefaultName();
-      _setPlayer1GameCounterData(gameCounterP1);
-      _setPlayer2GameCounterData(gameCounterP2);
-      _setPointLogListP1Data(pointLogListP1);
-      _setPointLogListP2Data(pointLogListP2);
-      _setTieBreakCounterP1Data(tieBreakCounterP1);
-      _setTieBreakCounterP2Data(tieBreakCounterP2);
-      _setPlayer1NameData(player1Name);
-      _setPlayer2NameData(player2Name);
-      _setOrderOfPlayListData(orderOfPlay);
-      _setLastCounterOfGameListP1Data(lastCounterOfGameListP1);
-      _setLastCounterOfGameListP2Data(lastCounterOfGameListP2);
-      _setCounterP1Data(counterP1);
-      _setCounterP2Data(counterP2);
+      _setLastDataAfterAction();
     });
   }
 
