@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "653089199691",
+    "firebase_url": "https://tennisscoreapp-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "tennisscoreapp",
+    "storage_bucket": "tennisscoreapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653089199691:android:b5252992a3a101efed5fce",
+        "android_client_info": {
+          "package_name": "com.example.tennis_score_system"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "653089199691-hgtesfkqlmehl26qecqn8qnqp09417nb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_BM0nNiQQPC1QOZ56JZTdv1n7JQvu83I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "653089199691-hgtesfkqlmehl26qecqn8qnqp09417nb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pixel_perfect/pixel_perfect.dart';
 import 'package:tennis_score_system/history.dart';
 import 'package:tennis_score_system/socreboard/korean_standard_nodeuce.dart';
+import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
+import 'firebase_options.dart';
 
 void main() => runApp(const MainMenu());
 
