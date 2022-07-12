@@ -880,7 +880,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void setPlayerNameDiaglog() {
     // 게임 종료시 Dialog 알림
-  
     showDialog(
         context: context,
         //barrierDismissible - Dialog를 제외한 다른 화면 터치 x

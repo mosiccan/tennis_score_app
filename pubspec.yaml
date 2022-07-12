@@ -32,6 +32,7 @@ dependencies:
   pixel_perfect: any
   flutter_screenutil: ^5.5.3
   shared_preferences: ^2.0.15
+  dropdown_button2: ^1.6.3
   kakao_flutter_sdk: ^1.2.1
   kakao_flutter_sdk_user: ^1.2.1
   kakao_flutter_sdk_talk: ^1.2.1

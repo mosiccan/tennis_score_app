@@ -1,36 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tennis_score_system/socreboard/scoreboard_components.dart';
+import 'package:tennis_score_system/main.dart';
 
-void koreanStandardNodeuce() => runApp(const KoreanStandardNodeucePage());
+void noDeuceScoreBoardPage() => runApp(const NoDeuceScoreBoardPage());
 
-class KoreanStandardNodeucePage extends StatelessWidget {
+class NoDeuceScoreBoardPage extends StatelessWidget {
 
-  const KoreanStandardNodeucePage({Key? key}) : super(key: key);
+  const NoDeuceScoreBoardPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tennis Score System',
+      title: 'Page for NoDeuce Game',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: 'Game Start!'),
+      home: const NoDeuceScoreBoardPageBuild(title: 'Game Start!'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class NoDeuceScoreBoardPageBuild extends StatefulWidget {
+
+  const NoDeuceScoreBoardPageBuild({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<NoDeuceScoreBoardPageBuild> createState() => _NoDeuceScoreBoardPageBuildState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _NoDeuceScoreBoardPageBuildState extends State<NoDeuceScoreBoardPageBuild> {
+
+  int _gameLength = 6;
+
+  int gameLength(){
+    return _gameLength;
+  }
+
+  void setGameLength(int givenGameLength){
+    _gameLength = givenGameLength;
+  }
 
   ScoreboardComponents sc = ScoreboardComponents();
 
@@ -370,14 +382,14 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   bool isTieBreak(int counter1, int counter2){
-    if(counter1 == counter2 && counter1 >= 5){
+    if(counter1 == counter2 && counter1 >= (gameLength()-1)){
       return true;
     }
     return false;
   }
 
   bool isMatchOver(int counter){
-    if(counter >= 6){
+    if(counter >= gameLength()){
       return true;
     }
     return false;
