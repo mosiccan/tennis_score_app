@@ -357,11 +357,11 @@ class _NoDeuceScoreBoardPageBuildState extends State<NoDeuceScoreBoardPageBuild>
   final myController2 = TextEditingController();
 
   int showGameCounterP1(){
-    return sc.gameCounterP1;
+    return sc.gameCounterForP1();
   }
 
   int showGameCounterP2(){
-    return sc.gameCounterP2;
+    return sc.gameCounterForP2();
   }
 
   String showCurrentPointP1(){
@@ -388,14 +388,14 @@ class _NoDeuceScoreBoardPageBuildState extends State<NoDeuceScoreBoardPageBuild>
   }
 
   bool isTieBreak(int counter1, int counter2){
-    if(counter1 == counter2 && counter1 >= (sc.gameLength()-1)){
+    if(counter1 == counter2 && counter1 >= (sc.gameLengthInUse()-1)){
       return true;
     }
     return false;
   }
 
   bool isMatchOver(int counter){
-    if(counter >= sc.gameLength()){
+    if(counter >= sc.gameLengthInUse()){
       return true;
     }
     return false;
@@ -935,7 +935,7 @@ class _NoDeuceScoreBoardPageBuildState extends State<NoDeuceScoreBoardPageBuild>
                           visible: turnToServe(),
                         )),
                     DataCell(Text(player1())),
-                    DataCell(Text("$showGameCounterP1()")),
+                    DataCell(Text(showGameCounterP1().toString())),
                     DataCell(Text(showCurrentPointP1())),
                   ],
                 ),
@@ -947,7 +947,7 @@ class _NoDeuceScoreBoardPageBuildState extends State<NoDeuceScoreBoardPageBuild>
                           visible: !turnToServe(),
                         )),
                     DataCell(Text(player2())),
-                    DataCell(Text("$showGameCounterP2()")),
+                    DataCell(Text(showGameCounterP2().toString())),
                     DataCell(Text(showCurrentPointP2())),
                   ],
                 ),

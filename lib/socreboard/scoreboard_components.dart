@@ -22,16 +22,6 @@ class ScoreboardComponents{
   String player1Name = "Player1";
   String player2Name = "Player2";
 
-  int _gameLength = 6;
-
-  int gameLength(){
-    return _gameLength;
-  }
-
-  void setGameLength(int givenGameLength){
-    _gameLength = givenGameLength;
-  }
-
   void addPointToLogP1(int counter) {
     // Player1 포인트 로그 리스트에 '포인트' 추가
     pointLogListP1.add(scoreList[counter]);
@@ -40,6 +30,14 @@ class ScoreboardComponents{
   void addPointToLogP2(int counter) {
     // Player2 포인트 로그 리스트에 '포인트' 추가
     pointLogListP2.add(scoreList[counter]);
+  }
+
+  int gameCounterForP1(){
+    return gameCounterP1;
+  }
+
+  int gameCounterForP2(){
+    return gameCounterP2;
   }
 
   String currentPointP1() {
@@ -89,6 +87,26 @@ class ScoreboardComponents{
   void removeLastCounterOfGame() {
     lastCounterOfGameListP1.removeLast();
     lastCounterOfGameListP2.removeLast();
+  }
+
+  NoDeuceGame ndc = NoDeuceGame();
+
+  int gameLengthInUse(){
+    return ndc.gameLength();
+  }
+
+}
+
+class NoDeuceGame{
+
+  int _gameLength = 6;
+
+  int gameLength(){
+    return _gameLength;
+  }
+
+  void setGameLength(int givenGameLength){
+    _gameLength = givenGameLength;
   }
 
 }

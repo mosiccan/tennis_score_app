@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String selectedGameLengthAsString = '';
   int chosenGameLength = 0;
 
-  ScoreboardComponents sbc = ScoreboardComponents();
+  NoDeuceGame ndc = NoDeuceGame();
 
   void setupGameDiaglog() {
     // 게임 시작을 위한 설정 탭 열기
@@ -96,12 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     setState((){
                       selectedGameLengthAsString = item as String;
                       chosenGameLength = int.parse(selectedGameLengthAsString);
-                      sbc.setGameLength(chosenGameLength);
+                      ndc.setGameLength(chosenGameLength);
                     });
                   },
-                  buttonHeight: 40,
-                  buttonWidth: 140,
-                  itemHeight: 40,
                 ),
               ],
             ),
