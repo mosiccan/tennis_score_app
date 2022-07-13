@@ -4,6 +4,7 @@ import 'package:pixel_perfect/pixel_perfect.dart';
 import 'package:tennis_score_system/history.dart';
 import 'package:tennis_score_system/socreboard/korean_standard_nodeuce.dart';
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
+import 'package:tennis_score_system/socreboard/scoreboard_components.dart';
 import 'firebase_options.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:tennis_score_system/socreboard/noDeuce_scoreboard_page.dart';
@@ -52,7 +53,10 @@ class _MyHomePageState extends State<MyHomePage> {
     '5',
     '6'
   ];
-  String? selectedGameLengthAsString;
+  String selectedGameLengthAsString = '';
+  int chosenGameLength = 0;
+
+  ScoreboardComponents sbc = ScoreboardComponents();
 
   void setupGameDiaglog() {
     // 게임 시작을 위한 설정 탭 열기
@@ -91,6 +95,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   onChanged: (item){
                     setState((){
                       selectedGameLengthAsString = item as String;
+                      chosenGameLength = int.parse(selectedGameLengthAsString);
+                      sbc.setGameLength(chosenGameLength);
                     });
                   },
                   buttonHeight: 40,

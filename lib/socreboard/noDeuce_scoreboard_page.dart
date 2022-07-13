@@ -34,16 +34,6 @@ class NoDeuceScoreBoardPageBuild extends StatefulWidget {
 
 class _NoDeuceScoreBoardPageBuildState extends State<NoDeuceScoreBoardPageBuild> {
 
-  int _gameLength = 6;
-
-  int gameLength(){
-    return _gameLength;
-  }
-
-  void setGameLength(int givenGameLength){
-    _gameLength = givenGameLength;
-  }
-
   ScoreboardComponents sc = ScoreboardComponents();
 
   void _setLastCounterOfGameListP1Data(List<int> intList) async{
@@ -366,6 +356,22 @@ class _NoDeuceScoreBoardPageBuildState extends State<NoDeuceScoreBoardPageBuild>
   final myController1 = TextEditingController();
   final myController2 = TextEditingController();
 
+  int showGameCounterP1(){
+    return sc.gameCounterP1;
+  }
+
+  int showGameCounterP2(){
+    return sc.gameCounterP2;
+  }
+
+  String showCurrentPointP1(){
+    return sc.currentPointP1();
+  }
+
+  String showCurrentPointP2(){
+    return sc.currentPointP2();
+  }
+
   @override
   void dispose(){
     myController1.dispose();
@@ -382,14 +388,14 @@ class _NoDeuceScoreBoardPageBuildState extends State<NoDeuceScoreBoardPageBuild>
   }
 
   bool isTieBreak(int counter1, int counter2){
-    if(counter1 == counter2 && counter1 >= (gameLength()-1)){
+    if(counter1 == counter2 && counter1 >= (sc.gameLength()-1)){
       return true;
     }
     return false;
   }
 
   bool isMatchOver(int counter){
-    if(counter >= gameLength()){
+    if(counter >= sc.gameLength()){
       return true;
     }
     return false;
@@ -929,8 +935,8 @@ class _NoDeuceScoreBoardPageBuildState extends State<NoDeuceScoreBoardPageBuild>
                           visible: turnToServe(),
                         )),
                     DataCell(Text(player1())),
-                    DataCell(Text("$sc.gameCounterP1")),
-                    DataCell(Text(sc.currentPointP1())),
+                    DataCell(Text("$showGameCounterP1()")),
+                    DataCell(Text(showCurrentPointP1())),
                   ],
                 ),
                 DataRow(
@@ -941,8 +947,8 @@ class _NoDeuceScoreBoardPageBuildState extends State<NoDeuceScoreBoardPageBuild>
                           visible: !turnToServe(),
                         )),
                     DataCell(Text(player2())),
-                    DataCell(Text("$sc.gameCounterP2")),
-                    DataCell(Text(sc.currentPointP2())),
+                    DataCell(Text("$showGameCounterP2()")),
+                    DataCell(Text(showCurrentPointP2())),
                   ],
                 ),
               ],

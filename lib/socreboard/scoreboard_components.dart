@@ -22,6 +22,16 @@ class ScoreboardComponents{
   String player1Name = "Player1";
   String player2Name = "Player2";
 
+  int _gameLength = 6;
+
+  int gameLength(){
+    return _gameLength;
+  }
+
+  void setGameLength(int givenGameLength){
+    _gameLength = givenGameLength;
+  }
+
   void addPointToLogP1(int counter) {
     // Player1 포인트 로그 리스트에 '포인트' 추가
     pointLogListP1.add(scoreList[counter]);
