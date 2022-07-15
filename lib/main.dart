@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pixel_perfect/pixel_perfect.dart';
 import 'package:tennis_score_system/history.dart';
+import 'package:tennis_score_system/match_and_scoreboard/noDeuce_singleSet_game.dart';
+import 'package:tennis_score_system/match_and_scoreboard/singleSet_scoreboard.dart';
 import 'package:tennis_score_system/socreboard/korean_standard_nodeuce.dart';
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:tennis_score_system/socreboard/scoreboard_components.dart';
@@ -45,6 +47,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  NoDeuceSingleSetGame noDeuceSingleSetGame = NoDeuceSingleSetGame();
+
   final List<String> gameLengths = [
     '1',
     '2',
@@ -55,8 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   String selectedGameLengthAsString = '';
   int chosenGameLength = 0;
-
-  NoDeuceGame ndc = NoDeuceGame();
 
   void setupGameDiaglog() {
     // 게임 시작을 위한 설정 탭 열기
@@ -96,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     setState((){
                       selectedGameLengthAsString = item as String;
                       chosenGameLength = int.parse(selectedGameLengthAsString);
-                      ndc.setGameLength(chosenGameLength);
+                      noDeuceSingleSetGame.setGameLength(chosenGameLength);
                     });
                   },
                 ),
@@ -121,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                      const NoDeuceScoreBoardPage()
+                      const SingleSetScoreboardPage()
                       )
                   );
                 },
