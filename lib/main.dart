@@ -47,8 +47,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  NoDeuceSingleSetGame noDeuceSingleSetGame = NoDeuceSingleSetGame();
-
   final List<String> gameLengths = [
     '1',
     '2',
@@ -59,6 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   String selectedGameLengthAsString = '';
   int chosenGameLength = 0;
+
+  NoDeuceSingleSetGame noDeuceSingleSetGame = NoDeuceSingleSetGame();
 
   void setupGameDiaglog() {
     // 게임 시작을 위한 설정 탭 열기
@@ -119,6 +119,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 child: const Text('Start Game'),
                 onPressed: () {
+                  Navigator.pop(context);
+                  noDeuceSingleSetGame.scoreComponents.resetPoint();
                   Navigator.push(
                       context,
                       MaterialPageRoute(

@@ -5,7 +5,7 @@ class NoDeuceSingleSetGame{
   String _player1Name = "Player1";
   String _player2Name = "Player2";
 
-  int _gameLength = 6;     //경기의 Game 수
+  static int _gameLength = 6;     //경기의 Game 수
 
   ScoreComponents scoreComponents = ScoreComponents();
 
