@@ -394,6 +394,9 @@ class _SingleSetScoreboardPageBuildState extends State<SingleSetScoreboardPageBu
     setState((){
       noDeuceSingleSetGame.incrementPointP1();
       _setLastDataAfterAction();
+      if(noDeuceSingleSetGame.isMatchOver(noDeuceSingleSetGame.scoreComponents.gameCounterP1())){
+        matchOverDialog(noDeuceSingleSetGame.player1Name());
+      }
     });
   }
 
@@ -401,6 +404,9 @@ class _SingleSetScoreboardPageBuildState extends State<SingleSetScoreboardPageBu
     setState((){
       noDeuceSingleSetGame.incrementPointP2();
       _setLastDataAfterAction();
+      if(noDeuceSingleSetGame.isMatchOver(noDeuceSingleSetGame.scoreComponents.gameCounterP2())){
+        matchOverDialog(noDeuceSingleSetGame.player2Name());
+      }
     });
   }
 
