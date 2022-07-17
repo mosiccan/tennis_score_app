@@ -14,7 +14,7 @@ void main() => runApp(const MainMenu());
 class MainMenu extends StatelessWidget {
   const MainMenu({Key? key}) : super(key: key);
 
-  @override 
+  @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(390, 844),
@@ -103,6 +103,21 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             actions: <Widget>[
+              TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Colors.black,
+                  ),
+                  child: const Text('Continue'),
+                  onPressed: (){
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                        builder: (context) =>
+                    const SingleSetScoreboardPage()
+                      ),
+                    );
+                  }),
               TextButton(
                   style: TextButton.styleFrom(
                     primary: Colors.black,
