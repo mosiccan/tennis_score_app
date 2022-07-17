@@ -6,17 +6,15 @@ import 'package:tennis_score_system/match_and_scoreboard/noDeuce_singleSet_game.
 import 'package:tennis_score_system/match_and_scoreboard/singleSet_scoreboard.dart';
 import 'package:tennis_score_system/socreboard/korean_standard_nodeuce.dart';
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
-import 'package:tennis_score_system/socreboard/scoreboard_components.dart';
 import 'firebase_options.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:tennis_score_system/socreboard/noDeuce_scoreboard_page.dart';
 
 void main() => runApp(const MainMenu());
 
 class MainMenu extends StatelessWidget {
   const MainMenu({Key? key}) : super(key: key);
 
-  @override
+  @override 
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(390, 844),

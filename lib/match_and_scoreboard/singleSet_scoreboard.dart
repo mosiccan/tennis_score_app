@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tennis_score_system/match_and_scoreboard/noDeuce_singleSet_game.dart';
-import 'package:tennis_score_system/socreboard/scoreboard_components.dart';
-import 'package:tennis_score_system/main.dart';
 
 void singleSetScoreboardPage() => runApp(const SingleSetScoreboardPage());
 
