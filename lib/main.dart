@@ -154,86 +154,110 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: const Color(0xfff2f4f6),
       appBar: AppBar(
         centerTitle: false,
-        title: Text(
-          "Welcome Player 1",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 34.sp,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        // title: Text(
+        //   "Welcome Player 1",
+        //   style: TextStyle(
+        //     color: Colors.black,
+        //     fontSize: 34.sp,
+        //     fontWeight: FontWeight.bold,
+        //   ),
+        // ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: 16.w, vertical: 58.h), // 양쪽 마진 (여백)
+            horizontal: 16.w, vertical: 0.h), // 양쪽 마진 (여백)
         child: Column(
           children: [
-            Row(  // 첫번째 줄
+            Column( // 타이틀
               children: [
-                Container(
-                  child: InkWell(
-                    child: ClipRRect(
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Game Start",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 25.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          textAlign: TextAlign.center,
+                Row(
+                  children: [
+                    Container(
+                      child : Text(
+                        "Welcome Player 1",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 34.sp,
+                          fontWeight: FontWeight.bold,
                         ),
-                        width: 171.w, // 160
-                        height: 171.h, // 180
-                        color: Colors.white,
+                        textAlign: TextAlign.left,
                       ),
-                      borderRadius: BorderRadius.circular(20),
                     ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const KoreanStandardNodeucePage()
-                          )
-                      );
-                    },
-                  ),
+
+                  ],
                 ),
                 SizedBox(
-                  width: 16.w,
+                  height: 82.h,
                 ),
-                Container(
-                  child: InkWell(
-                    child: ClipRRect(
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: Text(
-                          "History",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 26.sp,
-                            fontWeight: FontWeight.w500,
+                Row(  // 첫번째 줄
+                  children: [
+                    Container(
+                      child: InkWell(
+                        child: ClipRRect(
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Game Start",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 25.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            width: 171.w, // 160
+                            height: 171.h, // 180
+                            color: Colors.white,
                           ),
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                        width: 171.w, // 160
-                        height: 171.h, // 180
-                        color: Colors.white,
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const KoreanStandardNodeucePage()
+                              )
+                          );
+                        },
                       ),
-                      borderRadius: BorderRadius.circular(20),
                     ),
-                    onTap: () {
-                      Navigator.push(
-                        context, 
-                        MaterialPageRoute(
-                          builder: (context) =>
-                            const HistoryPage()));
-                    },
-                  ),
+                    SizedBox(
+                      width: 16.w,
+                    ),
+                    Container(
+                      child: InkWell(
+                        child: ClipRRect(
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "History",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 26.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            width: 171.w, // 160
+                            height: 171.h, // 180
+                            color: Colors.white,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                  const HistoryPage()));
+                        },
+                      ),
+                    ),
+                  ],
                 ),
+
               ],
             ),
             SizedBox(
