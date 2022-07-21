@@ -122,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextButton.styleFrom(
                     primary: Colors.black,
                   ),
-                  child: const Text('Cancle'),
+                  child: const Text('Cancel'),
                   onPressed: (){
                     Navigator.pop(context);
                   }),
@@ -170,7 +170,7 @@ class _MyHomePageState extends State<MyHomePage> {
             horizontal: 16.w, vertical: 58.h), // 양쪽 마진 (여백)
         child: Column(
           children: [
-            Row(
+            Row(  // 첫번째 줄
               children: [
                 Container(
                   child: InkWell(
@@ -236,30 +236,125 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            Container(
-              child: InkWell(
-                child: ClipRRect(
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Test",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 25.sp,
-                        fontWeight: FontWeight.w500,
+            SizedBox(
+              height: 16.h,
+            ),
+            Row(  // 두번째 줄
+              children: [
+                Container(
+                  child: InkWell(
+                    child: ClipRRect(
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Test",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 25.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        width: 171.w, // 160
+                        height: 171.h, // 180
+                        color: Colors.white,
                       ),
-                      textAlign: TextAlign.center,
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    width: 171.w, // 160
-                    height: 171.h, // 180
-                    color: Colors.white,
+                    onTap: (){
+                      setupGameDiaglog();
+                      },
                   ),
-                  borderRadius: BorderRadius.circular(20),
                 ),
-                onTap: (){
-                  setupGameDiaglog();
-                  },
-              ),
+                SizedBox(
+                  width: 16.w,
+                ),
+                Container(
+                  child: InkWell(
+                    child: ClipRRect(
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "A",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 25.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        width: 171.w, // 160
+                        height: 171.h, // 180
+                        color: Colors.white,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    onTap: (){
+                      //
+                    },
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 16.h,
+            ),
+            Row(  // 세번째 줄
+              children: [
+                Container(
+                  child: InkWell(
+                    child: ClipRRect(
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "B",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 25.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        width: 171.w, // 160
+                        height: 171.h, // 180
+                        color: Colors.white,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    onTap: (){
+                      //
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: 16.w,
+                ),
+                Container(
+                  child: InkWell(
+                    child: ClipRRect(
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "C",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 25.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        width: 171.w, // 160
+                        height: 171.h, // 180
+                        color: Colors.white,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    onTap: (){
+                      //
+                    },
+                  ),
+                ),
+              ],
             ),
           ],
         ),
