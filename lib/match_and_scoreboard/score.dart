@@ -1,23 +1,23 @@
 class ScoreComponents{
 
-  List<String> _scoreList = ["0", "15", "30", "40"]; // 듀스 미포함'포인트' 리스트
+  static List<String> _scoreList = ["0", "15", "30", "40"]; // 듀스 미포함'포인트' 리스트
 
-  List<String> _pointLogListP1 = ["0"]; // Player1의 포인트 로그 리스트
-  List<String> _pointLogListP2 = ["0"]; // Player2의 포인트 로그 리스트
+  static List<String> _pointLogListP1 = ["0"]; // Player1의 포인트 로그 리스트
+  static List<String> _pointLogListP2 = ["0"]; // Player2의 포인트 로그 리스트
 
-  List<int> _orderOfPlay = []; // 득점순서 기록용 리스트
+  static List<int> _orderOfPlay = []; // 득점순서 기록용 리스트
 
-  List<int> _lastCounterOfGameListP1 = []; // '게임' 득점 직전 CounterP1 및 CounterP2 저장
-  List<int> _lastCounterOfGameListP2 = []; // '게임' 득점 직전 CounterP1 및 CounterP2 저장
+  static List<int> _lastCounterOfGameListP1 = []; // '게임' 득점 직전 CounterP1 및 CounterP2 저장
+  static List<int> _lastCounterOfGameListP2 = []; // '게임' 득점 직전 CounterP1 및 CounterP2 저장
 
-  int _counterP1 = 0; // Player1의 '포인트' 지정 변수
-  int _counterP2 = 0; // Player2의 '포인트' 지정 변수
+  static int _counterP1 = 0; // Player1의 '포인트' 지정 변수
+  static int _counterP2 = 0; // Player2의 '포인트' 지정 변수
 
-  int _gameCounterP1 = 0; // Player1의 '게임' 스코어 지정 변수
-  int _gameCounterP2 = 0; // Player2의 '게임' 스코어 지정 변수
+  static int _gameCounterP1 = 0; // Player1의 '게임' 스코어 지정 변수
+  static int _gameCounterP2 = 0; // Player2의 '게임' 스코어 지정 변수
 
-  int _tieBreakCounterP1 = 0;    //Player1의 타이브레이크 진행 시 사용하는 카운터
-  int _tieBreakCounterP2 = 0;    //Player2의 타이브레이크 진행 시 사용하는 카운터
+  static int _tieBreakCounterP1 = 0;    //Player1의 타이브레이크 진행 시 사용하는 카운터
+  static int _tieBreakCounterP2 = 0;    //Player2의 타이브레이크 진행 시 사용하는 카운터
 
   //여기부터 getter 선언
 
