@@ -1,6 +1,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tennis_score_system">
-   <application
+
+    <!-- Required for ambient mode support -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Flags the app as a Wear app -->
+    <uses-feature android:name="android.hardware.type.watch" />
+
+    <!-- Flags that the app doesn't require a companion phone app -->
+    <application>
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
+    </application>
+
+    <application
         android:label="tennis_score_system"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
