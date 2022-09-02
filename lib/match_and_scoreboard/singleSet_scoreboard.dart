@@ -438,16 +438,16 @@ class _SingleSetScoreboardPageBuildState extends State<SingleSetScoreboardPageBu
             //Dialog Main Title
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Text("Reset Match?"),
+              children: const <Widget>[
+                Text("Reset Match?"),
               ],
             ),
             //
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Text(
+              children: const <Widget>[
+                Text(
                   "By clicking yes, the match will reset to 0-0",
                 ),
               ],
@@ -694,48 +694,44 @@ class _SingleSetScoreboardPageBuildState extends State<SingleSetScoreboardPageBu
                 ),
               ),
             ),
-            Container(
-              // Score 표시되는 부분
-              child:
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Flexible(
-                    fit: FlexFit.loose,
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        noDeuceSingleSetGame.scoreComponents.currentPointP1(),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 48,
-                        ),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Flexible(
+                  fit: FlexFit.loose,
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      noDeuceSingleSetGame.scoreComponents.currentPointP1(),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 48,
                       ),
-                    )),
-                Flexible(
-                  //fit: FlexFit.loose,
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(24, 0.0, 24, 8),
-                      child: const Text(
-                        ':',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 48,
-                        ),
+                    ),
+                  )),
+              Flexible(
+                //fit: FlexFit.loose,
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(24, 0.0, 24, 8),
+                    child: const Text(
+                      ':',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 48,
                       ),
-                    )),
-                Flexible(
-                    fit: FlexFit.loose,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        noDeuceSingleSetGame.scoreComponents.currentPointP2(),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 48,
-                        ),
+                    ),
+                  )),
+              Flexible(
+                  fit: FlexFit.loose,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      noDeuceSingleSetGame.scoreComponents.currentPointP2(),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 48,
                       ),
-                    )),
-              ]),
-            ),
+                    ),
+                  )),
+            ]),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
